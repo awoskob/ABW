@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Alexander Woskob</title>
+    <link rel='stylesheet' href='/stylesheets/test.css' />
+
+
+    <script src="/jquery/jquery.js"></script>
+    <script src="javascripts/scrolling.js"></script>
+
+    <script src="/three/build/three.min.js"></script>
+    <script src="/three/js/loaders/OBJLoader.js"></script>
+    <script src="/three/js/loaders/MTLLoader.js"></script>
+    <script src="/three/js/renderers/CSS3DRenderer.js"></script>
+
+    <script type="module" src="/three/src/constants.js"></script>
+    <script type="module" src="textures/VideoTexture.js"></script>
+    <script type="module" src="textures/Texture.js"></script>
+
+
+    <!--<script type="module" src="/three/textures/VideoTexture.js"></script>-->
+
+    <script src="javascripts/OrbitControls.js"></script>
+    <script src="javascripts/Tween.js"></script>
+
+    <script type="module" src="javascripts/threex.videotexture.js"></script>
+
+    <!--<script src="bad-tv-shader-master/example/lib/three.min.js"></script>-->
+    <script src="bad-tv-shader-master/example/lib/dat.gui.min.js"></script>
+    <script src="bad-tv-shader-master/example/lib/stats.min.js"></script>
+    <script src="bad-tv-shader-master/example/lib/postprocessing/EffectComposer.js"></script>
+    <script src="bad-tv-shader-master/example/lib/postprocessing/RenderPass.js"></script>
+    <script src="bad-tv-shader-master/example/lib/postprocessing/ShaderPass.js"></script>
+    <script src="bad-tv-shader-master/example/lib/postprocessing/MaskPass.js"></script>
+    <!--<script type="module" src="bad-tv-shader-master/example/lib/postprocessing/ClearPass.js"></script>-->
+    <script src="bad-tv-shader-master/example/lib/shaders/CopyShader.js"></script>
+    <script src="bad-tv-shader-master/example/lib/shaders/FilmShader.js"></script>
+    <script src="bad-tv-shader-master/example/lib/shaders/RGBShiftShader.js"></script>
+    <script src="bad-tv-shader-master/example/js/BadTVShader.js"></script>
+    <script src="bad-tv-shader-master/example/js/StaticShader.js"></script>
+
+    <script type="module" src="/three/js/postprocessing/EffectComposer.js"></script>
+    <script type="module" src="/three/js/postprocessing/ClearPass.js"></script>
+
+    <script src="/three/js/utils/SceneUtils.js"></script>
+    <script src="particlejs/particles.js"></script>
+    <script src="typed/typed.min.js"></script>
+
+    <video id="video" width="400" controls muted autoplay="true" style="display:none">
+      <source src="videos/quartet.mp4" type="video/mp4">
+      Your browser does not support HTML5 video.
+    </video>
+    <video id="video1" width="400" autoplay loop style="display:none">
+      <source src="videos/fits.mp4" type="video/mp4">
+      Your browser does not support HTML5 video.
+    </video>
+
+    <video id="stock1" width="400" autoplay loop style="display:none">
+      <source src="videos/ChefGamevine720.mp4" type="video/mp4">
+      Your browser does not support HTML5 video.
+    </video>
+
+    <video id="stock2" width="400" autoplay loop style="display:none">
+      <source src="videos/LemmingsVine720.mp4" type="video/mp4">
+      Your browser does not support HTML5 video.
+    </video>
+
+    <video id="stock3" width="400" autoplay loop style="display:none">
+      <source src="videos/ToadlioniVine720.mp4" type="video/mp4">
+      Your browser does not support HTML5 video.
+    </video>
+
+    <video id="stock4" width="400" autoplay loop style="display:none">
+      <source src="videos/UFOvine720.mp4" type="video/mp4">
+      Your browser does not support HTML5 video.
+    </video>
+
+    <video id="stock5" width="400" autoplay loop style="display:none">
+      <source src="videos/PlanetsVine720.mp4" type="video/mp4">
+      Your browser does not support HTML5 video.
+    </video>
+
+    <video id="stock6" width="400" autoplay loop style="display:none">
+      <source src="videos/GrandmaVine720.mp4" type="video/mp4">
+      Your browser does not support HTML5 video.
+    </video>
+
+    <video id="stock7" width="400" autoplay loop style="display:none">
+      <source src="videos/PollenVine720.mp4" type="video/mp4">
+      Your browser does not support HTML5 video.
+    </video>
+
+    <video id="stock8" width="400" autoplay loop style="display:none">
+      <source src="videos/DuckFallsVine720.mp4" type="video/mp4">
+      Your browser does not support HTML5 video.
+    </video>
+
+    <video id="stock9" width="400" autoplay loop style="display:none">
+      <source src="videos/ChromaVine720.mp4" type="video/mp4">
+      Your browser does not support HTML5 video.
+    </video>
+
+    <video id="stock10" width="400" autoplay loop style="display:none">
+      <source src="videos/QuartetVine720.mp4" type="video/mp4">
+      Your browser does not support HTML5 video.
+    </video>
+
+    <video id="stock11" width="400" autoplay loop style="display:none">
+      <source src="videos/WoodlandWarriorsVine720.mp4" type="video/mp4">
+      Your browser does not support HTML5 video.
+    </video>
+
+    <video id="stock12" width="400" autoplay loop style="display:none">
+      <source src="videos/UrSoFineVine720.mp4" type="video/mp4">
+      Your browser does not support HTML5 video.
+    </video>
+
+    <video id="stock13" width="400" autoplay loop style="display:none">
+      <source src="videos/HanselGretelVine720.mp4" type="video/mp4">
+      Your browser does not support HTML5 video.
+    </video>
+
+    <video id="stock14" width="400" autoplay loop style="display:none">
+      <source src="videos/ProceduralAnimationVine720.mp4" type="video/mp4">
+      Your browser does not support HTML5 video.
+    </video>
+
+    <video id="stock15" width="400" autoplay loop style="display:none">
+      <source src="videos/UnityAIVine720.mp4" type="video/mp4">
+      Your browser does not support HTML5 video.
+    </video>
+
+    <video id="stock16" width="400" autoplay loop style="display:none">
+      <source src="videos/PGHGameJamVine720.mp4" type="video/mp4">
+      Your browser does not support HTML5 video.
+    </video>
+
+    <video id="stock17" width="400" autoplay loop style="display:none">
+      <source src="videos/ProkofievVine720.mp4" type="video/mp4">
+      Your browser does not support HTML5 video.
+    </video>
+
+    <video id="stock18" width="400" autoplay loop style="display:none">
+      <source src="videos/ViolinVine720.mp4" type="video/mp4">
+      Your browser does not support HTML5 video.
+    </video>
+
+    <video id="stock19" width="400" autoplay loop style="display:none">
+      <source src="videos/PunchBuggyVine720.mp4" type="video/mp4">
+      Your browser does not support HTML5 video.
+    </video>
+
+    <video id="stock20" width="400" autoplay loop style="display:none">
+      <source src="videos/BirdCycleVine720.mp4" type="video/mp4">
+      Your browser does not support HTML5 video.
+    </video>
+
+  </head>
+
+
+  <header>
+    <div class="logo">
+      <div class="threedlogo" id="3dlogo">
+        <script src="javascripts/3dlogo.js"></script>
+      </div>
+      <h1 class="textlogo"> Alexander Woskob </h1>
+    </div>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle">
+    <nav>
+      <ul>
+        <li><a class="nav-link scroll" href="#intro">Intro</a></li>
+        <li><a class="nav-link scroll" href="#about">About</a></li>
+        <li><a class="nav-link scroll" href="#work">Work</a></li>
+        <li><a class="nav-link scroll" href="#contact">Contact</a></li>
+        <li><a class="nav-link scroll" href="#resume">Resume</a></li>
+      </ul>
+    </nav>
+    <label for="nav-toggle" class="nav-toggle-label">
+      <span></span>
+    </label>
+  </header>
+
+
+  <body>
+
+    <div id="particleCanvas">
+      <!--<script src="javascripts/beautiful.js"></script>-->
+    </div>
+    <div id="wrapper">
+      <div id="particles-js"></div>
+    </div>
+    <script>
+      particlesJS.load('particles-js', 'particlejs/particle-cfgbad.json', function() {
+          console.log('callback - particles.js config loaded');
+      });
+    </script>
+
+    <section class="intro" id="intro">
+        <div class="typing-container">
+            <h1>I am a <span class="text-primary">Musician</span></h1>
+            <h1> and <span class="text-primary"> Creative Programmer</span></h1>
+            <h1> exploring </h1>
+            <h1>
+              <span class="typing text-primary"></span>
+              .</h1>
+            <script>
+                // Can also be included with a regular script tag
+                var options = {
+                  strings: ["Interactive Media", "Sound Design", "Game Design",
+                  "Composition", "Visual Art"],
+                  startDelay: 1000,
+                  loop: true,
+                  typeSpeed: 5,
+                  backSpeed: 15,
+                  backDelay: 1500,
+                  smartBackspace: true,
+                }
+                var typed = new Typed(".typing", options);
+            </script>
+        </div>
+    </section>
+
+
+
+    <section class="about" id="about">
+      <div class="container" id-"about-container">
+        <h1 class="mb-5 display-4">About</h1>
+        <div class="row">
+          <div class="col-md-4">
+            <h3>Lorem ipsum dolor sit amet</h3>
+            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          </div>
+          <img src="images/aboutme.jpg" id="aboutimg" width="300" height="400" alt="Alexander Woskob playing keyboards in a limestone mine">
+          <div class="col-md-4">
+            <h3>Consectetuer adipiscing elit.</h3>
+            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          </div>
+          <div class="col-md-4">
+            <h3>Lorem ipsum dolor sit amet</h3>
+            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="work" id="work">
+      <div class="container" id="work-container">
+        <h1 class="mb-5 display-4">Work</h1>
+        <div class="row">
+          <div class="col-md-4">
+            <h3>Lorem ipsum dolor sit amet</h3>
+            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          </div>
+          <div class="col-md-4">
+            <h3>Consectetuer adipiscing elit.</h3>
+            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          </div>
+          <div class="col-md-4">
+            <h3>Lorem ipsum dolor sit amet</h3>
+            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          </div>
+        </div>
+      </div>
+      <div class="tvlayout" id="tvlayout">
+        <div class-"as">
+          <a id="layoutfire1" class="ui scroll" href="#proj1" hidden>GO TO PROJECT</a>
+          <a id="layoutfire2" class="ui scroll" href="#proj2" hidden>GO TO PROJECT</a>
+          <a id="layoutfire3" class="ui scroll" href="#proj3" hidden>GO TO PROJECT</a>
+          <a id="layoutfire4" class="ui scroll" href="#proj4" hidden>GO TO PROJECT</a>
+          <a id="layoutfire5" class="ui scroll" href="#proj5" hidden>GO TO PROJECT</a>
+          <a id="layoutfire6" class="ui scroll" href="#proj6" hidden>GO TO PROJECT</a>
+          <a id="layoutfire7" class="ui scroll" href="#proj7" hidden>GO TO PROJECT</a>
+          <a id="layoutfire8" class="ui scroll" href="#proj8" hidden>GO TO PROJECT</a>
+          <a id="layoutfire9" class="ui scroll" href="#proj9" hidden>GO TO PROJECT</a>
+          <a id="layoutfire10" class="ui scroll" href="#proj10" hidden>GO TO PROJECT</a>
+          <a id="layoutfire11" class="ui scroll" href="#proj11" hidden>GO TO PROJECT</a>
+          <a id="layoutfire12" class="ui scroll" href="#proj12" hidden>GO TO PROJECT</a>
+          <a id="layoutfire13" class="ui scroll" href="#proj13" hidden>GO TO PROJECT</a>
+          <a id="layoutfire14" class="ui scroll" href="#proj14" hidden>GO TO PROJECT</a>
+          <a id="layoutfire15" class="ui scroll" href="#proj15" hidden>GO TO PROJECT</a>
+          <a id="layoutfire16" class="ui scroll" href="#proj16" hidden>GO TO PROJECT</a>
+          <a id="layoutfire17" class="ui scroll" href="#proj17" hidden>GO TO PROJECT</a>
+          <a id="layoutfire18" class="ui scroll" href="#proj18" hidden>GO TO PROJECT</a>
+          <a id="layoutfire19" class="ui scroll" href="#proj19" hidden>GO TO PROJECT</a>
+          <a id="layoutfire20" class="ui scroll" href="#proj20" hidden>GO TO PROJECT</a>
+        </div>
+        <canvas id="layoutcanvas1" style="z-index:1"></canvas>
+        <canvas id="layoutcanvas2" style="z-index:1"></canvas>
+        <canvas id="layoutcanvas3" style="z-index:1"></canvas>
+        <canvas id="layoutcanvas4" style="z-index:1"></canvas>
+        <canvas id="layoutcanvas5" style="z-index:1"></canvas>
+        <canvas id="layoutcanvas6" style="z-index:1"></canvas>
+        <canvas id="layoutcanvas7" style="z-index:1"></canvas>
+        <canvas id="layoutcanvas8" style="z-index:1"></canvas>
+        <canvas id="layoutcanvas9" style="z-index:1"></canvas>
+        <canvas id="layoutcanvas10" style="z-index:1"></canvas>
+        <canvas id="layoutcanvas11" style="z-index:1"></canvas>
+        <canvas id="layoutcanvas12" style="z-index:1"></canvas>
+        <canvas id="layoutcanvas13" style="z-index:1"></canvas>
+        <canvas id="layoutcanvas14" style="z-index:1"></canvas>
+        <canvas id="layoutcanvas15" style="z-index:1"></canvas>
+        <canvas id="layoutcanvas16" style="z-index:1"></canvas>
+        <canvas id="layoutcanvas17" style="z-index:1"></canvas>
+        <canvas id="layoutcanvas18" style="z-index:1"></canvas>
+        <canvas id="layoutcanvas19" style="z-index:1"></canvas>
+        <canvas id="layoutcanvas20" style="z-index:1"></canvas>
+        <script src="javascripts/tvlayout.js"></script>
+      </div>
+
+      <div class="projects" id="proj1">
+        <a id="fire" class="ui" hidden>GO TO PROJECT</a>
+        <canvas id="proj1canvas" style="z-index:1"></canvas>
+        <script src="javascripts/buffercomp.js"></script>
+      </div>
+      <div class="projects" id="proj2">
+        <canvas id="proj2canvas" style="z-index:1"></canvas>
+        <script src="javascripts/proj2.js"></script>
+      </div>
+      <div class="projects" id="proj3">
+        <canvas id="proj2canvas" style="z-index:1"></canvas>
+        <script src="javascripts/proj2.js"></script>
+      </div>
+      <div class="projects" id="proj3">
+        <canvas id="proj2canvas" style="z-index:1"></canvas>
+        <script src="javascripts/proj2.js"></script>
+      </div>
+      <div class="projects" id="proj4">
+        <canvas id="proj2canvas" style="z-index:1"></canvas>
+        <script src="javascripts/proj2.js"></script>
+      </div>
+      <div class="projects" id="proj5">
+        <canvas id="proj2canvas" style="z-index:1"></canvas>
+        <script src="javascripts/proj2.js"></script>
+      </div>
+      <div class="projects" id="proj6">
+        <canvas id="proj2canvas" style="z-index:1"></canvas>
+        <script src="javascripts/proj2.js"></script>
+      </div>
+      <div class="projects" id="proj7">
+        <canvas id="proj2canvas" style="z-index:1"></canvas>
+        <script src="javascripts/proj2.js"></script>
+      </div>
+      <div class="projects" id="proj8">
+        <canvas id="proj2canvas" style="z-index:1"></canvas>
+        <script src="javascripts/proj2.js"></script>
+      </div>
+      <div class="projects" id="proj9">
+        <canvas id="proj2canvas" style="z-index:1"></canvas>
+        <script src="javascripts/proj2.js"></script>
+      </div>
+      <div class="projects" id="proj10">
+        <canvas id="proj2canvas" style="z-index:1"></canvas>
+        <script src="javascripts/proj2.js"></script>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="container">
+        <h1 class="mb-5 display-4">Contact</h1>
+        <div class="row">
+          <div class="col-md-4">
+            <h3>Lorem ipsum dolor sit amet</h3>
+            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          </div>
+          <div class="col-md-4">
+            <h3>Consectetuer adipiscing elit.</h3>
+            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          </div>
+          <div class="col-md-4">
+            <h3>Lorem ipsum dolor sit amet</h3>
+            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="resume" id="resume">
+      <div class="container">
+        <h1 class="mb-5 display-4">Resume</h1>
+        <div class="row">
+          <div class="col-md-4">
+            <h3>Lorem ipsum dolor sit amet</h3>
+            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          </div>
+          <div class="col-md-4">
+            <h3>Consectetuer adipiscing elit.</h3>
+            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          </div>
+          <div class="col-md-4">
+            <h3>Lorem ipsum dolor sit amet</h3>
+            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <footer>
+      <p>generic footer content</p>
+    </footer>
+  </body>
+
+
+</html>

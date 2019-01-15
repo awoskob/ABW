@@ -1,0 +1,12 @@
+// SASS Variables.
+:root{
+  --background: #00356B;
+}
+
+
+#particles-js {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+	background: var(--background);
+}
