@@ -19,7 +19,7 @@
     "three": "^0.100.0"
   },
   "engines": {
-    "node": "10.15.0"
+    "node": "10.x"
   },
   "devDependencies": {
     "nodemon": "^1.18.9"

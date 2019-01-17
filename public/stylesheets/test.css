@@ -302,7 +302,7 @@ body {
   //height: 50vh;
   padding: 10vh 0;
   margin: 0 auto;
-  position: relative;
+  //position: relative;
   background: #00990066;
   //background: #33333366;
   color: white;
@@ -340,7 +340,6 @@ footer {
 
 .projects{
   margin: 0 auto;
-  position: relative;
   top: 50px;
 }
 
@@ -355,9 +354,11 @@ footer {
   z-index: 200;
 }
 
-#tvlayout{
+#tvlayoutcanvas{
   margin: 0 auto;
   position: relative;
+  height: 300vh;
+  //background-color: lightblue;
 }
 
 .ui{

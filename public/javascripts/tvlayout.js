@@ -25,17 +25,13 @@
   var tvMesh;
   var screenGroup;
 
-  var divScale = 1;
-  var WIDTH  = window.innerWidth;
-  var HEIGHT = window.innerWidth;
+  var divScale = 2;
+  var WIDTH;
+  var HEIGHT;
 
   var scene1, scene2;
   var clearMaskPass;
   var maskPass1, maskPass2;
-
-  var zpos = -120;
-  var ypos = -40;
-  var tvscale = 0.25;
 
   var buffer, bufferTexture, ctx, texture, bufferScene, bufferRenderer, bufferCamera;
 
@@ -56,11 +52,14 @@
 
   var tvScreenArray = [];
   var tvArray = [];
-  var tvCol = 4;
-  var tvRow = 5;
+  var tvGroup;
+  //var tvCol = 4;
+  //var tvRow = 5;
+  var tvCol = 3;
+  var tvRow = 7;
 
-  var xleft = -50;
-  var xdelta = 32;
+  //var zpos = -120;
+  //var ypos = -50;
 
   var canvasGroup = []
   var ctxGroup = [];
@@ -71,60 +70,119 @@
   var renderPassGroup = [];
 
 
+function resizeTV() {
+  var zpos = -100;
+  var xleft = -(WIDTH/100);
+  var xdelta = (WIDTH/100);
+  var tvscale = .00008 * WIDTH;
+  var index = 0;
+  for (var col = 0; col < tvCol; col++) {
+    var ytop = (170000/HEIGHT);
+    var ydelta = .004 * HEIGHT;
+    var rotx = 0.6;
+    for (var row = 0; row < tvRow; row++) {
+      if(index < 20) {
+        var roty = 0.5;
+        roty -= (col * 0.52)
+        xpos = xleft;
+        ypos = ytop;
+      //here in child the geometry and material are available
+        var screenMesh = screenGroup.children[index];
+        screenMesh.position.z = zpos;
+        screenMesh.position.y = ypos;
+        screenMesh.position.x = xpos;
+        screenMesh.rotation.y = roty;
+        screenMesh.rotation.x = rotx;
+        screenMesh.scale.x = screenMesh.scale.y = screenMesh.scale.z = tvscale;
+        index1 = screenMesh.userData.id;
+
+        tvMesh = tvArray[index1];
+        tvMesh.position.z = zpos;
+        tvMesh.position.y = ypos;
+        tvMesh.position.x = xpos;
+        tvMesh.rotation.y = roty;
+        tvMesh.rotation.x = rotx;
+        tvMesh.scale.x = tvMesh.scale.y = tvMesh.scale.z = tvscale;
+
+        cssButton = cssGroup[index1];
+        cssButton.position.x  = xpos - 2.5;
+        cssButton.position.y  = ypos + 8;
+        cssButton.position.z  = zpos;
+        cssButton.rotation.copy(screenMesh.rotation);
+        cssButton.scale.x = cssButton.scale.y = cssButton.scale.z = 0.1;
+        cssScene.add(cssButton);
+        ytop -= ydelta;
+        rotx -= 0.2;
+        index += 1;
+      }
+    }
+    xleft += xdelta;
+  }
+
+}
+
 function loadTVs() {
-  //initTVMesh(xpos, ypos, zpos, tvscale, row, col, roty, rotx);
-  //initScreenMesh(xpos, ypos, zpos, tvscale, row, col, roty, rotx, screenGroup);
-  //console.log("BEFORE THE SHIT = " + screenGroup);
-  //var screenGroup = new THREE.Object3D();
-  var zpos = -120;
-  var ypos = -40;
-  var xpos = -10;
-  //cssObject.position.x = -10;
+  //var zpos = -100;
+  //var ypos = -150;
+  //var xpos = -200;
+  console.log("WIDTH =" + WIDTH);
+  console.log("HEIGHT =" + HEIGHT);
+  var zpos = -100;
+  var xleft = -(WIDTH/100);
+  var xdelta = (WIDTH/100);
+  //var tvscale = (350/WIDTH);
+  var tvscale = .00008 * WIDTH;
   loader = new THREE.OBJLoader();
   loader.load('../models/yellowtvscreen.obj', function(object) {
     screenGroup = new THREE.Object3D();
+    tvGroup = new THREE.Object3D();
     var index = 0;
     object.traverse(function (child) {
         if (child instanceof THREE.Mesh) {
           for (var col = 0; col < tvCol; col++) {
-            var ytop = 40;
-            var ydelta = 26;
-            var rotx = 0.4;
+            var ytop = (170000/HEIGHT);
+            //var ydelta = (65000/HEIGHT);
+            var ydelta = .004 * HEIGHT;
+            var rotx = 0.6;
             for (var row = 0; row < tvRow; row++) {
-              var roty = 0.5;
-              roty -= (col * 0.32)
-              xpos = xleft;
-              ypos = ytop;
-            //here in child the geometry and material are available
-              console.log("INIT INDEX = " + index);
-              var screenMesh = new THREE.Mesh( child.geometry, videoMaterialsPost[index]);
-              //var screenMesh = new THREE.Mesh( child.geometry, videoMaterialPost);
-              screenMesh.position.z = zpos;
-              screenMesh.position.y = ypos;
-              screenMesh.position.x = xpos;
-              screenMesh.rotation.y = roty;
-              screenMesh.rotation.x = rotx;
-              screenMesh.scale.x = screenMesh.scale.y = screenMesh.scale.z = tvscale;
-              screenMesh.userData.id = index;
-              initTVMesh(xpos, ypos, zpos, tvscale, row, col, roty, rotx);
-              screenGroup.add(screenMesh);
-              cssButton = cssGroup[index];
-              console.log(cssButton);
-              cssButton.position.x  = xpos - 2.5;
-              cssButton.position.y  = ypos + 8;
-              cssButton.position.z  = zpos;
-              cssButton.rotation.copy(screenMesh.rotation);
-              cssButton.scale.x = cssButton.scale.y = cssButton.scale.z = 0.1;
-              cssScene.add(cssButton);
-              ytop -= ydelta;
-              rotx -= 0.2;
-              index += 1;
+              if(index < 20) {
+                var roty = 0.5;
+                roty -= (col * 0.52)
+                xpos = xleft;
+                ypos = ytop;
+              //here in child the geometry and material are available
+                var screenMesh = new THREE.Mesh( child.geometry, videoMaterialsPost[index]);
+                screenMesh.position.z = zpos;
+                screenMesh.position.y = ypos;
+                screenMesh.position.x = xpos;
+                screenMesh.rotation.y = roty;
+                screenMesh.rotation.x = rotx;
+                screenMesh.scale.x = screenMesh.scale.y = screenMesh.scale.z = tvscale;
+                screenMesh.userData.id = index;
+                screenGroup.add(screenMesh);
+
+                initTVMesh(zpos, ypos, xpos, roty, rotx, tvscale);
+
+                cssButton = cssGroup[index];
+                cssButton.position.x  = xpos - 2.5;
+                cssButton.position.y  = ypos + 8;
+                cssButton.position.z  = zpos;
+                cssButton.rotation.copy(screenMesh.rotation);
+                cssButton.scale.x = cssButton.scale.y = cssButton.scale.z = 0.1;
+                cssScene.add(cssButton);
+                ytop -= ydelta;
+                rotx -= 0.2;
+                index += 1;
+              }
             }
             xleft += xdelta;
           }
         }
     });
+    //resizeTV(screenGroup);
+    console.log("LENGTH2 =" + screenGroup.length);
     mainScene.add(screenGroup);
+    //resizeTV(screenGroup);
   });
 }
 
@@ -142,7 +200,7 @@ function initCSS() {
   initButtons(scale);
 
   cssRenderer.domElement.style.position = 'absolute';
-  document.getElementById("tvlayout").appendChild(cssRenderer.domElement);
+  document.getElementById("tvlayoutcanvas").appendChild(cssRenderer.domElement);
 
 }
 
@@ -230,7 +288,6 @@ function initButtons(scale) {
   //cssScene.add(cssObject20);
   cssGroup.push(cssObject20);
   //cssScene.add(cssGroup);
-  console.log("CSSLENGTH = " + cssGroup.length)
 }
 
 function initCanvas() {
@@ -240,14 +297,11 @@ function initCanvas() {
     canvasnum = prenum.toString();
     canvasname = "layoutcanvas";
     id = canvasname.concat(canvasnum);
-    console.log( "CANVAS ID = " + id);
     canvas = document.getElementById(id);
-    console.log( "CANVAS = " + canvas);
     canvas.style.display="none";
     canvas.width = 512;
     canvas.height = 512;
     ctx = canvas.getContext("2d");
-    console.log( "CANVAS CTX = " + ctx);
     texture = new THREE.CanvasTexture(canvas);
     canvasGroup[i] = canvas;
     ctxGroup[i] = ctx;
@@ -259,8 +313,6 @@ function initCanvas() {
 
     bufferGroup[i] = buffer;
     effectComposerGroup[i] = effectComposer;
-    console.log("EFFECT COMPOSER = " + effectComposerGroup.length);
-
 
     material = new THREE.MeshBasicMaterial({map: texture});
     geometry = new THREE.PlaneBufferGeometry( 2, 2 );
@@ -270,30 +322,29 @@ function initCanvas() {
   }
 }
 
-function initBuffers() {
-  for(var i = 0; i < 20; i ++) {
-  }
-}
 
 function init() {
     initVideoPreBuffer();
-
     console.log("start");
-
-    //button = document.getElementById("layoutfire");
-
     initCSS();
+    //initTVMesh();
 
     renderer = new THREE.WebGLRenderer({ antialias: true , alpha: true});
     //renderer = new THREE.WebGLRenderer();
     //renderer.setClearColor (0xff0000, 1);
-    renderer.setSize(WIDTH,HEIGHT);
+
 		dimensions = renderer.getSize()
-		document.getElementById("tvlayout").appendChild(renderer.domElement);
+		tvlayout = document.getElementById("tvlayoutcanvas");
+    console.log("TVLAYOUT =" + tvlayout);
+    WIDTH = $(tvlayout).width();
+    HEIGHT = $(tvlayout).height();
+
+    renderer.setSize(WIDTH, HEIGHT);
+    tvlayout.appendChild(renderer.domElement);
 
     camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
     //scene = new THREE.Scene();
-
+    //resizeCanvasToDisplaySize();
     initCanvas();
     //initBuffers();
 
@@ -318,6 +369,8 @@ function init() {
     staticPass = new THREE.ShaderPass( THREE.StaticShader );
     rgbPass = new THREE.ShaderPass( THREE.RGBShiftShader );
     filmPass = new THREE.ShaderPass( THREE.FilmShader );
+
+    filmPass.uniforms.grayscale.value = 0;
 
     badTVParams = {
       mute:true,
@@ -361,8 +414,8 @@ function onMouseMove(event) {
       mouse.y = - ( ( event.clientY - rect.top ) / ( rect.bottom - rect.top) ) * 2 + 1;
 
       mouse3D = new THREE.Vector3(
-        ( event.clientX / window.innerWidth ) * 2 - 1,
-        - ( event.clientY / window.innerHeight ) * 2 + 1,
+        ( event.clientX / WIDTH ) * 2 - 1,
+        - ( event.clientY / HEIGHT ) * 2 + 1,
         0.5 );
 
     }
@@ -375,15 +428,10 @@ function drawVideo(){
     var video_height = v.offsetHeight;
 
     ctx = ctxGroup[i];
-    //console.log(v, c, ctx);
     ctx.save();
     ctxGroup[i].drawImage(v, 0,0, c.width, c.height);
     ctx.scale(1, dimensions.width / dimensions.height);
   }
-  //var v = video;
-  //var video_width = v.offsetWidth;
-  //var video_height = v.offsetHeight;
-  //ctx.drawImage(video, 0,0, canvas.width, canvas.height);
 }
 
 function ctxRestore() {
@@ -395,27 +443,16 @@ function ctxRestore() {
 }
 
 function mouseHover(event){
-  //console.log(mouse);
   raycaster.setFromCamera(mouse, mainCamera);
-
   intersects = raycaster.intersectObjects(screenGroup.children);
-  //console.log("INTERSECTS =" + intersects);
   if (intersects.length !== 0) {
     badTVPass.enabled = true;
     staticPass.enabled = true;
     rgbPass.enabled = true;
     filmPass.enabled = true;
-    //cssObject.visible = true;
-    //cssObject.enabled = true;
-    //console.log("IT WORKS ==" + intersects[0].object.position.x + intersects[0].object.position.y);
     index = intersects[0].object.userData.id;
     cssGroup[index].element.hidden = false;
-    //cssObject1.position.copy(intersects[0].object.position);
-    //cssObject1.position.x = intersects[0].object.position.x;
-    //cssObject1.position.y = intersects[0].object.position.y;
-    //console.log("CSSBS =" + cssObject1.position.x + cssObject1.position.y)
   } else {
-    //console.log("SHITT");
     randomizeParams();
     badTVPass.enabled = false;
     staticPass.enabled = false;
@@ -452,27 +489,10 @@ function effectComposerSwapBuffers() {
 }
 
 function animate() {
+    //resizeCanvasToDisplaySize();
+    //resizeTV();
     mouseHoverPre();
     drawVideo();
-    //cssObject.position.x += .1;
-
-    //var c = canvasGroup[0];
-    //var v = videos[0];
-    //var video_width = v.offsetWidth;
-    //var video_height = v.offsetHeight;
-
-
-    //ctx = ctxGroup[0];
-    //ctx = c.getContext("2d");
-    //console.log(v, c, ctx);
-    //ctx.save();
-    //ctx.drawImage(v, 0,0, c.width, c.height);
-
-
-
-    //ctx.scale(1, dimensions.width / dimensions.height)
-    //ctx.fillStyle = "#FF0000"
-    //ctx.fillRect((canvas.width / 2) - 25, (canvas.height /2 ) -25, 200, 200);
 
     shaderTime += 0.1;
     badTVPass.uniforms[ 'time' ].value =  shaderTime;
@@ -480,28 +500,14 @@ function animate() {
     staticPass.uniforms[ 'time' ].value =  shaderTime;
 
     ctxRestore();
-    //ctx.restore();
-    //texture = textureGroup[0];
-    //texture.needsUpdate = true;
-
-    //effectComposer = effectComposerGroup[0]
-    //effectComposer.render();
     renderEffectComposer();
     renderer.render(mainScene, mainCamera);
     cssRenderer.render(cssScene, mainCamera);
     requestAnimationFrame(animate);
-    //effectComposer.swapBuffers();
     effectComposerSwapBuffers();
 }
 
 function onToggleShaders(){
-  //effectComposer = effectComposerGroup[0];
-  //effectComposer.addPass(renderPass);
-  //effectComposer.addPass(filmPass);
-  //effectComposer.addPass(badTVPass);
-  //effectComposer.addPass(rgbPass);
-  //effectComposer.addPass(staticPass);
-  //effectComposer.addPass(copyPass);
   for(var i = 0; i < 20; i ++) {
     effectComposer = effectComposerGroup[i];
     effectComposer.addPass(renderPassGroup[i]);
@@ -528,9 +534,10 @@ function initScreenMesh(xpos, ypos, zpos, tvscale, row, col, roty, rotx, screenG
 
 }
 
-function initTVMesh(xpos, ypos, zpos, tvscale, row, col, roty, rotx) {
+function initTVMesh(zpos, ypos, xpos, roty, rotx, tvscale) {
   var mtlLoader = new THREE.MTLLoader();
   mtlLoader.load('../models/yellowtv.mtl', function (materials) {
+      tvGroup = new THREE.Object3D();
       materials.preload();
       var loader = new THREE.OBJLoader();
       loader.setMaterials(materials)
@@ -542,9 +549,10 @@ function initTVMesh(xpos, ypos, zpos, tvscale, row, col, roty, rotx) {
           tvMesh.rotation.y = roty;
           tvMesh.rotation.x = rotx;
           tvMesh.scale.x = tvMesh.scale.y = tvMesh.scale.z = tvscale;
-          tvMesh.translation = geometry.center;
-          index = row + col;
+          tvGroup.add(tvMesh);
           tvArray.push(tvMesh);
+
+          console.log("TVARRAYLENGTH =" + tvArray.length)
           mainScene.add(tvMesh);
       });
   });
@@ -556,18 +564,13 @@ function initVideoMaterials() {
     videonum = prenum.toString();
     videoname = "stock";
     id = videoname.concat(videonum);
-    //console.log("VIDEONAME = " + id);
+    console.log("VIDEONAME = " + id);
     video = document.getElementById( id );
+    console.log("VIDEOSRC = " + video.src);
     video.loop = true;
     video.muted = true;
     video.play();
-
     videos[i] = video;
-    //video.src = '../videos';
-
-    //console.log("initVideo" + video + " + " + video.src);
-
-
     videoTexture = new THREE.Texture( video );
     videoTexture.minFilter = THREE.LinearFilter;
     videoTexture.magFilter = THREE.LinearFilter;
@@ -588,7 +591,6 @@ function initVideoPreBuffer() {
 function initVideoPostBuffer() {
   for(var i = 0; i < 20; i ++) {
     texture = bufferGroup[i].texture;
-    //console.log("TEXTURE + " + texture);
     videoMaterialPost = new THREE.MeshBasicMaterial( {
       map: texture
     } );
@@ -632,8 +634,16 @@ function onToggleMute(){
 }
 
 function onResize() {
-  WIDTH  = window.innerWidth / divScale;
-  HEIGHT = window.innerWidth / divScale;
+  WIDTH = $(tvlayout).width();
+  HEIGHT = $(tvlayout).height();
+  if(screenGroup != null && tvArray != null) {
+    console.log("SL =" + screenGroup.children.length)
+    console.log("TL =" + tvArray.length)
+    resizeTV();
+  }
+  //if (screenGroup.length == 20) {
+  //  resizeTV();
+  //}
 
   renderer.setSize(WIDTH, HEIGHT);
   cssRenderer.setSize(WIDTH, HEIGHT);

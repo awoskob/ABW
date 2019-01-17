@@ -280,7 +280,7 @@ function initTVMesh() {
 
 function initVideoPreBuffer() {
 
-  video = document.getElementById( 'stock1' );
+  video = document.getElementById( 'stock10' );
   video.loop = true;
   video.muted = true;
   video.play();
