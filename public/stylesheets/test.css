@@ -273,25 +273,27 @@ body {
   background: #000000;
   //background: rgb(1,1,1,0.1);
 }
-#aboutimg {
-  //position: absolute;
-  max-width: 100%;
-  top: 25%;
-  bottom: 25%;
-  //height: 80%;
-  //width: 20%;
-  float: left;
-  margin-right: 20px;
+
+.about-title {
+
 }
 
 #about-container {
-  margin-left: 10px;
   width: 80%;
   height: 100%;
 }
 
+#aboutimg {
+  //position: relative;
+  vertical-align: middle;
+  //text-align: center; margin: 1em 0;
+  float:left;
+
+  border-radius: 50%;
+}
+
 .row {
-  //margin-left: 30px;
+
 }
 
 .col-md-4 {
@@ -306,7 +308,7 @@ body {
   //position: relative;
   background: #00990066;
   //background: #33333366;
-  color: white;
+  color: black;
 }
 
 .container {
@@ -359,6 +361,13 @@ footer {
 #tvlayoutcanvas{
   margin: 0 auto;
   position: relative;
+  height: 100vh;
+  //background-color: lightblue;
+}
+
+#tvlayoutcanvas2{
+  margin: 0 auto;
+  position: relative;
   height: 3500px;
   //background-color: lightblue;
 }
@@ -370,5 +379,6 @@ footer {
   text-align: center;
   padding: 10 auto;
   position: absolute;
+  transition: .5s ease;
   z-index: 200;
 }

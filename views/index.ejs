@@ -187,12 +187,14 @@
 
     <section class="intro" id="intro">
         <div class="typing-container">
-            <h1>I am a <span class="text-primary">Musician</span></h1>
-            <h1> and <span class="text-primary"> Creative Programmer</span></h1>
-            <h1> exploring </h1>
-            <h1>
+            <h2>I am a <span class="text-primary">Musician</span></
+
+              >
+            <h2> and <span class="text-primary"> Creative Programmer</span></h2>
+            <h2> exploring </h2>
+            <h2>
               <span class="typing text-primary"></span>
-              .</h1>
+              .</h2>
             <script>
                 // Can also be included with a regular script tag
                 var options = {
@@ -214,17 +216,9 @@
 
     <section class="about" id="about">
       <div class="container" id-"about-container">
-        <h1 class="mb-5 display-4">About</h1>
+        <img src="images/aboutme.jpg" id="aboutimg" width="300" height="400" alt="Alexander Woskob playing keyboards in a limestone mine">
+        <h3 class="About-title">About</h3>
         <div class="row">
-          <div class="col-md-4">
-            <h3>Lorem ipsum dolor sit amet</h3>
-            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-          </div>
-          <img src="images/aboutme.jpg" id="aboutimg" width="300" height="400" alt="Alexander Woskob playing keyboards in a limestone mine">
-          <div class="col-md-4">
-            <h3>Consectetuer adipiscing elit.</h3>
-            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-          </div>
           <div class="col-md-4">
             <h3>Lorem ipsum dolor sit amet</h3>
             <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
@@ -258,6 +252,24 @@
         </div>
       </div>
       <div class="tvlayout" id="tvlayout">
+        <div class-"as">
+          <a id="layoutfire1" class="ui scroll" href="#proj1" hidden>GO TO PROJECT</a>
+          <a id="layoutfire2" class="ui scroll" href="#proj2" hidden>GO TO PROJECT</a>
+          <a id="layoutfire3" class="ui scroll" href="#proj3" hidden>GO TO PROJECT</a>
+          <a id="layoutfire4" class="ui scroll" href="#proj4" hidden>GO TO PROJECT</a>
+          <a id="layoutfire5" class="ui scroll" href="#proj5" hidden>GO TO PROJECT</a>
+          <a id="layoutfire6" class="ui scroll" href="#proj6" hidden>GO TO PROJECT</a>
+        </div>
+        <canvas id="layoutcanvas1" style="z-index:1"></canvas>
+        <canvas id="layoutcanvas2" style="z-index:1"></canvas>
+        <canvas id="layoutcanvas3" style="z-index:1"></canvas>
+        <canvas id="layoutcanvas4" style="z-index:1"></canvas>
+        <canvas id="layoutcanvas5" style="z-index:1"></canvas>
+        <canvas id="layoutcanvas6" style="z-index:1"></canvas>
+        <div id="tvlayoutcanvas"></div>
+        <script src="javascripts/tvlayouthome.js"></script>
+      </div>
+      <!--
         <div class-"as">
           <a id="layoutfire1" class="ui scroll" href="#proj1" hidden>GO TO PROJECT</a>
           <a id="layoutfire2" class="ui scroll" href="#proj2" hidden>GO TO PROJECT</a>
@@ -303,6 +315,7 @@
         <div id="tvlayoutcanvas"></div>
         <script src="javascripts/tvlayout.js"></script>
       </div>
+    -->
       <section class="project-container">
         <!--
         <div class="projects" id="proj1">
