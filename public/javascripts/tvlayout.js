@@ -337,9 +337,9 @@ function init() {
     initCSS();
     //initTVMesh();
 
-    //renderer = new THREE.WebGLRenderer({ antialias: true , alpha: true});
-    renderer = new THREE.WebGLRenderer();
-    renderer.setClearColor (0xff0000, 1);
+    renderer = new THREE.WebGLRenderer({ antialias: true , alpha: true});
+    //renderer = new THREE.WebGLRenderer();
+    //renderer.setClearColor (0xff0000, 1);
 
 		dimensions = renderer.getSize()
 		tvlayout = document.getElementById("tvlayoutcanvas");

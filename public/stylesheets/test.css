@@ -216,6 +216,7 @@ body {
   width: 100vw;
   height: 100vh;
   margin: 0 auto;
+
   //background: radial-gradient(rgba(120, 0, 0, 0.5), rgba(120, 0, 0, 0.4), rgba(120, 0, 0, 0.3), rgba(120, 0, 0, 0.1), rgba(120, 0, 0, 0.01), rgba(120, 0, 0, 0));
 }
 
@@ -240,7 +241,7 @@ body {
   padding: 50vh 0;
   width: 100vw;
   height: 100vh;
-  background: #00356B11;
+  background: #00356B33;
   //background: rgb(0.2, 0.6, 0.95, 0.5);
   //background: radial-gradient(rgba(120, 0, 0, 0.5), rgba(120, 0, 0, 0.4), rgba(120, 0, 0, 0.3), rgba(120, 0, 0, 0.1), rgba(120, 0, 0, 0.01), rgba(120, 0, 0, 0))
 }
@@ -269,8 +270,8 @@ body {
   position: relative;
   padding-top: 10vh;
   padding-bottom: 10vh;
-  background: #ff000066;
-  //background: rgb(0,0,0,0.1);
+  background: #000000;
+  //background: rgb(1,1,1,0.1);
 }
 #aboutimg {
   //position: absolute;
@@ -318,7 +319,8 @@ body {
   padding: 10vh 0;
   margin: 0 auto;
   width: 100vw;
-  background: #rgb(0.5,0.5,0.5,0.7);
+  //background: #rgb(0.5,0.5,0.5,0.7);
+  background: #000000;
   color: white;
 }
 
