@@ -68,17 +68,22 @@
   var effectComposerGroup = [];
   var sceneGroup = [];
   var renderPassGroup = [];
-
+  //var zpos = -100;
+  //var xleft = -.016 * WIDTH;
+  //var xdelta = .016 * WIDTH;
+  //var tvscalex = .00008 * WIDTH;
+  //var tvscaley = .000045 * HEIGHT;
 
 function resizeTV() {
   var zpos = -100;
-  var xleft = -(WIDTH/100);
-  var xdelta = (WIDTH/100);
-  var tvscale = .00008 * WIDTH;
+  var xleft = -.014 * WIDTH;
+  var xdelta = .014 * WIDTH;
+  var tvscalex = .000115 * WIDTH;
+  var tvscaley = .00006 * HEIGHT;
   var index = 0;
   for (var col = 0; col < tvCol; col++) {
-    var ytop = (170000/HEIGHT);
-    var ydelta = .004 * HEIGHT;
+    var ytop = 45;
+    var ydelta = .0062 * HEIGHT;
     var rotx = 0.6;
     for (var row = 0; row < tvRow; row++) {
       if(index < 20) {
@@ -93,7 +98,8 @@ function resizeTV() {
         screenMesh.position.x = xpos;
         screenMesh.rotation.y = roty;
         screenMesh.rotation.x = rotx;
-        screenMesh.scale.x = screenMesh.scale.y = screenMesh.scale.z = tvscale;
+        screenMesh.scale.x = screenMesh.scale.z = tvscalex;
+        screenMesh.scale.y = tvscaley;
         index1 = screenMesh.userData.id;
 
         tvMesh = tvArray[index1];
@@ -102,7 +108,8 @@ function resizeTV() {
         tvMesh.position.x = xpos;
         tvMesh.rotation.y = roty;
         tvMesh.rotation.x = rotx;
-        tvMesh.scale.x = tvMesh.scale.y = tvMesh.scale.z = tvscale;
+        tvMesh.scale.x = tvMesh.scale.z = tvscalex;
+        tvMesh.scale.y = tvscaley;
 
         cssButton = cssGroup[index1];
         cssButton.position.x  = xpos - 2.5;
@@ -122,16 +129,16 @@ function resizeTV() {
 }
 
 function loadTVs() {
-  //var zpos = -100;
-  //var ypos = -150;
-  //var xpos = -200;
+
   console.log("WIDTH =" + WIDTH);
   console.log("HEIGHT =" + HEIGHT);
   var zpos = -100;
-  var xleft = -(WIDTH/100);
-  var xdelta = (WIDTH/100);
-  //var tvscale = (350/WIDTH);
-  var tvscale = .00008 * WIDTH;
+  var xleft = -.016 * WIDTH;
+  var xdelta = .016 * WIDTH;
+  var tvscalex = .00008 * WIDTH;
+  var tvscaley = .000045 * HEIGHT;
+
+  var index = 0;
   loader = new THREE.OBJLoader();
   loader.load('../models/yellowtvscreen.obj', function(object) {
     screenGroup = new THREE.Object3D();
@@ -140,9 +147,8 @@ function loadTVs() {
     object.traverse(function (child) {
         if (child instanceof THREE.Mesh) {
           for (var col = 0; col < tvCol; col++) {
-            var ytop = (170000/HEIGHT);
-            //var ydelta = (65000/HEIGHT);
-            var ydelta = .004 * HEIGHT;
+            var ytop = 45;
+            var ydelta = .0043 * HEIGHT;
             var rotx = 0.6;
             for (var row = 0; row < tvRow; row++) {
               if(index < 20) {
@@ -157,11 +163,12 @@ function loadTVs() {
                 screenMesh.position.x = xpos;
                 screenMesh.rotation.y = roty;
                 screenMesh.rotation.x = rotx;
-                screenMesh.scale.x = screenMesh.scale.y = screenMesh.scale.z = tvscale;
+                screenMesh.scale.x = screenMesh.scale.z = tvscalex;
+                screenMesh.scale.y = tvscaley;
                 screenMesh.userData.id = index;
                 screenGroup.add(screenMesh);
 
-                initTVMesh(zpos, ypos, xpos, roty, rotx, tvscale);
+                initTVMesh(zpos, ypos, xpos, roty, rotx, tvscalex, tvscaley);
 
                 cssButton = cssGroup[index];
                 cssButton.position.x  = xpos - 2.5;
@@ -329,9 +336,9 @@ function init() {
     initCSS();
     //initTVMesh();
 
-    renderer = new THREE.WebGLRenderer({ antialias: true , alpha: true});
-    //renderer = new THREE.WebGLRenderer();
-    //renderer.setClearColor (0xff0000, 1);
+    //renderer = new THREE.WebGLRenderer({ antialias: true , alpha: true});
+    renderer = new THREE.WebGLRenderer();
+    renderer.setClearColor (0xff0000, 1);
 
 		dimensions = renderer.getSize()
 		tvlayout = document.getElementById("tvlayoutcanvas");
@@ -534,7 +541,7 @@ function initScreenMesh(xpos, ypos, zpos, tvscale, row, col, roty, rotx, screenG
 
 }
 
-function initTVMesh(zpos, ypos, xpos, roty, rotx, tvscale) {
+function initTVMesh(zpos, ypos, xpos, roty, rotx, tvscalex, tvscaley) {
   var mtlLoader = new THREE.MTLLoader();
   mtlLoader.load('../models/yellowtv.mtl', function (materials) {
       tvGroup = new THREE.Object3D();
@@ -548,7 +555,8 @@ function initTVMesh(zpos, ypos, xpos, roty, rotx, tvscale) {
           tvMesh.position.x = xpos;
           tvMesh.rotation.y = roty;
           tvMesh.rotation.x = rotx;
-          tvMesh.scale.x = tvMesh.scale.y = tvMesh.scale.z = tvscale;
+          tvMesh.scale.x = tvMesh.scale.z = tvscalex;
+          tvMesh.scale.y = tvscaley;
           tvGroup.add(tvMesh);
           tvArray.push(tvMesh);
 
@@ -637,13 +645,11 @@ function onResize() {
   WIDTH = $(tvlayout).width();
   HEIGHT = $(tvlayout).height();
   if(screenGroup != null && tvArray != null) {
-    console.log("SL =" + screenGroup.children.length)
-    console.log("TL =" + tvArray.length)
+    //console.log("SL =" + screenGroup.children.length)
+    //console.log("TL =" + tvArray.length)
     resizeTV();
   }
-  //if (screenGroup.length == 20) {
-  //  resizeTV();
-  //}
+
 
   renderer.setSize(WIDTH, HEIGHT);
   cssRenderer.setSize(WIDTH, HEIGHT);
