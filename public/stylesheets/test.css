@@ -5,7 +5,7 @@ html{
 }
 
 :root {
-  --background: #074F57dd;
+  --background: #074F57;
 }
 
 *, *::before, *::after {
@@ -241,7 +241,7 @@ body {
   padding: 50vh 0;
   width: 100vw;
   height: 100vh;
-  background: #00356B33;
+  //background: #00356B33;
   //background: rgb(0.2, 0.6, 0.95, 0.5);
   //background: radial-gradient(rgba(120, 0, 0, 0.5), rgba(120, 0, 0, 0.4), rgba(120, 0, 0, 0.3), rgba(120, 0, 0, 0.1), rgba(120, 0, 0, 0.01), rgba(120, 0, 0, 0))
 }
@@ -254,7 +254,7 @@ body {
   	color: black;
   	max-width: 90%;
   	padding: 2em 3em;
-  	background: rgb(250, 250, 250, .8);
+  	//background: rgb(250, 0, 0, .8);
   	font-family: 'Open Sans', sans-serif;
 }
 
@@ -306,7 +306,7 @@ body {
   padding: 10vh 0;
   margin: 0 auto;
   //position: relative;
-  background: #00990066;
+  //background: #00990066;
   //background: #33333366;
   color: black;
 }
@@ -330,8 +330,8 @@ body {
   padding: 10vh 0;
   margin: 0 auto;
   width: 100vw;
-  background: #33333366;
-  color: white;
+  //background: #33333366;
+  color: black;
 }
 
 footer {

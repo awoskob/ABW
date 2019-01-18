@@ -321,9 +321,9 @@ function init() {
     //initTVMesh();
 
     //BGCOLOR
-    //renderer = new THREE.WebGLRenderer({ antialias: true , alpha: true});
-    renderer = new THREE.WebGLRenderer();
-    renderer.setClearColor (0xff0000, 1);
+    renderer = new THREE.WebGLRenderer({ antialias: true , alpha: true});
+    //renderer = new THREE.WebGLRenderer();
+    //renderer.setClearColor (0xff0000, 1);
 
 		dimensions = renderer.getSize()
 		tvlayout = document.getElementById("tvlayoutcanvas");
@@ -448,6 +448,7 @@ function mouseHover(event){
   if (intersects.length !== 0) {
     index = intersects[0].object.userData.id;
     exited = false;
+    cssGroup[index].element.hidden = false;
     if( index < 3) {
       badTVPass.enabled = true;
       staticPass.enabled = true;
