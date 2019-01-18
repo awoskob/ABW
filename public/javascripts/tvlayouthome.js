@@ -172,7 +172,7 @@ function loadTVs() {
         if (child instanceof THREE.Mesh) {
           for (var row = 0; row < tvRow; row++) {
               var roty = 0.7;
-              
+
               ypos = ytop;
               var xleft = -.039 * WIDTH;
 
@@ -364,6 +364,14 @@ function init() {
 
     filmPass.uniforms.grayscale.value = 0;
 
+    copyPass2 = new THREE.ShaderPass( THREE.CopyShader );
+    badTVPass2 = new THREE.ShaderPass( THREE.BadTVShader );
+    staticPass2 = new THREE.ShaderPass( THREE.StaticShader );
+    rgbPass2 = new THREE.ShaderPass( THREE.RGBShiftShader );
+    filmPass2 = new THREE.ShaderPass( THREE.FilmShader );
+
+    filmPass2.uniforms.grayscale.value = 0;
+
     badTVParams = {
       mute:true,
       show: true,
@@ -438,38 +446,36 @@ function mouseHover(event){
   raycaster.setFromCamera(mouse, mainCamera);
   intersects = raycaster.intersectObjects(screenGroup.children);
   if (intersects.length !== 0) {
-    //badTVPass.enabled = true;
-    //staticPass.enabled = true;
-    //rgbPass.enabled = true;
-    //filmPass.enabled = true;
     index = intersects[0].object.userData.id;
-    bottomOver = true;
-    if (index < 3) {
-      topOver = true;
-      bottomOver = false;
-    }
-    cssGroup[index].element.hidden = false;
-    if(entered == false){
-      randomizeParams();
-      console.log("ENTERED!!");
-      onToggleShaders();
-      entered = true;
-    }
     exited = false;
-  } else {
+    if( index < 3) {
+      badTVPass.enabled = true;
+      staticPass.enabled = true;
+      rgbPass.enabled = true;
+      filmPass.enabled = true;
+    } else {
+      badTVPass2.enabled = true;
+      staticPass2.enabled = true;
+      rgbPass2.enabled = true;
+      filmPass2.enabled = true;
+    }
 
-    topOver = false;
-    bottomOver = false;
-    //badTVPass.enabled = false;
-    //staticPass.enabled = false;
-    //rgbPass.enabled = false;
-    //filmPass.enabled = false;
+  } else {
+    badTVPass.enabled = false;
+    staticPass.enabled = false;
+    rgbPass.enabled = false;
+    filmPass.enabled = false;
+    badTVPass2.enabled = false;
+    staticPass2.enabled = false;
+    rgbPass2.enabled = false;
+    filmPass2.enabled = false;
+    randomizeParams()
     hideButtons();
-    entered = false;
-    if(exited == false){
-      onToggleShaders();
+    if(exited = false) {
+      randomizeParams();
       exited = true;
     }
+    //entered = false;
   }
 }
 
@@ -510,6 +516,10 @@ function animate() {
     filmPass.uniforms[ 'time' ].value =  shaderTime;
     staticPass.uniforms[ 'time' ].value =  shaderTime;
 
+    badTVPass2.uniforms[ 'time' ].value =  shaderTime;
+    filmPass2.uniforms[ 'time' ].value =  shaderTime;
+    staticPass2.uniforms[ 'time' ].value =  shaderTime;
+
     ctxRestore();
     renderEffectComposer(.1);
     renderer.render(mainScene, mainCamera);
@@ -523,21 +533,22 @@ function onToggleShaders(){
   for(var i = 0; i < 6; i ++) {
     effectComposer = effectComposerGroup[i];
     effectComposer.addPass(renderPassGroup[i]);
-    if(i < 3 && topOver == true) {
+    if(i < 3) {
       console.log("TOPOVER");
       effectComposer.addPass(filmPass);
       effectComposer.addPass(badTVPass);
       effectComposer.addPass(rgbPass);
       effectComposer.addPass(staticPass);
+      effectComposer.addPass(copyPass);
     }
-    if(i >= 3 && bottomOver == true) {
+    if(i >= 3) {
       console.log("BOTTOMOVER")
-      effectComposer.addPass(filmPass);
-      effectComposer.addPass(badTVPass);
-      effectComposer.addPass(rgbPass);
-      effectComposer.addPass(staticPass);
+      effectComposer.addPass(filmPass2);
+      effectComposer.addPass(badTVPass2);
+      effectComposer.addPass(rgbPass2);
+      effectComposer.addPass(staticPass2);
+      effectComposer.addPass(copyPass2);
     }
-    effectComposer.addPass(copyPass);
   };
 }
 
@@ -552,9 +563,6 @@ function initLights() {
 
 }
 
-function initScreenMesh(xpos, ypos, zpos, tvscale, row, col, roty, rotx, screenGroup) {
-
-}
 
 function initTVMesh(zpos, ypos, xpos, roty, rotx, tvscalex, tvscaley) {
   var mtlLoader = new THREE.MTLLoader();
@@ -638,6 +646,21 @@ function onParamsChange() {
   filmPass.uniforms[ 'sCount' ].value = filmParams.count;
   filmPass.uniforms[ 'sIntensity' ].value = filmParams.sIntensity;
   filmPass.uniforms[ 'nIntensity' ].value = filmParams.nIntensity;
+  //2
+  badTVPass2.uniforms[ 'distortion' ].value = badTVParams.distortion;
+  badTVPass2.uniforms[ 'distortion2' ].value = badTVParams.distortion2;
+  badTVPass2.uniforms[ 'speed' ].value = badTVParams.speed;
+  badTVPass2.uniforms[ 'rollSpeed' ].value = badTVParams.rollSpeed;
+
+  staticPass2.uniforms[ 'amount' ].value = staticParams.amount;
+  staticPass2.uniforms[ 'size' ].value = staticParams.size;
+
+  rgbPass2.uniforms[ 'angle' ].value = rgbParams.angle*Math.PI;
+  rgbPass2.uniforms[ 'amount' ].value = rgbParams.amount;
+
+  filmPass2.uniforms[ 'sCount' ].value = filmParams.count;
+  filmPass2.uniforms[ 'sIntensity' ].value = filmParams.sIntensity;
+  filmPass2.uniforms[ 'nIntensity' ].value = filmParams.nIntensity;
 }
 
 function randomizeParams() {
