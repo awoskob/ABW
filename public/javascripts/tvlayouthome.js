@@ -422,15 +422,24 @@ function onMouseMove(event) {
 
 function drawVideo(){
   for(var i = 0; i < 6; i ++) {
-    var c = canvasGroup[i];
-    var v = videos[i];
-    var video_width = v.offsetWidth;
-    var video_height = v.offsetHeight;
+    if(i == 0 || i ==5) {
+      var c = canvasGroup[i];
+      var v = videos[i];
+      ctx = ctxGroup[i];
+      ctx.save();
+      ctxGroup[i].drawImage(v, 0,0, c.width, c.height);
+      ctx.scale(1, dimensions.width / dimensions.height);
+    } else {
+      var c = canvasGroup[i];
+      var v = videos[i];
+      var video_width = v.offsetWidth;
+      var video_height = v.offsetHeight;
 
-    ctx = ctxGroup[i];
-    ctx.save();
-    ctxGroup[i].drawImage(v, 0,0, c.width, c.height);
-    ctx.scale(1, dimensions.width / dimensions.height);
+      ctx = ctxGroup[i];
+      ctx.save();
+      ctxGroup[i].drawImage(v, 0,0, c.width, c.height);
+      ctx.scale(1, dimensions.width / dimensions.height);
+    }
   }
 }
 
@@ -592,27 +601,51 @@ function initTVMesh(zpos, ypos, xpos, roty, rotx, tvscalex, tvscaley) {
 
 function initVideoMaterials() {
   for(var i = 0; i < 6; i ++) {
-    prenum = i+1;
-    videonum = prenum.toString();
-    videoname = "stock";
-    id = videoname.concat(videonum);
-    console.log("VIDEONAME = " + id);
-    video = document.getElementById( id );
-    console.log("VIDEOSRC = " + video.src);
-    video.loop = true;
-    video.muted = true;
-    video.play();
-    videos[i] = video;
-    videoTexture = new THREE.Texture( video );
-    videoTexture.minFilter = THREE.LinearFilter;
-    videoTexture.magFilter = THREE.LinearFilter;
+    if(i == 0) {
+      img = document.getElementById("GroupWork");
+      imgTexture = new THREE.Texture( img );
+      imgTexture.minFilter = THREE.LinearFilter;
+      imgTexture.magFilter = THREE.LinearFilter;
 
-    videoMaterial = new THREE.MeshBasicMaterial( {
-      map: videoTexture
-    } );
+      imgMaterial = new THREE.MeshBasicMaterial( {
+        map: imgTexture
+      } );
+      videoMaterials[i] = imgMaterial;
+      videos[i] = img;
 
-    videoMaterials[i] = videoMaterial;
+    } else if( i == 5) {
+      img = document.getElementById("SoloWork");
+      imgTexture = new THREE.Texture( img );
+      imgTexture.minFilter = THREE.LinearFilter;
+      imgTexture.magFilter = THREE.LinearFilter;
 
+      imgMaterial = new THREE.MeshBasicMaterial( {
+        map: imgTexture
+      } );
+      videoMaterials[i] = imgMaterial;
+      videos[i] = img;
+    } else {
+      prenum = i+1;
+      videonum = prenum.toString();
+      videoname = "stock";
+      id = videoname.concat(videonum);
+      console.log("VIDEONAME = " + id);
+      video = document.getElementById( id );
+      console.log("VIDEOSRC = " + video.src);
+      video.loop = true;
+      video.muted = true;
+      video.play();
+      videos[i] = video;
+      videoTexture = new THREE.Texture( video );
+      videoTexture.minFilter = THREE.LinearFilter;
+      videoTexture.magFilter = THREE.LinearFilter;
+
+      videoMaterial = new THREE.MeshBasicMaterial( {
+        map: videoTexture
+      } );
+
+      videoMaterials[i] = videoMaterial;
+    }
   }
 };
 
