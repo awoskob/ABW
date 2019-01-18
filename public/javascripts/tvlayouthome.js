@@ -81,21 +81,25 @@
 function resizeTV() {
   var zpos = -100;
   //var xdelta = .01115 * WIDTH;
-  var xdelta = .034 * WIDTH;
-  var tvscalex = .00026 * WIDTH;
-  var tvscaley = .0005 * HEIGHT;
-  var ytop = .009 * HEIGHT;
+  var xdelta = .038 * WIDTH;
+  var tvscalex = .00029 * WIDTH;
+  var tvscaley = .00055 * HEIGHT;
+  var ytop = .0135 * HEIGHT;
   var index = 0;
   var rotx = 0.3;
+  console.log("WIDTH =" + WIDTH);
+  console.log("HEIGHT =" + HEIGHT);
+
   for (var row = 0; row < tvRow; row++) {
       var roty = 0.7;
       //roty -= (row * 0.52)
       ypos = ytop;
-      var xleft = -.035 * WIDTH;
+      var xleft = -.039 * WIDTH;
+      console.log("XLEFT =" + xleft);
       for (var col = 0; col < tvCol ; col++) {
         if(index < 6) {
           xpos = xleft;
-          var ydelta = .04855 * HEIGHT;
+          var ydelta = .055 * HEIGHT;
           roty -= (col * 0.7)
           if(col == 2) {
             roty = -.7;
@@ -139,62 +143,6 @@ function resizeTV() {
 }
 
 
-
-function resizeTV2() {
-  var zpos = -100;
-  var xleft = -.0114 * WIDTH;
-  var xdelta = .01115 * WIDTH;
-  var tvscalex = .00009 * WIDTH;
-  var tvscaley = .000045 * HEIGHT;
-  var index = 0;
-  for (var col = 0; col < tvCol; col++) {
-    var ytop = 45;
-    var ydelta = .0049 * HEIGHT;
-    var rotx = 0.6;
-    for (var row = 0; row < tvRow; row++) {
-      if(index < 6) {
-        var roty = 0.5;
-        roty -= (col * 0.52)
-        xpos = xleft;
-        ypos = ytop;
-      //here in child the geometry and material are available
-        var screenMesh = screenGroup.children[index];
-        screenMesh.position.z = zpos;
-        screenMesh.position.y = ypos;
-        screenMesh.position.x = xpos;
-        screenMesh.rotation.y = roty;
-        screenMesh.rotation.x = rotx;
-        screenMesh.scale.x = screenMesh.scale.z = tvscalex;
-
-        screenMesh.scale.y = tvscaley;
-        index1 = screenMesh.userData.id;
-
-        tvMesh = tvArray[index1];
-        tvMesh.position.z = zpos;
-        tvMesh.position.y = ypos;
-        tvMesh.position.x = xpos;
-        tvMesh.rotation.y = roty;
-        tvMesh.rotation.x = rotx;
-        tvMesh.scale.x = tvMesh.scale.z = tvscalex;
-        tvMesh.scale.y = tvscaley;
-
-        cssButton = cssGroup[index1];
-        cssButton.position.x  = xpos - 2.5;
-        cssButton.position.y  = ypos + 8;
-        cssButton.position.z  = zpos;
-        cssButton.rotation.copy(screenMesh.rotation);
-        cssButton.scale.x = cssButton.scale.y = cssButton.scale.z = 0.1;
-        cssScene.add(cssButton);
-        ytop -= ydelta;
-        rotx -= 0.2;
-        index += 1;
-      }
-    }
-    xleft += xdelta;
-  }
-
-}
-
 function loadTVs() {
 
   console.log("WIDTH =" + WIDTH);
@@ -206,12 +154,15 @@ function loadTVs() {
   //var tvscaley = .000045 * HEIGHT;
 
   var zpos = -100;
-  var xdelta = .034 * WIDTH;
-  var tvscalex = .00026 * WIDTH;
-  var tvscaley = .0005 * HEIGHT;
-  var ytop = .009 * HEIGHT;
-  var rotx = 0.3;
+  //var xdelta = .01115 * WIDTH;
+  var xdelta = .038 * WIDTH;
+  var tvscalex = .00029 * WIDTH;
+  var tvscaley = .00055 * HEIGHT;
+  var ytop = .0135 * HEIGHT;
   var index = 0;
+  var rotx = 0.3;
+  console.log("WIDTH =" + WIDTH);
+  console.log("HEIGHT =" + HEIGHT);
   loader = new THREE.OBJLoader();
   loader.load('../models/yellowtvscreen.obj', function(object) {
     screenGroup = new THREE.Object3D();
@@ -221,13 +172,14 @@ function loadTVs() {
         if (child instanceof THREE.Mesh) {
           for (var row = 0; row < tvRow; row++) {
               var roty = 0.7;
-              //roty -= (row * 0.52)
+              
               ypos = ytop;
-              var xleft = -.035 * WIDTH;
+              var xleft = -.039 * WIDTH;
+
               for (var col = 0; col < tvCol ; col++) {
                 if(index < 6) {
                   xpos = xleft;
-                  var ydelta = .04855 * HEIGHT;
+                  var ydelta = .055 * HEIGHT;
                   roty -= (col * 0.7)
                   if(col == 2) {
                     roty = -.7;
@@ -533,10 +485,10 @@ function mouseHoverPre() {
   }
 }
 
-function renderEffectComposer() {
+function renderEffectComposer(time) {
   for(var i = 0; i < 6; i++) {
     effectComposer = effectComposerGroup[i];
-    effectComposer.render();
+    effectComposer.render(time);
   }
 }
 
@@ -559,7 +511,7 @@ function animate() {
     staticPass.uniforms[ 'time' ].value =  shaderTime;
 
     ctxRestore();
-    renderEffectComposer();
+    renderEffectComposer(.1);
     renderer.render(mainScene, mainCamera);
     cssRenderer.render(cssScene, mainCamera);
     requestAnimationFrame(animate);
