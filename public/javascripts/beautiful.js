@@ -133,7 +133,7 @@ function init() {
   //renderPassNo = new THREE.RenderPass(sceneNo, cameraNo);
   renderPassEmpty = new THREE.RenderPass(sceneEmpty, camera);
 
-  renderPass.clear = false;
+  //renderPass.clear = false;
   renderPassEmpty.clear = false;
   //renderPassNo.clear = false;
 
@@ -142,6 +142,8 @@ function init() {
   staticPass = new THREE.ShaderPass( THREE.StaticShader );
   rgbPass = new THREE.ShaderPass( THREE.RGBShiftShader );
   filmPass = new THREE.ShaderPass( THREE.FilmShader );
+
+  filmPass.uniforms.grayscale.value = 0;
 
   badTVParams = {
     mute:true,
@@ -257,28 +259,28 @@ function mouseHover(event){
   raycaster.setFromCamera(mouse, mainCamera);
   intersects = raycaster.intersectObject(screenMesh.children[0]);
   if (intersects.length !== 0) {
-    badTVPass.enabled = true;
-    staticPass.enabled = true;
-    rgbPass.enabled = true;
-    filmPass.enabled = true;
-    //cssObject.visible = true;
-    //cssObject.enabled = true;
-    //console.log("IT WORKS");
-    cssObject.element.hidden = false;
-  } else {
-    randomizeParams();
     badTVPass.enabled = false;
     staticPass.enabled = false;
     rgbPass.enabled = false;
     filmPass.enabled = false;
+    //cssObject.visible = true;
+    //cssObject.enabled = true;
+    //console.log("IT WORKS");
+    //cssObject.element.hidden = false;
+  } else {
+    randomizeParams();
+    badTVPass.enabled = true;
+    staticPass.enabled = true;
+    rgbPass.enabled = true;
+    filmPass.enabled = true;
     //cssObject.visible = false;
     //cssObject.enabled = false;
-    cssObject.element.hidden = true;
+    //cssObject.element.hidden = true;
   }
 }
 
 function initLights() {
-  var ambientLight = new THREE.AmbientLight( 0x222222 ); // soft white light
+  var ambientLight = new THREE.AmbientLight( 0x444444 ); // soft white light
   scene.add( ambientLight );
   //sceneNo.add( ambientLight );
 

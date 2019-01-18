@@ -76,14 +76,14 @@
 
 function resizeTV() {
   var zpos = -100;
-  var xleft = -.014 * WIDTH;
-  var xdelta = .014 * WIDTH;
-  var tvscalex = .000115 * WIDTH;
-  var tvscaley = .00006 * HEIGHT;
+  var xleft = -.0114 * WIDTH;
+  var xdelta = .01115 * WIDTH;
+  var tvscalex = .00009 * WIDTH;
+  var tvscaley = .000045 * HEIGHT;
   var index = 0;
   for (var col = 0; col < tvCol; col++) {
     var ytop = 45;
-    var ydelta = .0062 * HEIGHT;
+    var ydelta = .0049 * HEIGHT;
     var rotx = 0.6;
     for (var row = 0; row < tvRow; row++) {
       if(index < 20) {
@@ -99,6 +99,7 @@ function resizeTV() {
         screenMesh.rotation.y = roty;
         screenMesh.rotation.x = rotx;
         screenMesh.scale.x = screenMesh.scale.z = tvscalex;
+
         screenMesh.scale.y = tvscaley;
         index1 = screenMesh.userData.id;
 
@@ -133,10 +134,10 @@ function loadTVs() {
   console.log("WIDTH =" + WIDTH);
   console.log("HEIGHT =" + HEIGHT);
   var zpos = -100;
-  var xleft = -.016 * WIDTH;
-  var xdelta = .016 * WIDTH;
-  var tvscalex = .00008 * WIDTH;
-  var tvscaley = .000045 * HEIGHT;
+  var xleft = -.0114 * WIDTH;
+  var xdelta = .01115 * WIDTH;
+  var tvscalex = .00009 * WIDTH;
+  var tvscaley = .000045 * HEIGHT;;
 
   var index = 0;
   loader = new THREE.OBJLoader();
@@ -148,7 +149,7 @@ function loadTVs() {
         if (child instanceof THREE.Mesh) {
           for (var col = 0; col < tvCol; col++) {
             var ytop = 45;
-            var ydelta = .0043 * HEIGHT;
+            var ydelta = .0049 * HEIGHT;
             var rotx = 0.6;
             for (var row = 0; row < tvRow; row++) {
               if(index < 20) {
