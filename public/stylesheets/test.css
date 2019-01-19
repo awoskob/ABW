@@ -265,7 +265,7 @@ body {
 .about {
   margin: 0;
   color: white;
-  padding-top: 5vh;
+  padding-top: 20vh;
   padding-bottom: 5vh;
   position:relative;
   background: #000000;
@@ -306,7 +306,7 @@ body {
 .work {
   //width: 100vw;
   //height: 50vh;
-  padding: 10vh 0;
+  padding-top: 20vh;
   margin: 0 auto;
   //position: relative;
   //background: #00990066;
@@ -335,6 +335,16 @@ body {
   width: 100vw;
   //background: #33333366;
   color: black;
+//position: relative;
+}
+
+#resumepdf {
+  position: relative;
+  width: 40%;
+}
+
+#resumetalk {
+  position: absolute;
 }
 
 footer {
@@ -378,8 +388,8 @@ footer {
 }
 
 .ui{
-  background-color: white;
-  color: black;
+  background-color: green;
+  color: white;
   font-size: 16px;
   text-align: center;
   text-decoration: none;
@@ -387,4 +397,8 @@ footer {
   position: absolute;
   transition: .5s ease;
   z-index: 200;
+  width: 10rem;
+  border-style: solid;
+  border-width: medium;
+  border-color: black;
 }

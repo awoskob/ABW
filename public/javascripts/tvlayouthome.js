@@ -73,6 +73,9 @@
   var entered = false;
   var exited = true;
   var hammerMesh;
+  var textArray = ["LET'S GO!", "HAVE YOU NO COURAGE?",
+                  "TIME IS OF THE ESSENCE!", "YOU CAN DO IT!"];
+  var textIndex = 0;
   //var zpos = -100;
   //var xleft = -.016 * WIDTH;
   //var xdelta = .016 * WIDTH;
@@ -127,11 +130,11 @@ function resizeTV() {
           tvMesh.scale.y = tvscaley;
 
           cssButton = cssGroup[index];
-          cssButton.position.x  = xpos - 2.5;
-          cssButton.position.y  = ypos + 8;
+          cssButton.position.x  = xpos - (WIDTH * .002);
+          cssButton.position.y  = ypos + (HEIGHT * .045);
           cssButton.position.z  = zpos;
           cssButton.rotation.copy(screenMesh.rotation);
-          cssButton.scale.x = cssButton.scale.y = cssButton.scale.z = 0.1;
+          cssButton.scale.x = cssButton.scale.y = cssButton.scale.z = 0.25;
           cssScene.add(cssButton);
 
           index += 1;
@@ -217,11 +220,11 @@ function loadTVs() {
                   //tvMesh.scale.y = tvscaley;
 
                   cssButton = cssGroup[index];
-                  cssButton.position.x  = xpos - 2.5;
-                  cssButton.position.y  = ypos + 8;
+                  cssButton.position.x  = xpos - (WIDTH * .002);
+                  cssButton.position.y  = ypos + (HEIGHT * .045);
                   cssButton.position.z  = zpos;
                   cssButton.rotation.copy(screenMesh.rotation);
-                  cssButton.scale.x = cssButton.scale.y = cssButton.scale.z = 0.1;
+                  cssButton.scale.x = cssButton.scale.y = cssButton.scale.z = 0.25;
                   cssScene.add(cssButton);
 
                   index += 1;
@@ -235,6 +238,8 @@ function loadTVs() {
     });
     //resizeTV(screenGroup);
     console.log("LENGTH2 =" + screenGroup.length);
+    initHammerMesh();
+
     mainScene.add(screenGroup);
     //resizeTV(screenGroup);
   });
@@ -357,7 +362,6 @@ function init() {
     //initScreenMesh();
     //initTVMesh();
     loadTVs();
-    initHammerMesh();
 
     for(var i = 0; i < 6; i ++) {
       renderPass = new THREE.RenderPass(sceneGroup[i], camera);
@@ -418,6 +422,14 @@ function init() {
     randomizeParams();
 }
 
+document.getElementById('tvlayoutcanvas').onmouseover = function () {
+    //hammerMesh.visible = true;
+}
+
+document.getElementById('tvlayoutcanvas').onmouseout = function () {
+    //hammerMesh.visible = false;
+}
+
 function onMouseMove(event) {
       var rect = renderer.domElement.getBoundingClientRect();
       mouse.x = ( ( event.clientX - rect.left ) / ( rect.width - rect.left ) ) * 2 - 1;
@@ -435,7 +447,7 @@ function onMouseMove(event) {
       	var pos = mainCamera.position.clone().add( dir.multiplyScalar( distance ) );
         //pos.z = -80;
         //pos.y -= 5;
-        console.log("POS = " + pos.x + pos.y);
+        //console.log("POS = " + pos.x + pos.y);
       	hammerMesh.position.copy(pos);
         //hammerMesh.position.z = -80;
         //hammerMesh.position.x = mouse3D.x;
@@ -488,7 +500,16 @@ function mouseHover(event){
   raycaster.setFromCamera(mouse, mainCamera);
   intersects = raycaster.intersectObjects(screenGroup.children);
   if (intersects.length !== 0) {
+    hammerMesh.visible = true;
     $('html,body').css('cursor', 'none');
+    textIndex = textIndex % textArray.length;
+    text = textArray[textIndex];
+    $("#layoutfire1").text(text);
+    $("#layoutfire2").text(text);
+    $("#layoutfire3").text(text);
+    $("#layoutfire4").text(text);
+    $("#layoutfire5").text(text);
+    $("#layoutfire6").text(text);
 
     //path = intersects[0].object.userData.URL;
     //window.location.href = path;
@@ -519,6 +540,7 @@ function mouseHover(event){
 
   } else {
     $('html,body').css('cursor', 'default');
+    hammerMesh.visible = false;
 
     badTVPass.enabled = false;
     staticPass.enabled = false;
@@ -528,10 +550,11 @@ function mouseHover(event){
     staticPass2.enabled = false;
     rgbPass2.enabled = false;
     filmPass2.enabled = false;
-    randomizeParams()
+    //randomizeParams()
     hideButtons();
-    if(exited = false) {
+    if(exited == false) {
       randomizeParams();
+      textIndex += 1;
       exited = true;
     }
     //entered = false;
@@ -640,9 +663,11 @@ function initHammerMesh() {
           hammerMesh.scale.x = hammerMesh.scale.y = hammerMesh.scale.z = .2;
           hammerMesh.position.y = -10;
           hammerMesh.position.z = -80;
+          hammerMesh.lookAt(tvArray[1]);
           //hammerMesh.rotation.x = -.9;
         //  hammerMesh.rotation.z = -.5;
           mainScene.add(hammerMesh);
+          hammerMesh.visible = false;
       });
   });
 }
