@@ -199,7 +199,7 @@ animate();
 
 
 function initCSS() {
-  var scale = 0.1;
+  var scale = 0.2;
   cssRenderer = new THREE.CSS3DRenderer();
   cssRenderer.setSize(WIDTH,HEIGHT);
   cssScene = new THREE.Scene()

@@ -6,6 +6,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var workRouter = require('./routes/work');
 
 var THREE = require('three');
 var jquery = require('jquery');
@@ -50,6 +51,7 @@ app.use('/three/js/utils', express.static(__dirname + '/node_modules/three/examp
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/work', workRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

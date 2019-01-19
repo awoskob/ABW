@@ -362,9 +362,9 @@ footer {
 }
 
 #tvlayoutcanvas{
-  margin: 10px auto;
+  margin: 0 auto;
   position: relative;
-  height: 900px;
+  height: 500px;
   //height: 100vh;
   //width: 100vw;
   //background-color: lightblue;

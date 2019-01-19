@@ -116,7 +116,7 @@ function resizeTV() {
           screenMesh.scale.y = tvscaley;
           index1 = screenMesh.userData.id;
 
-          tvMesh = tvArray[index1];
+          tvMesh = tvArray[index];
           tvMesh.position.z = zpos;
           tvMesh.position.y = ypos;
           tvMesh.position.x = xpos;
@@ -125,7 +125,7 @@ function resizeTV() {
           tvMesh.scale.x = tvMesh.scale.z = tvscalex;
           tvMesh.scale.y = tvscaley;
 
-          cssButton = cssGroup[index1];
+          cssButton = cssGroup[index];
           cssButton.position.x  = xpos - 2.5;
           cssButton.position.y  = ypos + 8;
           cssButton.position.z  = zpos;
@@ -195,6 +195,12 @@ function loadTVs() {
 
                   screenMesh.scale.y = tvscaley;
                   screenMesh.userData.id = index;
+                  if(index < 3) {
+                    screenMesh.userData.URL = "/work/groupwork";
+                  } else{
+                    screenMesh.userData.URL = "/work/solowork";
+                  }
+
                   screenGroup.add(screenMesh);
 
 
@@ -238,7 +244,7 @@ animate();
 
 
 function initCSS() {
-  var scale = 0.1;
+  var scale = 0.2;
   cssRenderer = new THREE.CSS3DRenderer();
   cssRenderer.setSize(WIDTH,HEIGHT);
   cssScene = new THREE.Scene()
@@ -403,6 +409,8 @@ function init() {
 
     document.addEventListener('mousemove', onMouseMove, false);
     window.addEventListener('resize', onResize, false);
+    document.addEventListener('mousedown', onDocumentMouseDown, false);
+
 
     onResize();
     randomizeParams();
@@ -451,11 +459,23 @@ function ctxRestore() {
   }
 }
 
+function onDocumentMouseDown(event) {
+    raycaster.setFromCamera(mouse, mainCamera);
+    var intersects = raycaster.intersectObjects(screenGroup.children);
+    if (intersects.length !== 0) {
+      path = intersects[0].object.userData.URL;
+      window.location.href = path;
+    }
+};
+
 function mouseHover(event){
   raycaster.setFromCamera(mouse, mainCamera);
   intersects = raycaster.intersectObjects(screenGroup.children);
   if (intersects.length !== 0) {
+    //path = intersects[0].object.userData.URL;
+    //window.location.href = path;
     index = intersects[0].object.userData.id;
+    $('html,body').css('cursor', 'pointer');
     exited = false;
     cssGroup[index].element.hidden = false;
     if( index < 3) {
@@ -471,6 +491,7 @@ function mouseHover(event){
     }
 
   } else {
+    $('html,body').css('cursor', 'default');
     badTVPass.enabled = false;
     staticPass.enabled = false;
     rgbPass.enabled = false;
