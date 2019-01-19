@@ -378,10 +378,11 @@ footer {
 }
 
 .ui{
-  background-color: red;
-  color: white;
+  background-color: white;
+  color: black;
   font-size: 16px;
   text-align: center;
+  text-decoration: none;
   padding: 10 auto;
   position: absolute;
   transition: .5s ease;

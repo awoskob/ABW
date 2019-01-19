@@ -72,6 +72,7 @@
   var bottomOver = false;
   var entered = false;
   var exited = true;
+  var hammerMesh;
   //var zpos = -100;
   //var xleft = -.016 * WIDTH;
   //var xdelta = .016 * WIDTH;
@@ -356,6 +357,7 @@ function init() {
     //initScreenMesh();
     //initTVMesh();
     loadTVs();
+    initHammerMesh();
 
     for(var i = 0; i < 6; i ++) {
       renderPass = new THREE.RenderPass(sceneGroup[i], camera);
@@ -425,6 +427,20 @@ function onMouseMove(event) {
         ( event.clientX / WIDTH ) * 2 - 1,
         - ( event.clientY / HEIGHT ) * 2 + 1,
         0.5 );
+      if(hammerMesh != null) {
+        var vector = new THREE.Vector3(mouse.x, mouse.y, -80);
+      	vector.unproject( mainCamera );
+      	var dir = vector.sub( mainCamera.position ).normalize();
+      	var distance = - mainCamera.position.z / dir.z;
+      	var pos = mainCamera.position.clone().add( dir.multiplyScalar( distance ) );
+        //pos.z = -80;
+        //pos.y -= 5;
+        console.log("POS = " + pos.x + pos.y);
+      	hammerMesh.position.copy(pos);
+        //hammerMesh.position.z = -80;
+        //hammerMesh.position.x = mouse3D.x;
+        //hammerMesh.position.y = mouse3D.y;
+      }
 
     }
 
@@ -472,10 +488,21 @@ function mouseHover(event){
   raycaster.setFromCamera(mouse, mainCamera);
   intersects = raycaster.intersectObjects(screenGroup.children);
   if (intersects.length !== 0) {
+    $('html,body').css('cursor', 'none');
+
     //path = intersects[0].object.userData.URL;
     //window.location.href = path;
+    hammerMesh.lookAt(intersects[0].object.position);
+    //hammerMesh.rotation.z *= -1;
+    //hammerMesh.rotation.x += 2.0;
+    //hammerMesh.rotation.z += 1.5;
     index = intersects[0].object.userData.id;
-    $('html,body').css('cursor', 'pointer');
+    if(index % 3 == 0) {
+      hammerMesh.rotation.y -= 0.5;
+    }
+    if(index % 3 == 2) {
+      hammerMesh.rotation.y += 0.5;
+    }
     exited = false;
     cssGroup[index].element.hidden = false;
     if( index < 3) {
@@ -492,6 +519,7 @@ function mouseHover(event){
 
   } else {
     $('html,body').css('cursor', 'default');
+
     badTVPass.enabled = false;
     staticPass.enabled = false;
     rgbPass.enabled = false;
@@ -517,7 +545,7 @@ function hideButtons() {
 }
 
 function mouseHoverPre() {
-  if(screenGroup != null) {
+  if(screenGroup != null && hammerMesh != null) {
     mouseHover(event);
   }
 }
@@ -584,16 +612,40 @@ function onToggleShaders(){
 }
 
 function initLights() {
-  var light1 = new THREE.AmbientLight( 0x111111 ); // soft white light
+  var light1 = new THREE.AmbientLight( 0x777777 ); // soft white light
   mainScene.add( light1 );
 
-  var light = new THREE.PointLight( 0xffffff, 1, 500);
-  light.position.set(-100, 15, -50 );
+  var light = new THREE.PointLight( 0xffffff, 1, 2000);
+  light.position.set(-20, 15, -50 );
+  mainScene.add( light );
+
+  var light = new THREE.PointLight( 0xffffff, 1, 200);
+  light.position.set(-10, -10, 10 );
   mainScene.add( light );
 
 
 }
 
+
+function initHammerMesh() {
+  console.log("INIT HAMMER");
+  var mtlLoader = new THREE.MTLLoader();
+  mtlLoader.load('../models/Hammer03.mtl', function (materials) {
+      tvGroup = new THREE.Object3D();
+      materials.preload();
+      var loader = new THREE.OBJLoader();
+      loader.setMaterials(materials)
+      loader.load('../models/Hammer03.obj', function(geometry, materials) {
+          hammerMesh = geometry;
+          hammerMesh.scale.x = hammerMesh.scale.y = hammerMesh.scale.z = .2;
+          hammerMesh.position.y = -10;
+          hammerMesh.position.z = -80;
+          //hammerMesh.rotation.x = -.9;
+        //  hammerMesh.rotation.z = -.5;
+          mainScene.add(hammerMesh);
+      });
+  });
+}
 
 function initTVMesh(zpos, ypos, xpos, roty, rotx, tvscalex, tvscaley) {
   var mtlLoader = new THREE.MTLLoader();
