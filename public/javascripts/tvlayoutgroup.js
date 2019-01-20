@@ -1,4 +1,4 @@
-(function tvlayouthome(){
+(function tvlayoutgroup(){
 
   var camera, scene, renderer, mesh, material, canvas, dimensions;
 
@@ -56,7 +56,7 @@
   //var tvCol = 4;
   //var tvRow = 5;
   var tvCol = 3;
-  var tvRow = 2;
+  var tvRow = 4;
 
   //var zpos = -120;
   //var ypos = -50;
@@ -101,7 +101,7 @@ function resizeTV() {
       var xleft = -.039 * WIDTH;
       console.log("XLEFT =" + xleft);
       for (var col = 0; col < tvCol ; col++) {
-        if(index < 6) {
+        if(index < 12) {
           xpos = xleft;
           var ydelta = .055 * HEIGHT;
           roty -= (col * 0.7)
@@ -159,10 +159,10 @@ function loadTVs() {
 
   var zpos = -100;
   //var xdelta = .01115 * WIDTH;
-  var xdelta = .038 * WIDTH;
-  var tvscalex = .00029 * WIDTH;
-  var tvscaley = .00055 * HEIGHT;
-  var ytop = .0135 * HEIGHT;
+  var xdelta = .019 * WIDTH;
+  var tvscalex = .00015 * WIDTH;
+  var tvscaley = .00014 * HEIGHT;
+  var ytop = .016 * HEIGHT;
   var index = 0;
   var rotx = 0.3;
   console.log("WIDTH =" + WIDTH);
@@ -178,12 +178,12 @@ function loadTVs() {
               var roty = 0.7;
 
               ypos = ytop;
-              var xleft = -.039 * WIDTH;
+              var xleft = -.019 * WIDTH;
 
               for (var col = 0; col < tvCol ; col++) {
                 if(index < 12) {
                   xpos = xleft;
-                  var ydelta = .055 * HEIGHT;
+                  var ydelta = .014 * HEIGHT;
                   roty -= (col * 0.7)
                   if(col == 2) {
                     roty = -.7;
@@ -270,31 +270,41 @@ function initButtons(scale) {
   element4 = document.getElementById("layoutfire4");
   element5 = document.getElementById("layoutfire5");
   element6 = document.getElementById("layoutfire6");
+  element7 = document.getElementById("layoutfire7");
+  element8 = document.getElementById("layoutfire8");
+  element9 = document.getElementById("layoutfire9");
+  element10 = document.getElementById("layoutfire10");
+  element11 = document.getElementById("layoutfire11");
+  element12 = document.getElementById("layoutfire12");
   cssObject1 = new THREE.CSS3DObject(element1);
-  cssObject1.scale.x = cssObject1.scale.y = cssObject1.scale.z = scale;
-  cssScene.add(cssObject1);
   cssGroup.push(cssObject1);
-  //cssGroup.add(cssObject1);
   cssObject2 = new THREE.CSS3DObject(element2);
-  //cssScene.add(cssObject2);
   cssGroup.push(cssObject2);
   cssObject3 = new THREE.CSS3DObject(element3);
-  //cssScene.add(cssObject3);
   cssGroup.push(cssObject3);
   cssObject4 = new THREE.CSS3DObject(element4);
-  //cssScene.add(cssObject4);
   cssGroup.push(cssObject4);
   cssObject5 = new THREE.CSS3DObject(element5);
-  //cssScene.add(cssObject5);
   cssGroup.push(cssObject5);
   cssObject6 = new THREE.CSS3DObject(element6);
-  //cssScene.add(cssObject6);
   cssGroup.push(cssObject6);
-  //cssScene.add(cssGroup);
+
+  cssObject7 = new THREE.CSS3DObject(element7);
+  cssGroup.push(cssObject7);
+  cssObject8 = new THREE.CSS3DObject(element8);
+  cssGroup.push(cssObject6);
+  cssObject9 = new THREE.CSS3DObject(element9);
+  cssGroup.push(cssObject9);
+  cssObject10 = new THREE.CSS3DObject(element10);
+  cssGroup.push(cssObject10);
+  cssObject11 = new THREE.CSS3DObject(element11);
+  cssGroup.push(cssObject11);
+  cssObject12 = new THREE.CSS3DObject(element12);
+  cssGroup.push(cssObject12);
 }
 
 function initCanvas() {
-  for(var i = 0; i < 6; i ++) {
+  for(var i = 0; i < 12; i ++) {
     scene = new THREE.Scene();
     prenum = i + 1;
     canvasnum = prenum.toString();
@@ -363,7 +373,7 @@ function init() {
     //initTVMesh();
     loadTVs();
 
-    for(var i = 0; i < 6; i ++) {
+    for(var i = 0; i < 12; i ++) {
       renderPass = new THREE.RenderPass(sceneGroup[i], camera);
       renderPassGroup[i] = renderPass;
     }
@@ -457,7 +467,7 @@ function onMouseMove(event) {
     }
 
 function drawVideo(){
-  for(var i = 0; i < 6; i ++) {
+  for(var i = 0; i < 12; i ++) {
     if(i == 0 || i ==5) {
       var c = canvasGroup[i];
       var v = videos[i];
@@ -480,7 +490,7 @@ function drawVideo(){
 }
 
 function ctxRestore() {
-  for(var i = 0; i < 6; i ++) {
+  for(var i = 0; i < 12; i ++) {
     ctx = ctxGroup[i];
     ctx.restore();
     textureGroup[i].needsUpdate = true;
@@ -497,7 +507,6 @@ function onDocumentMouseDown(event) {
 };
 
 function mouseHover(event){
-  console.log("WORKING111")
   raycaster.setFromCamera(mouse, mainCamera);
   intersects = raycaster.intersectObjects(screenGroup.children);
   if (intersects.length !== 0) {
@@ -511,7 +520,6 @@ function mouseHover(event){
     $("#layoutfire4").text(text);
     $("#layoutfire5").text(text);
     $("#layoutfire6").text(text);
-    console.log("WORKING!?!?!")
 
     //path = intersects[0].object.userData.URL;
     //window.location.href = path;
@@ -570,21 +578,20 @@ function hideButtons() {
 }
 
 function mouseHoverPre() {
-  console.log(hammerMesh);
   if(screenGroup != null && hammerMesh != null) {
     mouseHover(event);
   }
 }
 
 function renderEffectComposer(time) {
-  for(var i = 0; i < 6; i++) {
+  for(var i = 0; i < 12; i++) {
     effectComposer = effectComposerGroup[i];
     effectComposer.render(time);
   }
 }
 
 function effectComposerSwapBuffers() {
-  for(var i = 0; i < 6; i++) {
+  for(var i = 0; i < 12; i++) {
     effectComposer = effectComposerGroup[i];
     effectComposer.swapBuffers();
   }
@@ -595,7 +602,6 @@ function animate() {
     //resizeTV();
     mouseHoverPre();
     drawVideo();
-    //console.log("ANIMATING")
 
     shaderTime += 0.1;
     badTVPass.uniforms[ 'time' ].value =  shaderTime;
@@ -616,7 +622,7 @@ function animate() {
 
 function onToggleShaders(){
 
-  for(var i = 0; i < 6; i ++) {
+  for(var i = 0; i < 12; i ++) {
     effectComposer = effectComposerGroup[i];
     effectComposer.addPass(renderPassGroup[i]);
     if(i < 3) {
@@ -664,7 +670,7 @@ function initHammerMesh() {
       loader.setMaterials(materials)
       loader.load('../models/Hammer03.obj', function(geometry, materials) {
           hammerMesh = geometry;
-          hammerMesh.scale.x = hammerMesh.scale.y = hammerMesh.scale.z = .2;
+          hammerMesh.scale.x = hammerMesh.scale.y = hammerMesh.scale.z = .1;
           hammerMesh.position.y = -10;
           hammerMesh.position.z = -80;
           hammerMesh.lookAt(tvArray[1]);
@@ -702,7 +708,7 @@ function initTVMesh(zpos, ypos, xpos, roty, rotx, tvscalex, tvscaley) {
 }
 
 function initVideoMaterials() {
-  for(var i = 0; i < 6; i ++) {
+  for(var i = 0; i < 12; i ++) {
     if(i == 0) {
       img = document.getElementById("GroupWork");
       imgTexture = new THREE.Texture( img );
@@ -756,7 +762,7 @@ function initVideoPreBuffer() {
 }
 
 function initVideoPostBuffer() {
-  for(var i = 0; i < 6; i ++) {
+  for(var i = 0; i < 12; i ++) {
     texture = bufferGroup[i].texture;
     videoMaterialPost = new THREE.MeshBasicMaterial( {
       map: texture

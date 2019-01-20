@@ -2,29 +2,175 @@
 <html>
   <head>
     <title>Alexander Woskob</title>
-    <link rel='stylesheet' href='/stylesheets/test.css' />
+    <link rel='stylesheet' href='/stylesheets/work.css' />
+
+    <script src="/jquery/jquery.js"></script>
+    <script src="../../javascripts/scrolling.js"></script>
+    <script src="../../javascripts/navigation.js"></script>
+
+    <script src="../../three/build/three.min.js"></script>
+    <script src="../../three/js/loaders/OBJLoader.js"></script>
+    <script src="../../three/js/loaders/MTLLoader.js"></script>
+    <script src="../../three/js/renderers/CSS3DRenderer.js"></script>
+
+    <script type="module" src="../../three/src/constants.js"></script>
+    <script type="module" src="../../textures/VideoTexture.js"></script>
+    <script type="module" src="../../textures/Texture.js"></script>
+
+
+    <!--<script type="module" src="/three/textures/VideoTexture.js"></script>-->
+
+    <script src="../../javascripts/OrbitControls.js"></script>
+    <script src="../../javascripts/Tween.js"></script>
+
+    <script type="module" src="../../javascripts/threex.videotexture.js"></script>
+
+    <script src="../../bad-tv-shader-master/example/lib/dat.gui.min.js"></script>
+    <script src="../../bad-tv-shader-master/example/lib/stats.min.js"></script>
+    <script src="../../bad-tv-shader-master/example/lib/postprocessing/EffectComposer.js"></script>
+    <script src="../../bad-tv-shader-master/example/lib/postprocessing/RenderPass.js"></script>
+    <script src="../../bad-tv-shader-master/example/lib/postprocessing/ShaderPass.js"></script>
+    <script src="../../bad-tv-shader-master/example/lib/postprocessing/MaskPass.js"></script>
+    <script src="../../bad-tv-shader-master/example/lib/shaders/CopyShader.js"></script>
+    <script src="../../bad-tv-shader-master/example/lib/shaders/FilmShader.js"></script>
+    <script src="../../bad-tv-shader-master/example/lib/shaders/RGBShiftShader.js"></script>
+    <script src="../../bad-tv-shader-master/example/js/BadTVShader.js"></script>
+    <script src="../../bad-tv-shader-master/example/js/StaticShader.js"></script>
+
+    <script type="module" src="../../three/js/postprocessing/EffectComposer.js"></script>
+    <script type="module" src="../../three/js/postprocessing/ClearPass.js"></script>
+
+    <script src="../../three/js/utils/SceneUtils.js"></script>
+    <script src="../../particlejs/particles.js"></script>
+    <script src="../../typed/typed.min.js"></script>
+
+    <!--<img id="slowpoke2" src="http://i.stack.imgur.com/SBv4T.gif" title="this slowpoke moves" alt="slow slowpoke" />-->
+
+    <video id="stock2" width="400" autoplay loop style="display:none">
+      <source src="../../videos480/LemmingsVine480.mp4" type="video/mp4">
+      Your browser does not support HTML5 video.
+    </video>
+
+    <video id="stock3" width="400" autoplay loop style="display:none">
+      <source src="../../videos480/ToadlioniVine480.mp4" type="video/mp4">
+      Your browser does not support HTML5 video.
+    </video>
+
+    <video id="stock4" width="400" autoplay loop style="display:none">
+      <source src="../../videos480/UFOVine480.mp4" type="video/mp4">
+      Your browser does not support HTML5 video.
+    </video>
+
+    <video id="stock5" width="400" autoplay loop style="display:none">
+      <source src="../../videos480/PlanetsVine480.mp4" type="video/mp4">
+      Your browser does not support HTML5 video.
+    </video>
+
+    <img id="GroupWork" src="../../images/GroupWork.jpg" style="display: none">
+
+    <img id="SoloWork" src="../../images/SoloWork.jpg" style="display: none">
+
+    <video id="stock6" width="400" autoplay loop style="display:none">
+      <source src="../../videos480/GrandmaVine480.mp4" type="video/mp4">
+      Your browser does not support HTML5 video.
+    </video>
+
+    <video id="stock7" width="400" autoplay loop style="display:none">
+      <source src="../../videos480/PollenVine480.mp4" type="video/mp4">
+      Your browser does not support HTML5 video.
+    </video>
+
+    <video id="stock8" width="400" autoplay loop style="display:none">
+      <source src="../../videos480/DuckFallsVine480.mp4" type="video/mp4">
+      Your browser does not support HTML5 video.
+    </video>
+
+    <video id="stock9" width="400" autoplay loop style="display:none">
+      <source src="../../videos480/ChromaVine480.mp4" type="video/mp4">
+      Your browser does not support HTML5 video.
+    </video>
+
+    <video id="stock10" width="400" autoplay loop style="display:none">
+      <source src="../../videos480/QuartetVine480.mp4" type="video/mp4">
+      Your browser does not support HTML5 video.
+    </video>
+
+    <video id="stock11" width="400" autoplay loop style="display:none">
+      <source src="../../videos480/WoodlandWarriorsVine480.mp4" type="video/mp4">
+      Your browser does not support HTML5 video.
+    </video>
+
+    <video id="stock12" width="400" autoplay loop style="display:none">
+      <source src="../../videos480/UrSoFineVine480.mp4" type="video/mp4">
+      Your browser does not support HTML5 video.
+    </video>
 
   </head>
 
   <header>
     <div class="logo">
       <div class="threedlogo" id="3dlogo">
-        <script src="javascripts/3dlogo.js"></script>
+        <script src="/javascripts/3dlogo.js"></script>
       </div>
       <h1 class="textlogo"> Alexander Woskob </h1>
     </div>
     <input type="checkbox" id="nav-toggle" class="nav-toggle">
     <nav>
       <ul>
-        <li><a class="nav-link" href="#intro">HOME</a></li>
-        <li><a class="nav-link" href="#intro">Group Work</a></li>
-        <li><a class="nav-link" href="#about">Solo Work</a></li>
+        <li><a class="nav-link" href="/">HOME</a></li>
+        <li><a class="nav-link" href="/work/groupwork">Group Work</a></li>
+        <li><a class="nav-link" href="/work/solowork">Solo Work</a></li>
       </ul>
     </nav>
     <label for="nav-toggle" class="nav-toggle-label">
       <span></span>
     </label>
   </header>
+
+  <body>
+
+    <div class="as">
+      <a id="layoutfire1" class="ui scroll" href="#proj1" hidden>GO TO PROJECT</a>
+      <a id="layoutfire2" class="ui scroll" href="#proj2" hidden>GO TO PROJECT</a>
+      <a id="layoutfire3" class="ui scroll" href="#proj3" hidden>GO TO PROJECT</a>
+      <a id="layoutfire4" class="ui scroll" href="#proj4" hidden>GO TO PROJECT</a>
+      <a id="layoutfire5" class="ui scroll" href="#proj5" hidden>GO TO PROJECT</a>
+      <a id="layoutfire6" class="ui scroll" href="#proj6" hidden>GO TO PROJECT</a>
+      <a id="layoutfire7" class="ui scroll" href="#proj7" hidden>GO TO PROJECT</a>
+      <a id="layoutfire8" class="ui scroll" href="#proj8" hidden>GO TO PROJECT</a>
+      <a id="layoutfire9" class="ui scroll" href="#proj9" hidden>GO TO PROJECT</a>
+      <a id="layoutfire10" class="ui scroll" href="#proj10" hidden>GO TO PROJECT</a>
+      <a id="layoutfire11" class="ui scroll" href="#proj11" hidden>GO TO PROJECT</a>
+      <a id="layoutfire12" class="ui scroll" href="#proj12" hidden>GO TO PROJECT</a>
+      <a id="layoutfire13" class="ui scroll" href="#proj13" hidden>GO TO PROJECT</a>
+      <a id="layoutfire14" class="ui scroll" href="#proj14" hidden>GO TO PROJECT</a>
+      <a id="layoutfire15" class="ui scroll" href="#proj15" hidden>GO TO PROJECT</a>
+      <a id="layoutfire16" class="ui scroll" href="#proj16" hidden>GO TO PROJECT</a>
+      <a id="layoutfire17" class="ui scroll" href="#proj17" hidden>GO TO PROJECT</a>
+      <a id="layoutfire18" class="ui scroll" href="#proj18" hidden>GO TO PROJECT</a>
+      <a id="layoutfire19" class="ui scroll" href="#proj19" hidden>GO TO PROJECT</a>
+      <a id="layoutfire20" class="ui scroll" href="#proj20" hidden>GO TO PROJECT</a>
+      <canvas id="layoutcanvas1" style="z-index:1"></canvas>
+      <canvas id="layoutcanvas2" style="z-index:1"></canvas>
+      <canvas id="layoutcanvas3" style="z-index:1"></canvas>
+      <canvas id="layoutcanvas4" style="z-index:1"></canvas>
+      <canvas id="layoutcanvas5" style="z-index:1"></canvas>
+      <canvas id="layoutcanvas6" style="z-index:1"></canvas>
+      <canvas id="layoutcanvas7" style="z-index:1"></canvas>
+      <canvas id="layoutcanvas8" style="z-index:1"></canvas>
+      <canvas id="layoutcanvas9" style="z-index:1"></canvas>
+      <canvas id="layoutcanvas10" style="z-index:1"></canvas>
+      <canvas id="layoutcanvas11" style="z-index:1"></canvas>
+      <canvas id="layoutcanvas12" style="z-index:1"></canvas>
+      <div id="tvlayoutcanvas"></div>
+      <script src="../../javascripts/tvlayoutgroup.js"></script>
+    </div>
+
+
+
+
+  </body>
+
 
 
 
