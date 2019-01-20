@@ -56,7 +56,7 @@
   //var tvCol = 4;
   //var tvRow = 5;
   var tvCol = 3;
-  var tvRow = 4;
+  var tvRow = 5;
 
   //var zpos = -120;
   //var ypos = -50;
@@ -76,6 +76,9 @@
   var textArray = ["LET'S GO!", "HAVE YOU NO COURAGE?",
                   "TIME IS OF THE ESSENCE!", "YOU CAN DO IT!"];
   var textIndex = 0;
+
+  var cardArray = [];
+  var cardIndex = 0;
   //var zpos = -100;
   //var xleft = -.016 * WIDTH;
   //var xdelta = .016 * WIDTH;
@@ -101,7 +104,7 @@ function resizeTV() {
       var xleft = -.039 * WIDTH;
       console.log("XLEFT =" + xleft);
       for (var col = 0; col < tvCol ; col++) {
-        if(index < 12) {
+        if(index < 15) {
           xpos = xleft;
           var ydelta = .055 * HEIGHT;
           roty -= (col * 0.7)
@@ -159,12 +162,12 @@ function loadTVs() {
 
   var zpos = -100;
   //var xdelta = .01115 * WIDTH;
-  var xdelta = .019 * WIDTH;
-  var tvscalex = .00015 * WIDTH;
-  var tvscaley = .00014 * HEIGHT;
-  var ytop = .016 * HEIGHT;
+  var xdelta = .0145 * WIDTH;
+  var tvscalex = .00012 * WIDTH;
+  var tvscaley = .00009 * HEIGHT;
+  var ytop = .015 * HEIGHT;
   var index = 0;
-  var rotx = 0.3;
+  var rotx = 0.6;
   console.log("WIDTH =" + WIDTH);
   console.log("HEIGHT =" + HEIGHT);
   loader = new THREE.OBJLoader();
@@ -178,12 +181,12 @@ function loadTVs() {
               var roty = 0.7;
 
               ypos = ytop;
-              var xleft = -.019 * WIDTH;
+              var xleft = -.0145 * WIDTH;
 
               for (var col = 0; col < tvCol ; col++) {
-                if(index < 12) {
+                if(index < 15) {
                   xpos = xleft;
-                  var ydelta = .014 * HEIGHT;
+                  var ydelta = .009 * HEIGHT;
                   roty -= (col * 0.7)
                   if(col == 2) {
                     roty = -.7;
@@ -220,8 +223,8 @@ function loadTVs() {
                   //tvMesh.scale.y = tvscaley;
 
                   cssButton = cssGroup[index];
-                  cssButton.position.x  = xpos - (WIDTH * .002);
-                  cssButton.position.y  = ypos + (HEIGHT * .045);
+                  cssButton.position.x  = xpos - (WIDTH * 0);
+                  cssButton.position.y  = ypos + (HEIGHT * 0);
                   cssButton.position.z  = zpos;
                   cssButton.rotation.copy(screenMesh.rotation);
                   cssButton.scale.x = cssButton.scale.y = cssButton.scale.z = 0.25;
@@ -247,6 +250,39 @@ function loadTVs() {
 
 init();
 animate();
+
+function initHomeCards() {
+  card1 = document.getElementById("card1");
+  cardArray.push(card1);
+  card2 = document.getElementById("card2");
+  cardArray.push(card2);
+  card3 = document.getElementById("card3");
+  cardArray.push(card3);
+  card4 = document.getElementById("card4");
+  cardArray.push(card4);
+  card5 = document.getElementById("card5");
+  cardArray.push(card5);
+  card6 = document.getElementById("card6");
+  cardArray.push(card6);
+  card7 = document.getElementById("card7");
+  cardArray.push(card7);
+  card8 = document.getElementById("card8");
+  cardArray.push(card8);
+  card9 = document.getElementById("card9");
+  cardArray.push(card9);
+  card10 = document.getElementById("card10");
+  cardArray.push(card10);
+  card11 = document.getElementById("card11");
+  cardArray.push(card11);
+  card12 = document.getElementById("card12");
+  cardArray.push(card12);
+  card13 = document.getElementById("card13");
+  cardArray.push(card13);
+  card14 = document.getElementById("card13");
+  cardArray.push(card14);
+  card15 = document.getElementById("card13");
+  cardArray.push(card15);
+}
 
 
 function initCSS() {
@@ -276,6 +312,9 @@ function initButtons(scale) {
   element10 = document.getElementById("layoutfire10");
   element11 = document.getElementById("layoutfire11");
   element12 = document.getElementById("layoutfire12");
+  element13 = document.getElementById("layoutfire13");
+  element14 = document.getElementById("layoutfire14");
+  element15 = document.getElementById("layoutfire15");
   cssObject1 = new THREE.CSS3DObject(element1);
   cssGroup.push(cssObject1);
   cssObject2 = new THREE.CSS3DObject(element2);
@@ -301,10 +340,16 @@ function initButtons(scale) {
   cssGroup.push(cssObject11);
   cssObject12 = new THREE.CSS3DObject(element12);
   cssGroup.push(cssObject12);
+  cssObject13 = new THREE.CSS3DObject(element13);
+  cssGroup.push(cssObject13);
+  cssObject14 = new THREE.CSS3DObject(element14);
+  cssGroup.push(cssObject14);
+  cssObject15 = new THREE.CSS3DObject(element15);
+  cssGroup.push(cssObject15);
 }
 
 function initCanvas() {
-  for(var i = 0; i < 12; i ++) {
+  for(var i = 0; i < 15; i ++) {
     scene = new THREE.Scene();
     prenum = i + 1;
     canvasnum = prenum.toString();
@@ -367,13 +412,14 @@ function init() {
     mainScene = new THREE.Scene();
 
     //initCSS();
+    initHomeCards();
     initVideoPostBuffer();
     initLights();
     //initScreenMesh();
     //initTVMesh();
     loadTVs();
 
-    for(var i = 0; i < 12; i ++) {
+    for(var i = 0; i < 15; i ++) {
       renderPass = new THREE.RenderPass(sceneGroup[i], camera);
       renderPassGroup[i] = renderPass;
     }
@@ -467,7 +513,7 @@ function onMouseMove(event) {
     }
 
 function drawVideo(){
-  for(var i = 0; i < 12; i ++) {
+  for(var i = 0; i < 15; i ++) {
     if(i == 0 || i ==5) {
       var c = canvasGroup[i];
       var v = videos[i];
@@ -490,7 +536,7 @@ function drawVideo(){
 }
 
 function ctxRestore() {
-  for(var i = 0; i < 12; i ++) {
+  for(var i = 0; i < 15; i ++) {
     ctx = ctxGroup[i];
     ctx.restore();
     textureGroup[i].needsUpdate = true;
@@ -535,17 +581,22 @@ function mouseHover(event){
       hammerMesh.rotation.y += 0.5;
     }
     exited = false;
-    cssGroup[index].element.hidden = false;
-    if( index < 3) {
-      badTVPass.enabled = true;
-      staticPass.enabled = true;
-      rgbPass.enabled = true;
-      filmPass.enabled = true;
-    } else {
-      badTVPass2.enabled = true;
-      staticPass2.enabled = true;
-      rgbPass2.enabled = true;
-      filmPass2.enabled = true;
+    //cssGroup[index].element.hidden = false;
+    badTVPass.enabled = true;
+    staticPass.enabled = true;
+    rgbPass.enabled = true;
+    filmPass.enabled = true;
+    if(entered == false) {
+
+      for (i = 0; i < 15; i ++) {
+        if(i != index) {
+          if(videos[i].nodeName == "video") {
+            videos[i].pause();
+          }
+          videos[i] = cardArray[index]
+          entered = true;
+        }
+      }
     }
 
   } else {
@@ -556,18 +607,15 @@ function mouseHover(event){
     staticPass.enabled = false;
     rgbPass.enabled = false;
     filmPass.enabled = false;
-    badTVPass2.enabled = false;
-    staticPass2.enabled = false;
-    rgbPass2.enabled = false;
-    filmPass2.enabled = false;
     //randomizeParams()
     hideButtons();
     if(exited == false) {
       randomizeParams();
       textIndex += 1;
       exited = true;
+      initVideoMaterials()
     }
-    //entered = false;
+    entered = false;
   }
 }
 
@@ -584,14 +632,14 @@ function mouseHoverPre() {
 }
 
 function renderEffectComposer(time) {
-  for(var i = 0; i < 12; i++) {
+  for(var i = 0; i < 15; i++) {
     effectComposer = effectComposerGroup[i];
     effectComposer.render(time);
   }
 }
 
 function effectComposerSwapBuffers() {
-  for(var i = 0; i < 12; i++) {
+  for(var i = 0; i < 15; i++) {
     effectComposer = effectComposerGroup[i];
     effectComposer.swapBuffers();
   }
@@ -622,25 +670,14 @@ function animate() {
 
 function onToggleShaders(){
 
-  for(var i = 0; i < 12; i ++) {
+  for(var i = 0; i < 15; i ++) {
     effectComposer = effectComposerGroup[i];
     effectComposer.addPass(renderPassGroup[i]);
-    if(i < 3) {
-      console.log("TOPOVER");
-      effectComposer.addPass(filmPass);
-      effectComposer.addPass(badTVPass);
-      effectComposer.addPass(rgbPass);
-      effectComposer.addPass(staticPass);
-      effectComposer.addPass(copyPass);
-    }
-    if(i >= 3) {
-      console.log("BOTTOMOVER")
-      effectComposer.addPass(filmPass2);
-      effectComposer.addPass(badTVPass2);
-      effectComposer.addPass(rgbPass2);
-      effectComposer.addPass(staticPass2);
-      effectComposer.addPass(copyPass2);
-    }
+    effectComposer.addPass(filmPass);
+    effectComposer.addPass(badTVPass);
+    effectComposer.addPass(rgbPass);
+    effectComposer.addPass(staticPass);
+    effectComposer.addPass(copyPass);
   };
 }
 
@@ -670,7 +707,7 @@ function initHammerMesh() {
       loader.setMaterials(materials)
       loader.load('../models/Hammer03.obj', function(geometry, materials) {
           hammerMesh = geometry;
-          hammerMesh.scale.x = hammerMesh.scale.y = hammerMesh.scale.z = .1;
+          hammerMesh.scale.x = hammerMesh.scale.y = hammerMesh.scale.z = .07;
           hammerMesh.position.y = -10;
           hammerMesh.position.z = -80;
           hammerMesh.lookAt(tvArray[1]);
@@ -708,61 +745,54 @@ function initTVMesh(zpos, ypos, xpos, roty, rotx, tvscalex, tvscaley) {
 }
 
 function initVideoMaterials() {
-  for(var i = 0; i < 12; i ++) {
-    if(i == 0) {
-      img = document.getElementById("GroupWork");
-      imgTexture = new THREE.Texture( img );
-      imgTexture.minFilter = THREE.LinearFilter;
-      imgTexture.magFilter = THREE.LinearFilter;
+  for(var i = 0; i < 15; i ++) {
 
-      imgMaterial = new THREE.MeshBasicMaterial( {
-        map: imgTexture
-      } );
-      videoMaterials[i] = imgMaterial;
-      videos[i] = img;
+      if(i > 12) {
+        img = document.getElementById("GroupWork");
+        imgTexture = new THREE.Texture( img );
+        imgTexture.minFilter = THREE.LinearFilter;
+        imgTexture.magFilter = THREE.LinearFilter;
 
-    } else if( i == 5) {
-      img = document.getElementById("SoloWork");
-      imgTexture = new THREE.Texture( img );
-      imgTexture.minFilter = THREE.LinearFilter;
-      imgTexture.magFilter = THREE.LinearFilter;
+        imgMaterial = new THREE.MeshBasicMaterial( {
+          map: imgTexture
+        } );
+        videoMaterials[i] = imgMaterial;
+        videos[i] = img;
 
-      imgMaterial = new THREE.MeshBasicMaterial( {
-        map: imgTexture
-      } );
-      videoMaterials[i] = imgMaterial;
-      videos[i] = img;
-    } else {
-      prenum = i+1;
-      videonum = prenum.toString();
-      videoname = "stock";
-      id = videoname.concat(videonum);
-      console.log("VIDEONAME = " + id);
-      video = document.getElementById( id );
-      console.log("VIDEOSRC = " + video.src);
-      video.loop = true;
-      video.muted = true;
-      video.play();
-      videos[i] = video;
-      videoTexture = new THREE.Texture( video );
-      videoTexture.minFilter = THREE.LinearFilter;
-      videoTexture.magFilter = THREE.LinearFilter;
+      } else {
+        prenum = i+1;
+        videonum = prenum.toString();
+        videoname = "stock";
+        id = videoname.concat(videonum);
+        console.log("VIDEONAME = " + id);
+        video = document.getElementById( id );
+        console.log("VIDEOSRC = " + video.src);
+        video.loop = true;
+        video.muted = true;
+        if(video.paused = true) {
+          video.play();
+        }
+        videos[i] = video;
+        videoTexture = new THREE.Texture( video );
+        videoTexture.minFilter = THREE.LinearFilter;
+        videoTexture.magFilter = THREE.LinearFilter;
 
-      videoMaterial = new THREE.MeshBasicMaterial( {
-        map: videoTexture
-      } );
+        videoMaterial = new THREE.MeshBasicMaterial( {
+          map: videoTexture
+        } );
 
-      videoMaterials[i] = videoMaterial;
+        videoMaterials[i] = videoMaterial;
+      }
     }
-  }
-};
+}
+
 
 function initVideoPreBuffer() {
   initVideoMaterials();
 }
 
 function initVideoPostBuffer() {
-  for(var i = 0; i < 12; i ++) {
+  for(var i = 0; i < 15; i ++) {
     texture = bufferGroup[i].texture;
     videoMaterialPost = new THREE.MeshBasicMaterial( {
       map: texture

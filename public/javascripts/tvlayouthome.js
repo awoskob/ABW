@@ -76,6 +76,9 @@
   var textArray = ["LET'S GO!", "HAVE YOU NO COURAGE?",
                   "TIME IS OF THE ESSENCE!", "YOU CAN DO IT!"];
   var textIndex = 0;
+
+  var cardArray = [];
+  var cardIndex = 0;
   //var zpos = -100;
   //var xleft = -.016 * WIDTH;
   //var xdelta = .016 * WIDTH;
@@ -207,8 +210,11 @@ function loadTVs() {
 
                   screenGroup.add(screenMesh);
 
-
-                  initTVMesh(zpos, ypos, xpos, roty, rotx, tvscalex, tvscaley);
+                  if(index < 3) {
+                    initBlueTVMesh(zpos, ypos, xpos, roty, rotx, tvscalex, tvscaley);
+                  } else {
+                    initYellowTVMesh(zpos, ypos, xpos, roty, rotx, tvscalex, tvscaley);
+                  }
 
                   //tvMesh = tvArray[index1];
                   //tvMesh.position.z = zpos;
@@ -248,6 +254,16 @@ function loadTVs() {
 init();
 animate();
 
+function initHomeCards() {
+  homeCard1 = document.getElementById("HomeCard1");
+  cardArray.push(homeCard1);
+  homeCard2 = document.getElementById("HomeCard2");
+  cardArray.push(homeCard2);
+  homeCard3 = document.getElementById("HomeCard3");
+  cardArray.push(homeCard3);
+  homeCard4 = document.getElementById("HomeCard4");
+  cardArray.push(homeCard4);
+}
 
 function initCSS() {
   var scale = 0.2;
@@ -357,6 +373,7 @@ function init() {
     mainScene = new THREE.Scene();
 
     //initCSS();
+    initHomeCards();
     initVideoPostBuffer();
     initLights();
     //initScreenMesh();
@@ -497,7 +514,6 @@ function onDocumentMouseDown(event) {
 };
 
 function mouseHover(event){
-  console.log("WORKING111")
   raycaster.setFromCamera(mouse, mainCamera);
   intersects = raycaster.intersectObjects(screenGroup.children);
   if (intersects.length !== 0) {
@@ -511,7 +527,8 @@ function mouseHover(event){
     $("#layoutfire4").text(text);
     $("#layoutfire5").text(text);
     $("#layoutfire6").text(text);
-    console.log("WORKING!?!?!")
+
+    cardIndex = cardIndex % cardArray.length;
 
     //path = intersects[0].object.userData.URL;
     //window.location.href = path;
@@ -527,7 +544,7 @@ function mouseHover(event){
       hammerMesh.rotation.y += 0.5;
     }
     exited = false;
-    cssGroup[index].element.hidden = false;
+    //cssGroup[index].element.hidden = false;
     if( index < 3) {
       badTVPass.enabled = true;
       staticPass.enabled = true;
@@ -538,6 +555,30 @@ function mouseHover(event){
       staticPass2.enabled = true;
       rgbPass2.enabled = true;
       filmPass2.enabled = true;
+    }
+
+    if((index == 0 || index == 1) && entered == false) {
+      videos[2].pause();
+      videos[2] = cardArray[cardIndex];
+      entered = true;
+    }
+
+    if(index == 2 && entered == false) {
+      videos[1].pause();
+      videos[1] = cardArray[cardIndex];
+      entered = true;
+    }
+
+    if((index == 3 || index == 4) && entered == false) {
+      videos[5].pause();
+      videos[5] = cardArray[cardIndex];
+      entered = true;
+    }
+
+    if(index == 5 && entered == false) {
+      videos[4].pause();
+      videos[4] = cardArray[cardIndex];
+      entered = true;
     }
 
   } else {
@@ -557,9 +598,15 @@ function mouseHover(event){
     if(exited == false) {
       randomizeParams();
       textIndex += 1;
+      cardIndex += 1;
       exited = true;
+      initVideoMaterials()
+      //for(i = 0; i < 16; i ++) {
+        //initVideoMaterials()
+
+      //}
     }
-    //entered = false;
+    entered = false;
   }
 }
 
@@ -570,7 +617,6 @@ function hideButtons() {
 }
 
 function mouseHoverPre() {
-  console.log(hammerMesh);
   if(screenGroup != null && hammerMesh != null) {
     mouseHover(event);
   }
@@ -676,7 +722,31 @@ function initHammerMesh() {
   });
 }
 
-function initTVMesh(zpos, ypos, xpos, roty, rotx, tvscalex, tvscaley) {
+function initBlueTVMesh(zpos, ypos, xpos, roty, rotx, tvscalex, tvscaley) {
+  var mtlLoader = new THREE.MTLLoader();
+  mtlLoader.load('../models/bluetv.mtl', function (materials) {
+      materials.preload();
+      var loader = new THREE.OBJLoader();
+      loader.setMaterials(materials)
+      loader.load('../models/bluetv.obj', function(geometry, materials) {
+          tvMesh = geometry;
+          tvMesh.position.z = zpos;
+          tvMesh.position.y = ypos;
+          tvMesh.position.x = xpos;
+          tvMesh.rotation.y = roty;
+          tvMesh.rotation.x = rotx;
+          tvMesh.scale.x = tvMesh.scale.z = tvscalex;
+          tvMesh.scale.y = tvscaley;
+          //tvGroup.add(tvMesh);
+          tvArray.push(tvMesh);
+
+          console.log("TVARRAYLENGTH =" + tvArray.length)
+          mainScene.add(tvMesh);
+      });
+  });
+}
+
+function initYellowTVMesh(zpos, ypos, xpos, roty, rotx, tvscalex, tvscaley) {
   var mtlLoader = new THREE.MTLLoader();
   mtlLoader.load('../models/yellowtv.mtl', function (materials) {
       tvGroup = new THREE.Object3D();
@@ -715,7 +785,7 @@ function initVideoMaterials() {
       videoMaterials[i] = imgMaterial;
       videos[i] = img;
 
-    } else if( i == 5) {
+    } else if( i == 3) {
       img = document.getElementById("SoloWork");
       imgTexture = new THREE.Texture( img );
       imgTexture.minFilter = THREE.LinearFilter;
@@ -736,7 +806,9 @@ function initVideoMaterials() {
       console.log("VIDEOSRC = " + video.src);
       video.loop = true;
       video.muted = true;
-      video.play();
+      if (video.paused == true) {
+        video.play();
+      }
       videos[i] = video;
       videoTexture = new THREE.Texture( video );
       videoTexture.minFilter = THREE.LinearFilter;

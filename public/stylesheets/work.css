@@ -204,18 +204,23 @@ body {
 #tvlayoutcanvas{
   margin-top: 107px;
   position: relative;
-  height: 200vh;
+  height: 250vh;
 }
 
 .ui{
-  background-color: red;
+  background-color: green;
   color: white;
   font-size: 16px;
   text-align: center;
+  text-decoration: none;
   padding: 10 auto;
   position: absolute;
   transition: .5s ease;
   z-index: 200;
+  width: 10rem;
+  border-style: solid;
+  border-width: medium;
+  border-color: black;
 }
 
 footer {
