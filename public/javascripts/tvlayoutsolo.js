@@ -82,7 +82,7 @@
 
   var urlArray = ["/work/solowork/youresofine", "/work/solowork/proceduralanimation",
                 "/work/solowork/machinelearningunity", "/work/solowork/prokofiev7",
-                "/work/solowork/gravitysound", "/work/groupwork/birdcycle",
+                "/work/solowork/gravitysound", "/work/solowork/birdcycle",
                 "/work/solowork/goldmarkviolin", "/work/solowork",
                 "/work/solowork", "/work/solowork",
                 "/work/solowork", "/work/solowork",

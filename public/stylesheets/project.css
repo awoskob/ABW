@@ -17,7 +17,7 @@ html{
 header {
   background: var(--background);
   text-align: center;
-  position: fixed;
+  //position: fixed;
   z-index: 999;
   width: 100%;
 }
@@ -197,196 +197,14 @@ body {
 	font-family: 'Work Sans', sans-serif;
 	font-weight: 400;
   overflow: hidden;
-  background-color: white;
+  background-color: black;
 }
 
-#particleCanvas {
-  margin: 0 auto;
-  text-align: center;
-  width: 100vw;
-  height: 100vh;
-  position: fixed;
-  z-index: -90;
-  width: 100%;
-  height: 100%;
-}
-
-#particles-js {
-  position: fixed;
-  width: 100vw;
-  height: 100vh;
-  margin: 0 auto;
-
-  //background: radial-gradient(rgba(120, 0, 0, 0.5), rgba(120, 0, 0, 0.4), rgba(120, 0, 0, 0.3), rgba(120, 0, 0, 0.1), rgba(120, 0, 0, 0.01), rgba(120, 0, 0, 0));
-}
-
-/*
-.content {
-  height: vh;
-  background-image: url(//unsplash.it/1000/1000);
-   background-color: #AAA;
-  background-blend-mode: multiply;
-  background-size: cover;
-  display: grid
-  display: grid;
-  padding: 0px;
-  place-items: center;
-}
-*/
-
-.intro {
-  margin: 0 auto;
-  color: white;
-  text-align: center;
-  padding: 50vh 0;
-  width: 100vw;
-  height: 100vh;
-  //background: #00356B33;
-  //background: rgb(0.2, 0.6, 0.95, 0.5);
-  //background: radial-gradient(rgba(120, 0, 0, 0.5), rgba(120, 0, 0, 0.4), rgba(120, 0, 0, 0.3), rgba(120, 0, 0, 0.1), rgba(120, 0, 0, 0.01), rgba(120, 0, 0, 0))
-}
-
-.typing-container{
-    position: absolute;
-  	top: 50%;
-  	right: 50%;
-  	transform: translate(50%,-50%);
-  	color: black;
-  	max-width: 90%;
-  	padding: 2em 3em;
-  	//background: rgb(250, 0, 0, .8);
-  	font-family: 'Open Sans', sans-serif;
-}
-
-.text-primary{
-  color: #077187;
-}
-
-.about {
-  margin: 0;
-  color: white;
-  padding-top: 20vh;
-  padding-bottom: 5vh;
-  position:relative;
-  background: #000000;
-  overflow: auto;
-}
-
-.About-title {
-  margin: 0px;
-}
-
-#about-container {
-  width: 80%;
-  height: 100%;
-  float: right;
-  margin: 0;
-}
-
-#aboutimg {
-  //position: absolute;
-  margin-right: 50px;
-  float: left;
-  //max-width:20%;
-  //max-height:20%;
-  width: 300px;
-  height: 400px;
-  vertical-align: middle;
-  border-radius: 50%;
-}
-
-.row {
-  margin: 0;
-}
-
-.col-md-4 {
-  margin: 0;
-}
-
-.work {
-  //width: 100vw;
-  //height: 50vh;
-  padding-top: 20vh;
-  margin: 0 auto;
-  //position: relative;
-  //background: #00990066;
-  //background: #33333366;
-  color: black;
-}
-
-.container {
-  width: 80%;
-  height: 100%;
-  margin: 0 auto;
-}
-
-.contact {
-  padding: 10vh 0;
-  margin: 0 auto;
-  width: 100vw;
-  //background: #rgb(0.5,0.5,0.5,0.7);
-  background: #000000;
-  color: white;
-}
-
-.resume {
-  padding: 10vh 0;
-  margin: 0 auto;
-  width: 100vw;
-  //background: #33333366;
-  color: black;
-//position: relative;
-}
-
-#resumepdf {
-  position: relative;
-  text-decoration: none;
-  width: 40%;
-}
-
-#resumetalk {
-  position: absolute;
-  text-decoration: none;
-}
-
-footer {
-  margin: 0 auto;
-  padding: 10px 0;
-  text-align: center;
-  background: var(--background);
-  color: white;
-}
-
-.projects{
-  margin: 0 auto;
-  top: 50px;
-}
-
-
-.fire{
-  background-color: red;
-  color: white;
-  font-size: 16px;
-  text-align: center;
-  padding: 10 auto;
-  position: absolute;
-  z-index: 200;
-}
 
 #tvlayoutcanvas{
-  margin: 10px auto;
+  //margin-top: 107px;
   position: relative;
-  height: 900px;
-  //height: 100vh;
-  //width: 100vw;
-  //background-color: lightblue;
-}
-
-#tvlayoutcanvas2{
-  margin: 0 auto;
-  position: relative;
-  height: 3500px;
-  //background-color: lightblue;
+  height: 1500px;
 }
 
 .ui{
@@ -403,4 +221,32 @@ footer {
   border-style: solid;
   border-width: medium;
   border-color: black;
+}
+
+#utube {
+  //float:left;
+  margin: 5% 10% auto;
+}
+
+.project {
+  height: 100vh;
+  display: block;
+}
+
+.descrip {
+  //float: right;
+  color: white;
+  margin: 0 10% auto;
+}
+
+h2{
+  margin-left: 100px;
+}
+
+footer {
+  margin: 0 auto;
+  padding: 10px 0;
+  text-align: center;
+  background: var(--background);
+  color: white;
 }
