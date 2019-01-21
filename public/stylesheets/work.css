@@ -17,7 +17,7 @@ html{
 header {
   background: var(--background);
   text-align: center;
-  position: fixed;
+  //position: fixed;
   z-index: 999;
   width: 100%;
 }
@@ -202,9 +202,9 @@ body {
 
 
 #tvlayoutcanvas{
-  margin-top: 107px;
+  //margin-top: 107px;
   position: relative;
-  height: 250vh;
+  height: 1500px;
 }
 
 .ui{

@@ -710,7 +710,7 @@ function initHammerMesh() {
       loader.setMaterials(materials)
       loader.load('../models/Hammer03.obj', function(geometry, materials) {
           hammerMesh = geometry;
-          hammerMesh.scale.x = hammerMesh.scale.y = hammerMesh.scale.z = .2;
+          hammerMesh.scale.x = hammerMesh.scale.y = hammerMesh.scale.z = .15;
           hammerMesh.position.y = -10;
           hammerMesh.position.z = -80;
           hammerMesh.lookAt(tvArray[1]);

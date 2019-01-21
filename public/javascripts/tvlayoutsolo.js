@@ -80,13 +80,13 @@
   var cardArray = [];
   var cardIndex = 0;
 
-  var urlArray = ["/work/groupwork/undercooked", "/work/groupwork/lemmingsinvr",
-                "/work/groupwork/woowho", "/work/groupwork/extraterrestrialclunker",
-                "/work/groupwork/gamejampgh", "/work/groupwork/cookandruin",
-                "/work/groupwork/pollennation", "/work/groupwork/duckfalls",
-                "/work/groupwork/chroma", "/work/groupwork/band",
-                "/work/groupwork/woodlandwarriors", "/work/groupwork/hanselandgretel",
-                "/work/groupwork/punchbuggy", "/work/groupwork", "/work/groupwork"];
+  var urlArray = ["/work/solowork/youresofine", "/work/solowork/proceduralanimation",
+                "/work/solowork/machinelearningunity", "/work/solowork/prokofiev7",
+                "/work/solowork/gravitysound", "/work/groupwork/birdcycle",
+                "/work/solowork/goldmarkviolin", "/work/solowork",
+                "/work/solowork", "/work/solowork",
+                "/work/solowork", "/work/solowork",
+                "/work/solowork", "/work/solowork", "/work/solowork"];
   //var zpos = -100;
   //var xleft = -.016 * WIDTH;
   //var xdelta = .016 * WIDTH;
@@ -560,37 +560,37 @@ function mouseHover(event){
   if (intersects.length !== 0) {
 
 
-      index = intersects[0].object.userData.id;
-      if(index < 13) {
-        hammerMesh.visible = true;
-        $('html,body').css('cursor', 'none');
-        hammerMesh.lookAt(intersects[0].object.position);
-        if(index % 3 == 0) {
-          hammerMesh.rotation.y -= 0.5;
-        }
-        if(index % 3 == 2) {
-          hammerMesh.rotation.y += 0.5;
-        }
-        exited = false;
-        //cssGroup[index].element.hidden = false;
-        badTVPass.enabled = true;
-        staticPass.enabled = true;
-        rgbPass.enabled = true;
-        filmPass.enabled = true;
-        if(entered == false) {
+    index = intersects[0].object.userData.id;
+    if(index < 7) {
+      hammerMesh.visible = true;
+      $('html,body').css('cursor', 'none');
+      hammerMesh.lookAt(intersects[0].object.position);
+      if(index % 3 == 0) {
+        hammerMesh.rotation.y -= 0.5;
+      }
+      if(index % 3 == 2) {
+        hammerMesh.rotation.y += 0.5;
+      }
+      exited = false;
+      //cssGroup[index].element.hidden = false;
+      badTVPass.enabled = true;
+      staticPass.enabled = true;
+      rgbPass.enabled = true;
+      filmPass.enabled = true;
+      if(entered == false) {
 
-          for (i = 0; i < 15; i ++) {
-            if(i != index) {
-              if(videos[i].nodeName == "video") {
-                videos[i].pause();
-              }
-              videos[i] = cardArray[index]
-              entered = true;
+        for (i = 0; i < 15; i ++) {
+          if(i != index) {
+            if(videos[i].nodeName == "video") {
+              videos[i].pause();
             }
+            videos[i] = cardArray[index]
+            entered = true;
           }
+        }
 
-      }
-      }
+    }
+    }
 
   } else {
     $('html,body').css('cursor', 'default');
@@ -714,12 +714,12 @@ function initHammerMesh() {
 
 function initTVMesh(zpos, ypos, xpos, roty, rotx, tvscalex, tvscaley) {
   var mtlLoader = new THREE.MTLLoader();
-  mtlLoader.load('../models/bluetv.mtl', function (materials) {
+  mtlLoader.load('../models/yellowtv.mtl', function (materials) {
       tvGroup = new THREE.Object3D();
       materials.preload();
       var loader = new THREE.OBJLoader();
       loader.setMaterials(materials)
-      loader.load('../models/bluetv.obj', function(geometry, materials) {
+      loader.load('../models/yellowtv.obj', function(geometry, materials) {
           tvMesh = geometry;
           tvMesh.position.z = zpos;
           tvMesh.position.y = ypos;
@@ -740,8 +740,8 @@ function initTVMesh(zpos, ypos, xpos, roty, rotx, tvscalex, tvscaley) {
 function initVideoMaterials() {
   for(var i = 0; i < 15; i ++) {
 
-      if(i > 12) {
-        img = document.getElementById("GroupWork");
+      if(i > 6) {
+        img = document.getElementById("SoloWork");
         imgTexture = new THREE.Texture( img );
         imgTexture.minFilter = THREE.LinearFilter;
         imgTexture.magFilter = THREE.LinearFilter;

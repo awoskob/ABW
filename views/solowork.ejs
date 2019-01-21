@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Alexander Woskob</title>
+    <link rel='stylesheet' href='/stylesheets/work.css' />
+
+    <script src="/jquery/jquery.js"></script>
+    <script src="../../javascripts/scrolling.js"></script>
+    <script src="../../javascripts/navigation.js"></script>
+
+    <script src="../../three/build/three.min.js"></script>
+    <script src="../../three/js/loaders/OBJLoader.js"></script>
+    <script src="../../three/js/loaders/MTLLoader.js"></script>
+    <script src="../../three/js/renderers/CSS3DRenderer.js"></script>
+
+    <script type="module" src="../../three/src/constants.js"></script>
+    <script type="module" src="../../textures/VideoTexture.js"></script>
+    <script type="module" src="../../textures/Texture.js"></script>
+
+
+    <!--<script type="module" src="/three/textures/VideoTexture.js"></script>-->
+
+    <script src="../../javascripts/OrbitControls.js"></script>
+    <script src="../../javascripts/Tween.js"></script>
+
+    <script type="module" src="../../javascripts/threex.videotexture.js"></script>
+
+    <script src="../../bad-tv-shader-master/example/lib/dat.gui.min.js"></script>
+    <script src="../../bad-tv-shader-master/example/lib/stats.min.js"></script>
+    <script src="../../bad-tv-shader-master/example/lib/postprocessing/EffectComposer.js"></script>
+    <script src="../../bad-tv-shader-master/example/lib/postprocessing/RenderPass.js"></script>
+    <script src="../../bad-tv-shader-master/example/lib/postprocessing/ShaderPass.js"></script>
+    <script src="../../bad-tv-shader-master/example/lib/postprocessing/MaskPass.js"></script>
+    <script src="../../bad-tv-shader-master/example/lib/shaders/CopyShader.js"></script>
+    <script src="../../bad-tv-shader-master/example/lib/shaders/FilmShader.js"></script>
+    <script src="../../bad-tv-shader-master/example/lib/shaders/RGBShiftShader.js"></script>
+    <script src="../../bad-tv-shader-master/example/js/BadTVShader.js"></script>
+    <script src="../../bad-tv-shader-master/example/js/StaticShader.js"></script>
+
+    <script type="module" src="../../three/js/postprocessing/EffectComposer.js"></script>
+    <script type="module" src="../../three/js/postprocessing/ClearPass.js"></script>
+
+    <script src="../../three/js/utils/SceneUtils.js"></script>
+    <script src="../../particlejs/particles.js"></script>
+    <script src="../../typed/typed.min.js"></script>
+
+    <!--<img id="slowpoke2" src="http://i.stack.imgur.com/SBv4T.gif" title="this slowpoke moves" alt="slow slowpoke" />-->
+
+    <img id="SoloWork" src="../../images/SoloWork.jpg" style="display: none">
+    <img id="GroupWork" src="../../images/GroupWork.jpg" style="display: none">
+
+    <img id="HomeCard1" src="../../images/HomeCard1.jpg" style="display: none">
+
+    <img id="HomeCard2" src="../../images/HomeCard2.jpg" style="display: none">
+
+    <img id="HomeCard3" src="../../images/HomeCard3.jpg" style="display: none">
+
+    <img id="HomeCard4" src="../../images/HomeCard4.jpg" style="display: none">
+
+    <img id="card1" src="../../images/undercooked.jpg" style="display: none">
+    <img id="card2" src="../../images/lemmings.jpg" style="display: none">
+    <img id="card3" src="../../images/woowho.jpg" style="display: none">
+    <img id="card4" src="../../images/extraterrestrialclunker.jpg" style="display: none">
+    <img id="card5" src="../../images/gamejampgh.jpg" style="display: none">
+    <img id="card6" src="../../images/cookandruin.jpg" style="display: none">
+    <img id="card7" src="../../images/pollennation.jpg" style="display: none">
+    <img id="card8" src="../../images/duckfalls.jpg" style="display: none">
+    <img id="card9" src="../../images/chroma.jpg" style="display: none">
+    <img id="card10" src="../../images/band.jpg" style="display: none">
+    <img id="card11" src="../../images/woodlandwarriors.jpg" style="display: none">
+    <img id="card12" src="../../images/hanselandgretel.jpg" style="display: none">
+    <img id="card13" src="../../images/punchbuggy.jpg" style="display: none">
+
+    <video id="stock1" width="400" autoplay loop style="display:none">
+      <source src="../../videos480/UrSoFineVine480.mp4" type="video/mp4">
+      Your browser does not support HTML5 video.
+    </video>
+
+    <video id="stock2" width="400" autoplay loop style="display:none">
+      <source src="../../videos480/ProceduralAnimationVine480.mp4" type="video/mp4">
+      Your browser does not support HTML5 video.
+    </video>
+
+    <video id="stock3" width="400" autoplay loop style="display:none">
+      <source src="../../videos480/UnityAIVine480.mp4" type="video/mp4">
+      Your browser does not support HTML5 video.
+    </video>
+
+    <video id="stock4" width="400" autoplay loop style="display:none">
+      <source src="../../videos480/ProkofievVine480.mp4" type="video/mp4">
+      Your browser does not support HTML5 video.
+    </video>
+
+    <video id="stock5" width="400" autoplay loop style="display:none">
+      <source src="../../videos480/PlanetsVine480.mp4" type="video/mp4">
+      Your browser does not support HTML5 video.
+    </video>
+
+    <video id="stock6" width="400" autoplay loop style="display:none">
+      <source src="../../videos480/BirdCycleVine480.mp4" type="video/mp4">
+      Your browser does not support HTML5 video.
+    </video>
+
+    <video id="stock7" width="400" autoplay loop style="display:none">
+      <source src="../../videos480/ViolinVine480.mp4" type="video/mp4">
+      Your browser does not support HTML5 video.
+    </video>
+
+
+
+
+  </head>
+
+  <header>
+    <div class="logo">
+      <div class="threedlogo" id="3dlogo">
+        <script src="/javascripts/3dlogo.js"></script>
+      </div>
+      <h1 class="textlogo"> Alexander Woskob </h1>
+    </div>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle">
+    <nav>
+      <ul>
+        <li><a class="nav-link" href="/">HOME</a></li>
+        <li><a class="nav-link" href="/work/groupwork">Group Work</a></li>
+        <li><a class="nav-link" href="/work/solowork">Solo Work</a></li>
+      </ul>
+    </nav>
+    <label for="nav-toggle" class="nav-toggle-label">
+      <span></span>
+    </label>
+  </header>
+
+  <body>
+
+    <div class="as">
+      <a id="layoutfire1" class="ui scroll" href="#proj1" hidden>GO TO PROJECT</a>
+      <a id="layoutfire2" class="ui scroll" href="#proj2" hidden>GO TO PROJECT</a>
+      <a id="layoutfire3" class="ui scroll" href="#proj3" hidden>GO TO PROJECT</a>
+      <a id="layoutfire4" class="ui scroll" href="#proj4" hidden>GO TO PROJECT</a>
+      <a id="layoutfire5" class="ui scroll" href="#proj5" hidden>GO TO PROJECT</a>
+      <a id="layoutfire6" class="ui scroll" href="#proj6" hidden>GO TO PROJECT</a>
+      <a id="layoutfire7" class="ui scroll" href="#proj7" hidden>GO TO PROJECT</a>
+      <a id="layoutfire8" class="ui scroll" href="#proj8" hidden>GO TO PROJECT</a>
+      <a id="layoutfire9" class="ui scroll" href="#proj9" hidden>GO TO PROJECT</a>
+      <a id="layoutfire10" class="ui scroll" href="#proj10" hidden>GO TO PROJECT</a>
+      <a id="layoutfire11" class="ui scroll" href="#proj11" hidden>GO TO PROJECT</a>
+      <a id="layoutfire12" class="ui scroll" href="#proj12" hidden>GO TO PROJECT</a>
+      <a id="layoutfire13" class="ui scroll" href="#proj13" hidden>GO TO PROJECT</a>
+      <a id="layoutfire14" class="ui scroll" href="#proj14" hidden>GO TO PROJECT</a>
+      <a id="layoutfire15" class="ui scroll" href="#proj15" hidden>GO TO PROJECT</a>
+      <a id="layoutfire16" class="ui scroll" href="#proj16" hidden>GO TO PROJECT</a>
+      <a id="layoutfire17" class="ui scroll" href="#proj17" hidden>GO TO PROJECT</a>
+      <a id="layoutfire18" class="ui scroll" href="#proj18" hidden>GO TO PROJECT</a>
+      <a id="layoutfire19" class="ui scroll" href="#proj19" hidden>GO TO PROJECT</a>
+      <a id="layoutfire20" class="ui scroll" href="#proj20" hidden>GO TO PROJECT</a>
+      <canvas id="layoutcanvas1" style="z-index:1"></canvas>
+      <canvas id="layoutcanvas2" style="z-index:1"></canvas>
+      <canvas id="layoutcanvas3" style="z-index:1"></canvas>
+      <canvas id="layoutcanvas4" style="z-index:1"></canvas>
+      <canvas id="layoutcanvas5" style="z-index:1"></canvas>
+      <canvas id="layoutcanvas6" style="z-index:1"></canvas>
+      <canvas id="layoutcanvas7" style="z-index:1"></canvas>
+      <canvas id="layoutcanvas8" style="z-index:1"></canvas>
+      <canvas id="layoutcanvas9" style="z-index:1"></canvas>
+      <canvas id="layoutcanvas10" style="z-index:1"></canvas>
+      <canvas id="layoutcanvas11" style="z-index:1"></canvas>
+      <canvas id="layoutcanvas12" style="z-index:1"></canvas>
+      <canvas id="layoutcanvas13" style="z-index:1"></canvas>
+      <canvas id="layoutcanvas14" style="z-index:1"></canvas>
+      <canvas id="layoutcanvas15" style="z-index:1"></canvas>
+      <div id="tvlayoutcanvas"></div>
+      <script src="../../javascripts/tvlayoutsolo.js"></script>
+    </div>
+
+
+
+
+  </body>
+
+
+
+
+
+
+    <footer>
+      <p>take a minute</p>
+    </footer>
+  </body>
+
+
+</html>

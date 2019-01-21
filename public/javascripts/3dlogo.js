@@ -81,7 +81,7 @@ function initLights() {
 
 function initMesh() {
     var loader = new THREE.OBJLoader();
-    loader.load('../models/AW.obj', function(geometry, materials) {
+    loader.load('../../models/AW.obj', function(geometry, materials) {
         awGroup = new THREE.Object3D();
         //material = new THREE.MeshNormalMaterial();
         //geometry.children[0].material.wireframe = true;
