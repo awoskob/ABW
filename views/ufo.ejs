@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Alexander Woskob</title>
+    <link rel='stylesheet' href='/stylesheets/project.css' />
+
+    <script src="/jquery/jquery.js"></script>
+    <script src="/javascripts/scrolling.js"></script>
+    <script src="/javascripts/navigation.js"></script>
+
+    <script src="/three/build/three.min.js"></script>
+    <script src="/three/js/loaders/OBJLoader.js"></script>
+    <script src="/three/js/loaders/MTLLoader.js"></script>
+    <script src="/three/js/renderers/CSS3DRenderer.js"></script>
+
+
+    <!--<script type="module" src="/three/textures/VideoTexture.js"></script>-->
+
+    <script src="/javascripts/OrbitControls.js"></script>
+    <script src="/javascripts/Tween.js"></script>
+
+
+  </head>
+
+  <header>
+    <div class="logo">
+      <div class="threedlogo" id="3dlogo">
+        <script src="/javascripts/3dlogo.js"></script>
+      </div>
+      <h1 class="textlogo"> Alexander Woskob </h1>
+    </div>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle">
+    <nav>
+      <ul>
+        <li><a class="nav-link" href="/">HOME</a></li>
+        <li><a class="nav-link" href="/work/groupwork">Group Work</a></li>
+        <li><a class="nav-link" href="/work/solowork">Solo Work</a></li>
+      </ul>
+    </nav>
+    <label for="nav-toggle" class="nav-toggle-label">
+      <span></span>
+    </label>
+  </header>
+
+  <body>
+    <section class="project">
+      <iframe id="utube" width="560" height="315" src="https://www.youtube.com/embed/hMr4aNkEe14" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <div class="descrip">
+        <h2> Extra Terrestrial Clunker </h2>
+        <p> This project was developed for Building Virtual Worlds, a class at
+          Carnegie Mellon's Entertainment Technology Center. The player of this
+          game navigates a desert, picking up crystals in an alien flying saucer
+          which is controlled by the chair they are sitting on.
+          Two HTC Vive Trackers attached to the chair detect the direction
+          the player is facing, and how much they are
+          leaning forward/backward—which in turn flies the saucer.
+        </p>
+        <p>
+          The task of this assignment was to create a virtual reality experience which
+          maximized a naive guest's sense of freedom. A naive
+          guest is someone who does not know anything about our game before
+          playing it. Additionaly, the naive guest could potentially be someone
+          who has never tried virtual reality before. Along with the task of maximizing
+          the sense of freedom, we were given one condition: we could not give our
+          guest any written instruction. With these rules in place, we were graded on our ability to predict what
+          actions our guest would perform in our world.
+        </p>
+        <p>
+          Our ability to predict what our guest would do depended on our ability to indirectly guide them through an
+          intended experience. One way of indirectly controlling a guest's actions
+          is by assigning them with an obvious and familiar goal: collecting
+          crystals. Jewels, rupees, crystals—whatever you want to call it—are things
+          we all want, whether it's in real life or in Zelda. The crystals in our game emit a
+          blue glow, making them stand out from everything else in our natural terrain.
+        </p>
+        <p>
+          As a member of a five person team,
+          my primary role was to be the composer and sound designer for the experience. However,
+          I took the initiative to design, engineer, and implement the chair which
+          controls the flying saucer. I was inspired to find a solution to the
+          problem of navigating a large space in VR. I wondered how someone could
+          move freely through a space without walking, telaporting, or using their
+          hands. Pondering this question at my desk, I took note of the satisfying
+          springiness of my chair. I realized that I could use the chair to
+          control a vehicle, which would free my hands and feet. Additionally,
+          the soundtrack features original music which I wrote, performed and produced.
+          For the sound of the vehicle, I reverse engineered an <a id="jetson" href="https://www.youtube.com/watch?v=QdWswvLPdE0" target="_blank">audio sample</a> of the car
+          from The Jetsons halting to a stop. I spliced the sample into 30 different
+          loopable parts, each designated to play when the vehicle reaches a specific velocity.
+        </p>
+
+      </div>
+    </section>
+  </body>
+
+
+
+
+
+
+    <footer>
+      <p>extra terrestrial clunker</p>
+    </footer>
+  </body>
+
+
+</html>

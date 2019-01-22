@@ -6,16 +6,16 @@ router.get('/groupwork', function(req, res, next) {
 });
 
 router.get('/groupwork/undercooked', function(req, res, next) {
-  res.render('project');
+  res.render('undercooked');
 });
 router.get('/groupwork/lemmingsinvr', function(req, res, next) {
-  res.render('project');
+  res.render('lemmings');
 });
 router.get('/groupwork/woowho', function(req, res, next) {
   res.render('woowho');
 });
 router.get('/groupwork/extraterrestrialclunker', function(req, res, next) {
-  res.render('project');
+  res.render('ufo');
 });
 router.get('/groupwork/gamejampgh', function(req, res, next) {
   res.render('project');
@@ -24,22 +24,22 @@ router.get('/groupwork/cookandruin', function(req, res, next) {
   res.render('cookandruin');
 });
 router.get('/groupwork/pollennation', function(req, res, next) {
-  res.render('project');
+  res.render('pollennation');
 });
 router.get('/groupwork/duckfalls', function(req, res, next) {
-  res.render('project');
+  res.render('duckfalls');
 });
 router.get('/groupwork/chroma', function(req, res, next) {
-  res.render('project');
+  res.render('chroma');
 });
 router.get('/groupwork/band', function(req, res, next) {
   res.render('band');
 });
 router.get('/groupwork/woodlandwarriors', function(req, res, next) {
-  res.render('project');
+  res.render('woodlandwarriors');
 });
 router.get('/groupwork/hanselandgretel', function(req, res, next) {
-  res.render('project');
+  res.render('hanselandgretel');
 });
 router.get('/groupwork/punchbuggy', function(req, res, next) {
   res.render('project');

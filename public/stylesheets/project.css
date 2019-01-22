@@ -243,6 +243,27 @@ h2{
   margin-left: 100px;
 }
 
+#jetson:link {
+  color: green;
+  background-color: transparent;
+  text-decoration: none;
+}
+#jetson:visited {
+  color: pink;
+  background-color: transparent;
+  text-decoration: none;
+}
+#jetson:hover {
+  color: red;
+  background-color: transparent;
+  text-decoration: underline;
+}
+#jetson:active {
+  color: yellow;
+  background-color: transparent;
+  text-decoration: underline;
+}
+
 footer {
   margin: 0 auto;
   padding: 10px 0;
