@@ -230,13 +230,15 @@ body {
 
 .project {
   height: 100vh;
-  display: block;
+  //display: block;
 }
 
 .descrip {
   //float: right;
   color: white;
   margin: 0 10% auto;
+  height: 100vh;
+  padding: 10vh
 }
 
 h2{
@@ -262,12 +264,4 @@ h2{
   color: yellow;
   background-color: transparent;
   text-decoration: underline;
-}
-
-footer {
-  margin: 0 auto;
-  padding: 10px 0;
-  text-align: center;
-  background: var(--background);
-  color: white;
 }
