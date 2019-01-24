@@ -201,26 +201,68 @@ body {
 }
 
 
+#tvlayoutcanvas{
+  //margin-top: 107px;
+  position: relative;
+  height: 1500px;
+}
+
+.ui{
+  background-color: green;
+  color: white;
+  font-size: 16px;
+  text-align: center;
+  text-decoration: none;
+  padding: 10 auto;
+  position: absolute;
+  transition: .5s ease;
+  z-index: 200;
+  width: 10rem;
+  border-style: solid;
+  border-width: medium;
+  border-color: black;
+}
+
 #utube {
-  float:left;
-  margin: 3% 3% auto;
+  //float:left;
+  margin: 5% 10% auto;
 }
 
 .project {
+  height: 1000px;
+  display: block;
 }
 
 .descrip {
+  //float: right;
   color: white;
   margin: 0 10% auto;
-  height: 1000px;
-  padding: 10vh
-  display: inline-block;
 }
 
 h2{
   margin-left: 100px;
 }
 
+#jetson:link {
+  color: green;
+  background-color: transparent;
+  text-decoration: none;
+}
+#jetson:visited {
+  color: pink;
+  background-color: transparent;
+  text-decoration: none;
+}
+#jetson:hover {
+  color: red;
+  background-color: transparent;
+  text-decoration: underline;
+}
+#jetson:active {
+  color: yellow;
+  background-color: transparent;
+  text-decoration: underline;
+}
 
 footer {
   margin: 0 auto;
