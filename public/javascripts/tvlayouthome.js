@@ -654,7 +654,7 @@ function animateEffect() {
     badTVPass = badTVArray[i];
     staticPass = staticArray[i];
     filmPass = filmArray[i];
-    shaderTime += 0.02;
+    shaderTime += 0.01;
     badTVPass.uniforms[ 'time' ].value =  shaderTime;
     filmPass.uniforms[ 'time' ].value =  shaderTime;
     staticPass.uniforms[ 'time' ].value =  shaderTime;
