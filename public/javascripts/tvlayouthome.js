@@ -92,8 +92,8 @@
 function resizeTV() {
   var zpos = -100;
   //var xdelta = .01115 * WIDTH;
-  var xdelta = .038 * WIDTH;
-  var tvscalex = .00029 * WIDTH;
+  var xdelta = .042 * WIDTH;
+  var tvscalex = .00032 * WIDTH;
   var tvscaley = .00055 * HEIGHT;
   var ytop = .0135 * HEIGHT;
   var index = 0;
@@ -103,7 +103,7 @@ function resizeTV() {
       var roty = 0.7;
       //roty -= (row * 0.52)
       ypos = ytop;
-      var xleft = -.039 * WIDTH;
+      var xleft = -.043 * WIDTH;
       console.log("XLEFT =" + xleft);
       for (var col = 0; col < tvCol ; col++) {
         if(index < 6) {
@@ -162,8 +162,8 @@ function loadTVs() {
 
   var zpos = -100;
   //var xdelta = .01115 * WIDTH;
-  var xdelta = .038 * WIDTH;
-  var tvscalex = .00029 * WIDTH;
+  var xdelta = .042 * WIDTH;
+  var tvscalex = .00032 * WIDTH;
   var tvscaley = .00055 * HEIGHT;
   var ytop = .0135 * HEIGHT;
   var index = 0;
@@ -179,7 +179,7 @@ function loadTVs() {
               var roty = 0.7;
 
               ypos = ytop;
-              var xleft = -.039 * WIDTH;
+              var xleft = -.043 * WIDTH;
 
               for (var col = 0; col < tvCol ; col++) {
                 if(index < 12) {

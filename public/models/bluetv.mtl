@@ -1,4 +1,4 @@
-# Blender MTL File: 'yellowTV.blend'
+# Blender MTL File: 'yellowTVsmall.blend'
 # Material Count: 5
 
 newmtl Black
@@ -14,7 +14,7 @@ illum 2
 newmtl Body
 Ns 7.843137
 Ka 1.000000 1.000000 1.000000
-Kd 0.046688 0.372979 0.790560
+Kd 0.024299 0.364215 0.790560
 Ks 0.000000 0.000000 0.000000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000

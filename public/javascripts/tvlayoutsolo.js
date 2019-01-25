@@ -571,10 +571,6 @@ function mouseHover(event){
       }
       exited = false;
       //cssGroup[index].element.hidden = false;
-      badTVPass.enabled = true;
-      staticPass.enabled = true;
-      rgbPass.enabled = true;
-      filmPass.enabled = true;
       if(entered == false) {
 
         for (i = 0; i < 15; i ++) {
