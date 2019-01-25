@@ -11,12 +11,14 @@
   var videos = [];
   var composer;
   var shaderTime = 0;
-  var badTVParams, badTVPass;
-  var staticParams, staticPass;
-  var rgbParams, rgbPass;
-  var filmParams, filmPass;
-  var renderPass, copyPass, renderPassBuffer;
-  var gui;
+
+  var copyArray = [];
+  var badTVArray = [];
+  var staticArray = [];
+  var rgbArray = [];
+  var filmArray = [];
+
+
   var pnoise, globalParams;
   var mesh, cube;
   var SPEED = 0.01;
@@ -426,21 +428,8 @@ function init() {
       renderPassGroup[i] = renderPass;
     }
     //renderPass = new THREE.RenderPass(sceneGroup[0], camera);
-    copyPass = new THREE.ShaderPass( THREE.CopyShader );
-    badTVPass = new THREE.ShaderPass( THREE.BadTVShader );
-    staticPass = new THREE.ShaderPass( THREE.StaticShader );
-    rgbPass = new THREE.ShaderPass( THREE.RGBShiftShader );
-    filmPass = new THREE.ShaderPass( THREE.FilmShader );
 
-    filmPass.uniforms.grayscale.value = 0;
-
-    copyPass2 = new THREE.ShaderPass( THREE.CopyShader );
-    badTVPass2 = new THREE.ShaderPass( THREE.BadTVShader );
-    staticPass2 = new THREE.ShaderPass( THREE.StaticShader );
-    rgbPass2 = new THREE.ShaderPass( THREE.RGBShiftShader );
-    filmPass2 = new THREE.ShaderPass( THREE.FilmShader );
-
-    filmPass2.uniforms.grayscale.value = 0;
+    initEffects();
 
     badTVParams = {
       mute:true,
@@ -480,12 +469,21 @@ function init() {
     randomizeParams();
 }
 
-document.getElementById('tvlayoutcanvas').onmouseover = function () {
-    //hammerMesh.visible = true;
-}
+function initEffects() {
+  for(i = 0; i < 15; i++) {
+    copyPass = new THREE.ShaderPass( THREE.CopyShader );
+    badTVPass = new THREE.ShaderPass( THREE.BadTVShader );
+    staticPass = new THREE.ShaderPass( THREE.StaticShader );
+    rgbPass = new THREE.ShaderPass( THREE.RGBShiftShader );
+    filmPass = new THREE.ShaderPass( THREE.FilmShader );
+    filmPass.uniforms.grayscale.value = 0;
+    copyArray.push(copyPass);
+    badTVArray.push(badTVPass);
+    staticArray.push(staticPass);
+    rgbArray.push(rgbPass);
+    filmArray.push(filmPass);
 
-document.getElementById('tvlayoutcanvas').onmouseout = function () {
-    //hammerMesh.visible = false;
+  }
 }
 
 function onMouseMove(event) {
@@ -581,6 +579,14 @@ function mouseHover(event){
 
         for (i = 0; i < 15; i ++) {
           if(i != index) {
+            badTVPass = badTVArray[i];
+            staticPass = staticArray[i];
+            rgbPass = rgbArray[i];
+            filmPass = filmArray[i];
+            badTVPass.enabled = true;
+            staticPass.enabled = true;
+            rgbPass.enabled = true;
+            filmPass.enabled = true;
             if(videos[i].nodeName == "video") {
               videos[i].pause();
             }
@@ -596,10 +602,7 @@ function mouseHover(event){
     $('html,body').css('cursor', 'default');
     hammerMesh.visible = false;
 
-    badTVPass.enabled = false;
-    staticPass.enabled = false;
-    rgbPass.enabled = false;
-    filmPass.enabled = false;
+    turnOffEffects();
     //randomizeParams()
     hideButtons();
     if(exited == false) {
@@ -609,6 +612,19 @@ function mouseHover(event){
       initVideoMaterials()
     }
     entered = false;
+  }
+}
+
+function turnOffEffects() {
+  for(var i = 0; i < 15; i++) {
+    badTVPass = badTVArray[i];
+    staticPass = staticArray[i];
+    rgbPass = rgbArray[i];
+    filmPass = filmArray[i];
+    badTVPass.enabled = false;
+    staticPass.enabled = false;
+    rgbPass.enabled = false;
+    filmPass.enabled = false;
   }
 }
 
@@ -638,20 +654,25 @@ function effectComposerSwapBuffers() {
   }
 }
 
+function animateEffect() {
+  for(var i = 0; i < 15; i ++) {
+    badTVPass = badTVArray[i];
+    staticPass = staticArray[i];
+    filmPass = filmArray[i];
+    shaderTime += 0.01;
+    badTVPass.uniforms[ 'time' ].value =  shaderTime;
+    filmPass.uniforms[ 'time' ].value =  shaderTime;
+    staticPass.uniforms[ 'time' ].value =  shaderTime;
+  }
+}
+
 function animate() {
     //resizeCanvasToDisplaySize();
     //resizeTV();
     mouseHoverPre();
     drawVideo();
 
-    shaderTime += 0.1;
-    badTVPass.uniforms[ 'time' ].value =  shaderTime;
-    filmPass.uniforms[ 'time' ].value =  shaderTime;
-    staticPass.uniforms[ 'time' ].value =  shaderTime;
-
-    badTVPass2.uniforms[ 'time' ].value =  shaderTime;
-    filmPass2.uniforms[ 'time' ].value =  shaderTime;
-    staticPass2.uniforms[ 'time' ].value =  shaderTime;
+    animateEffect()
 
     ctxRestore();
     renderEffectComposer(.1);
@@ -665,6 +686,13 @@ function onToggleShaders(){
 
   for(var i = 0; i < 15; i ++) {
     effectComposer = effectComposerGroup[i];
+
+    copyPass = copyArray[i];
+    badTVPass = badTVArray[i];
+    staticPass = staticArray[i];
+    rgbPass = rgbArray[i];
+    filmPass = filmArray[i];
+
     effectComposer.addPass(renderPassGroup[i]);
     effectComposer.addPass(filmPass);
     effectComposer.addPass(badTVPass);
@@ -795,45 +823,38 @@ function initVideoPostBuffer() {
 }
 
 function onParamsChange() {
-
+  for(i = 0; i < 15; i++) {
+    badTVPass = badTVArray[i];
+    staticPass = staticArray[i];
+    rgbPass = rgbArray[i];
+    filmPass = filmArray[i];
   //copy gui params into shader uniforms
-  badTVPass.uniforms[ 'distortion' ].value = badTVParams.distortion;
-  badTVPass.uniforms[ 'distortion2' ].value = badTVParams.distortion2;
-  badTVPass.uniforms[ 'speed' ].value = badTVParams.speed;
-  badTVPass.uniforms[ 'rollSpeed' ].value = badTVParams.rollSpeed;
+    badTVPass.uniforms[ 'distortion' ].value = badTVParams.distortion;
+    badTVPass.uniforms[ 'distortion2' ].value = badTVParams.distortion2;
+    badTVPass.uniforms[ 'speed' ].value = badTVParams.speed;
+    badTVPass.uniforms[ 'rollSpeed' ].value = badTVParams.rollSpeed;
 
-  staticPass.uniforms[ 'amount' ].value = staticParams.amount;
-  staticPass.uniforms[ 'size' ].value = staticParams.size;
+    staticPass.uniforms[ 'amount' ].value = staticParams.amount;
+    staticPass.uniforms[ 'size' ].value = staticParams.size;
 
-  rgbPass.uniforms[ 'angle' ].value = rgbParams.angle*Math.PI;
-  rgbPass.uniforms[ 'amount' ].value = rgbParams.amount;
+    rgbPass.uniforms[ 'angle' ].value = rgbParams.angle*Math.PI;
+    rgbPass.uniforms[ 'amount' ].value = rgbParams.amount;
 
-  filmPass.uniforms[ 'sCount' ].value = filmParams.count;
-  filmPass.uniforms[ 'sIntensity' ].value = filmParams.sIntensity;
-  filmPass.uniforms[ 'nIntensity' ].value = filmParams.nIntensity;
-  //2
-  badTVPass2.uniforms[ 'distortion' ].value = badTVParams.distortion;
-  badTVPass2.uniforms[ 'distortion2' ].value = badTVParams.distortion2;
-  badTVPass2.uniforms[ 'speed' ].value = badTVParams.speed;
-  badTVPass2.uniforms[ 'rollSpeed' ].value = badTVParams.rollSpeed;
-
-  staticPass2.uniforms[ 'amount' ].value = staticParams.amount;
-  staticPass2.uniforms[ 'size' ].value = staticParams.size;
-
-  rgbPass2.uniforms[ 'angle' ].value = rgbParams.angle*Math.PI;
-  rgbPass2.uniforms[ 'amount' ].value = rgbParams.amount;
-
-  filmPass2.uniforms[ 'sCount' ].value = filmParams.count;
-  filmPass2.uniforms[ 'sIntensity' ].value = filmParams.sIntensity;
-  filmPass2.uniforms[ 'nIntensity' ].value = filmParams.nIntensity;
+    filmPass.uniforms[ 'sCount' ].value = filmParams.count;
+    filmPass.uniforms[ 'sIntensity' ].value = filmParams.sIntensity;
+    filmPass.uniforms[ 'nIntensity' ].value = filmParams.nIntensity;
+  }
 }
 
 function randomizeParams() {
+  max = 0.5;
+  min = 0;
+  rollSpeed = Math.random() * (max - min) + min;
 
   badTVParams.distortion = Math.random()*10+0.1;
   badTVParams.distortion2 =Math.random()*10+0.1;
-  badTVParams.speed =Math.random()*0.4;
-  badTVParams.rollSpeed =Math.random()*0.2;
+  badTVParams.speed =Math.random()*0.2;
+  badTVParams.rollSpeed =rollSpeed*0.2;
   rgbParams.angle = Math.random()*2;
   rgbParams.amount = Math.random()*0.03;
   staticParams.amount = Math.random()*0.2;
