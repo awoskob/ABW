@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Alexander Woskob</title>
+    <link rel='stylesheet' href='/stylesheets/project.css' />
+
+    <script src="/jquery/jquery.js"></script>
+    <script src="/javascripts/scrolling.js"></script>
+    <script src="/javascripts/navigation.js"></script>
+
+    <script src="/three/build/three.min.js"></script>
+    <script src="/three/js/loaders/OBJLoader.js"></script>
+    <script src="/three/js/loaders/MTLLoader.js"></script>
+    <script src="/three/js/renderers/CSS3DRenderer.js"></script>
+
+
+    <!--<script type="module" src="/three/textures/VideoTexture.js"></script>-->
+
+    <script src="/javascripts/OrbitControls.js"></script>
+    <script src="/javascripts/Tween.js"></script>
+    <script src="/canvasjs/canvasjs.min.js"></script>
+    <script>
+    $(function() {
+
+    var opArray = [];
+    var dataArrays = [];
+    var chart;
+    var allWhiskers = [];
+    var allOpStrings = [];
+    var allOpStrs = [];
+    var allIDs = [];
+
+    function renderCharts() {
+    	console.log(allWhiskers.length)
+    	for (var i = 0; i < allWhiskers.length; i++) {
+    		id = allIDs[i];
+    		opString = allOpStrings[i];
+    		opStr = allOpStrs[i];
+    		var dataPoints = [{label: opStr, y: allWhiskers[i]}];
+    		console.log("DONE ADDING = " + id + " opSTR = " + opStr + " data = " + allWhiskers[i]);
+
+    		var chart = new CanvasJS.Chart(id, {
+    			animationEnabled: true,
+    			//zoomEnabled: true,
+    			//theme: "light1",
+    			title: {
+    				text: (opString)
+    			},
+
+    			axisY: {
+    				title: "# of solutions",
+    				titleFontSize: 20,
+    			},
+    			data: [{
+    				type: "boxAndWhisker",
+    				upperBoxColor: "#FFC28D",
+    				lowerBoxColor: "#9ECCB8",
+    				color: "black",
+    				dataPoints: dataPoints
+    			}]
+    		});
+
+
+    		chart.render();
+    	}
+    }
+
+    function Median(data) {
+      return Quartile_50(data);
+    }
+
+    function Quartile_25(data) {
+      return Quartile(data, 0.25);
+    }
+
+    function Quartile_50(data) {
+      return Quartile(data, 0.5);
+    }
+
+    function Quartile_75(data) {
+      return Quartile(data, 0.75);
+    }
+
+    function Quartile(data, q) {
+      //data=Array_Sort_Numbers(data);
+      var pos = ((data.length) - 1) * q;
+      var base = Math.floor(pos);
+      var rest = pos - base;
+      if( (data[base+1]!==undefined) ) {
+        return data[base] + rest * (data[base+1] - data[base]);
+      } else {
+        return data[base];
+      }
+    }
+
+    function Array_Sort_Numbers(inputarray){
+      return inputarray.sort(function(a, b) {
+        return a - b;
+      });
+    }
+
+    function createWhiskerData(path) {
+    	var whiskers = [];
+    	var yVals = [];
+
+    	$.getJSON(path, function(data) {
+    		index = 0;
+    		console.log("adding data = " + index);
+    		Object.keys(data[0]).forEach(function(key) {
+    		  for (var i = 0; i < data[0][key]; i++) {
+    			  yVals.push(parseInt(key));
+    				index += 1;
+    			}
+    		})
+    		yVals = Array_Sort_Numbers(yVals);
+    		whiskers.push(yVals[0]);
+    		whiskers.push(Quartile_25(yVals));
+    		whiskers.push(Quartile_75(yVals));
+    		whiskers.push(yVals[index-1]);
+    		whiskers.push(Quartile_50(yVals));
+    		allWhiskers.push(whiskers);
+
+    	});
+    }
+
+
+    function createOpString(operators) {
+    	var opString = "operators: ";
+    	var opStr = " ";
+    	for (var i = 0; i < 3; i++) {
+    		if (operators[i] == 0) {
+    			//console.log("here");
+    			opString = opString.concat(" +");
+    			opStr = opStr.concat(" +");
+    		}
+    		if (operators[i] == 1) {
+    			opString = opString.concat(" -");
+    			opStr = opStr.concat(" -");
+    		}
+    		if (operators[i] == 2) {
+    			opString = opString.concat(" x");
+    			opStr = opStr.concat(" x");
+    		}
+    		if (operators[i] == 3) {
+    			opString = opString.concat(" /");
+    			opStr = opStr.concat(" /");
+    		}
+    		if (operators[i] == 4) {
+    			opString = opString.concat(" ^");
+    			opStr = opStr.concat(" ^");
+    		}
+    		if (operators[i] == 5) {
+    			opString = opString.concat(" %");
+    			opStr = opStr.concat(" %");
+    		}
+    	}
+    	//console.log(opString);
+    	return [opString, opStr];
+    }
+
+    var i = 0;
+    var j = 0;
+    var k = 0;
+    var index1 = 0;
+    var max = 5;
+    function nextChart() {
+    	var operators = [i, j, k]
+    	var opString = createOpString(operators)[0];
+    	var opStr = createOpString(operators)[1];
+
+    	var path = "/distributions/d-[" + (i.toString()) + ", " + (j.toString()) + ", " + (k.toString()) + "].json";
+
+    	var id = ("chartContainer").concat(index1.toString());
+
+    	var div = document.createElement("div");
+    	div.id = id;
+    	div.style.width = "31%";
+    	div.style.height = "600px";
+    	div.style.margin = "1% 1%";
+    	div.style.float = "left";
+
+    	document.getElementById("main").appendChild(div);
+    	allIDs.push(id);
+    	allOpStrings.push(opString);
+    	allOpStrs.push(opStr);
+
+
+
+    	createWhiskerData(path);
+    	index1 += 1;
+
+    	// k < 5
+    	if(k < max) { k += 1; }
+    	// k == 5
+    	else {// j < 5
+    				if(j < max) { j += 1;	k = j; }
+    				// j == 5
+    				else {// i < 5
+    							if(i < max) {	i += 1;	j = i; k = j }
+    							// i == 5
+    							else {
+    								console.log("JEENAAA")
+    								renderCharts();	return; }}}
+
+    	setTimeout(nextChart, 0);
+    }
+    nextChart();
+    });
+    </script>
+
+
+  </head>
+
+  <header>
+    <div class="logo">
+      <div class="threedlogo" id="3dlogo">
+        <script src="/javascripts/3dlogo.js"></script>
+      </div>
+      <h1 class="textlogo"> Alexander Woskob </h1>
+    </div>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle">
+    <nav>
+      <ul>
+        <li><a class="nav-link" href="/">HOME</a></li>
+        <li><a class="nav-link" href="/dice/column">Column</a></li>
+        <li><a class="nav-link" href="/dice/boxandwhisker">Box and Whisker</a></li>
+      </ul>
+    </nav>
+    <label for="nav-toggle" class="nav-toggle-label">
+      <span></span>
+    </label>
+  </header>
+
+  <body>
+    <div id="main"></div>
+
+  </body>
+
+
+
+</html>
