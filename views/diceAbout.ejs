@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Alexander Woskob</title>
+    <link rel='stylesheet' href='/stylesheets/dice.css' />
+
+    <script src="/jquery/jquery.js"></script>
+    <script src="/javascripts/scrolling.js"></script>
+    <script src="/javascripts/navigation.js"></script>
+
+    <script src="/three/build/three.min.js"></script>
+    <script src="/three/js/loaders/OBJLoader.js"></script>
+    <script src="/three/js/loaders/MTLLoader.js"></script>
+    <script src="/three/js/renderers/CSS3DRenderer.js"></script>
+
+
+    <!--<script type="module" src="/three/textures/VideoTexture.js"></script>-->
+
+    <script src="/javascripts/OrbitControls.js"></script>
+    <script src="/javascripts/Tween.js"></script>
+    <script src="/canvasjs/canvasjs.min.js"></script>
+
+
+
+  </head>
+
+  <header>
+    <div class="logo">
+      <div class="threedlogo" id="3dlogo">
+        <script src="/javascripts/3dlogo.js"></script>
+      </div>
+      <h1 class="textlogo"> Dice Gambit </h1>
+    </div>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle">
+    <nav>
+      <ul>
+        <li><a class="nav-link" href="/dice/generator">Generator</a></li>
+        <li><a class="nav-link" href="/dice/column">Distributions</a></li>
+        <li><a class="nav-link" href="/dice/boxandwhisker">Box and Whisker</a></li>
+      </ul>
+    </nav>
+    <label for="nav-toggle" class="nav-toggle-label">
+      <span></span>
+    </label>
+  </header>
+
+  <body>
+    <div id="main">
+      <select id="op1">
+        <option value="0">+</option>
+        <option value="1">-</option>
+        <option value="2">x</option>
+        <option value="3">/</option>
+        <option value="4">^</option>
+        <option value="5">%</option>
+      </select>
+      <select id="op2">
+        <option value="0">+</option>
+        <option value="1">-</option>
+        <option value="2">x</option>
+        <option value="3">/</option>
+        <option value="4">^</option>
+        <option value="5">%</option>
+      </select>
+      <select id="op3">
+        <option value="0">+</option>
+        <option value="1">-</option>
+        <option value="2">x</option>
+        <option value="3">/</option>
+        <option value="4">^</option>
+        <option value="5">%</option>
+      </select>
+      <select id="num1">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+      </select>
+      <select id="num2">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+      </select>
+      <select id="num3">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+      </select>
+      <select id="num4">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+      </select>
+      <button type="button" onclick="generateChart()">Generate</button>
+
+      <script>
+        var chart;
+
+        function renderChart() {
+          chart.render();
+        }
+
+        function createOpString(operators) {
+        	var opString = "operators: ";
+        	var opStr = "";
+        	for (var i = 0; i < 3; i++) {
+        		if (operators[i] == 0) {
+        			//console.log("here");
+        			opString = opString.concat(" +");
+        			opStr = opStr.concat(" +");
+        		}
+        		if (operators[i] == 1) {
+        			opString = opString.concat(" -");
+        			opStr = opStr.concat(" -");
+        		}
+        		if (operators[i] == 2) {
+        			opString = opString.concat(" x");
+        			opStr = opStr.concat(" x");
+        		}
+        		if (operators[i] == 3) {
+        			opString = opString.concat(" /");
+        			opStr = opStr.concat(" /");
+        		}
+        		if (operators[i] == 4) {
+        			opString = opString.concat(" ^");
+        			opStr = opStr.concat(" ^");
+        		}
+        		if (operators[i] == 5) {
+        			opString = opString.concat(" %");
+        			opStr = opStr.concat(" %");
+        		}
+        	}
+        	//console.log(opString);
+        	return [opString, opStr];
+        }
+
+        function generateChart() {
+          var id = "chart1";
+          var div = document.createElement("div");
+        	div.id = id;
+        	div.style.width = "100%";
+        	div.style.height = "80vh";
+        	div.style.margin = "1% 1%";
+        	//div.style.background = "red";
+        	//div.style.color = "white";
+        	//div.innerHTML = "Hello";
+        	document.getElementById("main").appendChild(div);
+
+          //document.getElementById("num4").value = "6";
+          var userPath = [document.getElementById("op1").value, document.getElementById("op2").value, document.getElementById("op3").value]
+          userPath.sort();
+          var path = "/distributions/d-[" + userPath[0].toString()
+            + ", " + userPath[1].toString() + ", "
+            + userPath[2].toString() + "].json";
+
+          // var operators = "" + userPath[0].toString()
+          //   + ", " + userPath[1].toString() + ", "
+          //   + userPath[2].toString()
+          operators = createOpString(userPath)[0];
+
+          var userList = [document.getElementById("num1").value, document.getElementById("num2").value, document.getElementById("num3").value, document.getElementById("num4").value]
+          userList.sort();
+          console.log("userList = " + userList + userList.length);
+          var userKey = "[" + userList[0].toString() + ", " +
+            userList[1].toString()  + ", " + userList[2].toString()  + ", "
+            + userList[3].toString() + "]"
+
+          console.log("userKey =" + userKey);
+
+          console.log(path);
+
+          var dataPoints = [];
+
+        	// push dataPoints
+        	$.getJSON(path, function(data) {
+        		Object.keys(data[0][2][userKey]).forEach(function(key) {
+              console.log("KEY = " + key)
+              console.log("value = " + data[0][2][userKey][key])
+        			dataPoints.push({
+        				x: parseInt(key),
+        				y: data[0][2][userKey][key]
+        			})
+        		})
+        	});
+
+          console.log("DP = " + dataPoints);
+
+
+          chart = new CanvasJS.Chart(id, {
+        		animationEnabled: true,
+        		zoomEnabled: true,
+        		theme: "light1",
+        		title: {
+        			//text: (opString)
+              text: operators
+        		},
+        		axisX: {
+        			title: "dice values = " + userKey,
+        			//interval: 10,
+        			titleFontSize: 20,
+        		},
+        		axisY: {
+        			title: "# of solutions",
+        			titleFontSize: 20
+        		},
+        		data: [{
+        			type: "column",
+        			dataPoints: dataPoints
+        		}]
+        	});
+          setTimeout(renderChart, 500);
+        }
+      </script>
+    </div>
+
+
+  </body>
+
+</html>

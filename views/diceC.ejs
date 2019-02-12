@@ -95,12 +95,13 @@
     	// push dataPoints
     	$.getJSON(path, function(data) {
     		//console.log("adding data");
-    		//console.log(data)
-    		Object.keys(data[0]).forEach(function(key) {
+    		//console.log(data[0][0])
+    		Object.keys(data[0][0]).forEach(function(key) {
+          //console.log(key)
     			dataPoints.push({
     				x: parseInt(key),
     				//x: key,
-    				y: data[0][key]
+    				y: data[0][0][key]
     			})
     		})
     	});
@@ -157,13 +158,13 @@
       <div class="threedlogo" id="3dlogo">
         <script src="/javascripts/3dlogo.js"></script>
       </div>
-      <h1 class="textlogo"> Alexander Woskob </h1>
+      <h1 class="textlogo"> Dice Gambit </h1>
     </div>
     <input type="checkbox" id="nav-toggle" class="nav-toggle">
     <nav>
       <ul>
-        <li><a class="nav-link" href="/">HOME</a></li>
-        <li><a class="nav-link" href="/dice/column">Column</a></li>
+        <li><a class="nav-link" href="/dice/generator">Generator</a></li>
+        <li><a class="nav-link" href="/dice/column">Distributions</a></li>
         <li><a class="nav-link" href="/dice/boxandwhisker">Box and Whisker</a></li>
       </ul>
     </nav>

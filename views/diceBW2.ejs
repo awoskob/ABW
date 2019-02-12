@@ -31,102 +31,92 @@
     var allIDs = [];
 
     function renderCharts() {
-    	console.log(allWhiskers.length)
-    	for (var i = 0; i < allWhiskers.length; i++) {
-    		id = allIDs[i];
-    		opString = allOpStrings[i];
-    		opStr = allOpStrs[i];
-    		var dataPoints = [{label: opStr, y: allWhiskers[i]}];
-    		console.log("DONE ADDING = " + id + " opSTR = " + opStr + " data = " + allWhiskers[i]);
+    	//console.log(allWhiskers.length)
+      //console.log(allWhiskers)
+      id = allIDs[0];
 
-    		var chart = new CanvasJS.Chart(id, {
-    			animationEnabled: true,
-    			//zoomEnabled: true,
-    			//theme: "light1",
-    			title: {
-    				text: (opString)
-    			},
+      var div = document.createElement("div");
+      div.id = id;
+      div.style.width = "100%";
+      div.style.height = "85vh";
+      //div.style.margin = "10% 1%";
+      //div.style.float = "left";
 
-    			axisY: {
-    				title: "# of solutions",
-    				titleFontSize: 20,
-    			},
-    			data: [{
-    				type: "boxAndWhisker",
-    				upperBoxColor: "#FFC28D",
-    				lowerBoxColor: "#9ECCB8",
-    				color: "black",
-    				dataPoints: dataPoints
-    			}]
-    		});
+      document.getElementById("main").appendChild(div);
 
+      var chart = new CanvasJS.Chart(id, {
+      		animationEnabled: true,
+      		title: {
+      			text: "Box and Whisker Distributions"
+      		},
 
-    		chart.render();
-    	}
+      		axisY: {
+      			title: "solution",
+      			titleFontSize: 20,
+      		},
+          axisX: {
+            labelAngle: 0,
+            labelMaxWidth: 1,
+            labelWrap: true,
+            labelFontSize: 14,
+            interval: 1
+          },
+
+      		data: [{
+      			type: "boxAndWhisker",
+      			upperBoxColor: "#FFC28D",
+      			lowerBoxColor: "#9ECCB8",
+      			color: "black",
+      			dataPoints: allWhiskers
+      		}]
+      	});
+      chart.render();
+
+    	// for (var i = 0; i < allWhiskers.length; i++) {
+    	// 	id = allIDs[i];
+    	// 	opString = allOpStrings[i];
+    	// 	opStr = allOpStrs[i];
+    	// 	var dataPoints = [{label: opStr, y: allWhiskers[i]}];
+    	// 	console.log("DONE ADDING = " + id + " opSTR = " + opStr + " data = " + allWhiskers[i]);
+      //
+    	// 	var chart = new CanvasJS.Chart(id, {
+    	// 		animationEnabled: true,
+    	// 		//zoomEnabled: true,
+    	// 		//theme: "light1",
+    	// 		title: {
+    	// 			text: (opString)
+    	// 		},
+      //
+    	// 		axisY: {
+    	// 			title: "# of solutions",
+    	// 			titleFontSize: 20,
+    	// 		},
+    	// 		data: [{
+    	// 			type: "boxAndWhisker",
+    	// 			upperBoxColor: "#FFC28D",
+    	// 			lowerBoxColor: "#9ECCB8",
+    	// 			color: "black",
+    	// 			dataPoints: dataPoints
+    	// 		}]
+    	// 	});
+      //
+      //
+    	// 	chart.render();
+    	// }
     }
 
-    function Median(data) {
-      return Quartile_50(data);
-    }
-
-    function Quartile_25(data) {
-      return Quartile(data, 0.25);
-    }
-
-    function Quartile_50(data) {
-      return Quartile(data, 0.5);
-    }
-
-    function Quartile_75(data) {
-      return Quartile(data, 0.75);
-    }
-
-    function Quartile(data, q) {
-      //data=Array_Sort_Numbers(data);
-      var pos = ((data.length) - 1) * q;
-      var base = Math.floor(pos);
-      var rest = pos - base;
-      if( (data[base+1]!==undefined) ) {
-        return data[base] + rest * (data[base+1] - data[base]);
-      } else {
-        return data[base];
-      }
-    }
-
-    function Array_Sort_Numbers(inputarray){
-      return inputarray.sort(function(a, b) {
-        return a - b;
-      });
-    }
-
-    function createWhiskerData(path) {
-    	var whiskers = [];
-    	var yVals = [];
-
+    function createWhiskerData(path, opStr) {
     	$.getJSON(path, function(data) {
-    		index = 0;
-    		console.log("adding data = " + index);
-    		Object.keys(data[0]).forEach(function(key) {
-    		  for (var i = 0; i < data[0][key]; i++) {
-    			  yVals.push(parseInt(key));
-    				index += 1;
-    			}
-    		})
-    		yVals = Array_Sort_Numbers(yVals);
-    		whiskers.push(yVals[0]);
-    		whiskers.push(Quartile_25(yVals));
-    		whiskers.push(Quartile_75(yVals));
-    		whiskers.push(yVals[index-1]);
-    		whiskers.push(Quartile_50(yVals));
-    		allWhiskers.push(whiskers);
-
+    		console.log("adding data");
+    		var whiskers = data[0][1]
+    		allWhiskers.push({label: opStr, y: whiskers});
     	});
     }
 
 
     function createOpString(operators) {
     	var opString = "operators: ";
-    	var opStr = " ";
+    	var opStr = "";
     	for (var i = 0; i < 3; i++) {
     		if (operators[i] == 0) {
     			//console.log("here");
@@ -172,21 +162,21 @@
 
     	var id = ("chartContainer").concat(index1.toString());
 
-    	var div = document.createElement("div");
-    	div.id = id;
-    	div.style.width = "31%";
-    	div.style.height = "600px";
-    	div.style.margin = "1% 1%";
-    	div.style.float = "left";
-
-    	document.getElementById("main").appendChild(div);
+    	// var div = document.createElement("div");
+    	// div.id = id;
+    	// div.style.width = "31%";
+    	// div.style.height = "600px";
+    	// div.style.margin = "1% 1%";
+    	// div.style.float = "left";
+      //
+    	// document.getElementById("main").appendChild(div);
     	allIDs.push(id);
     	allOpStrings.push(opString);
     	allOpStrs.push(opStr);
 
 
 
-    	createWhiskerData(path);
+    	createWhiskerData(path, opStr);
     	index1 += 1;
 
     	// k < 5
@@ -202,7 +192,7 @@
     								console.log("JEENAAA")
     								renderCharts();	return; }}}
 
-    	setTimeout(nextChart, 100);
+    	setTimeout(nextChart, 0);
     }
     nextChart();
     });
@@ -216,13 +206,13 @@
       <div class="threedlogo" id="3dlogo">
         <script src="/javascripts/3dlogo.js"></script>
       </div>
-      <h1 class="textlogo"> Alexander Woskob </h1>
+      <h1 class="textlogo"> Dice Gambit </h1>
     </div>
     <input type="checkbox" id="nav-toggle" class="nav-toggle">
     <nav>
       <ul>
-        <li><a class="nav-link" href="/">HOME</a></li>
-        <li><a class="nav-link" href="/dice/column">Column</a></li>
+        <li><a class="nav-link" href="/dice/generator">Generator</a></li>
+        <li><a class="nav-link" href="/dice/column">Distributions</a></li>
         <li><a class="nav-link" href="/dice/boxandwhisker">Box and Whisker</a></li>
       </ul>
     </nav>

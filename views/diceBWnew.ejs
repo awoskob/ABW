@@ -25,104 +25,14 @@
     var opArray = [];
     var dataArrays = [];
     var chart;
-    var allWhiskers = [];
-    var allOpStrings = [];
-    var allOpStrs = [];
-    var allIDs = [];
 
     function renderCharts() {
-    	console.log(allWhiskers.length)
-    	for (var i = 0; i < allWhiskers.length; i++) {
-    		id = allIDs[i];
-    		opString = allOpStrings[i];
-    		opStr = allOpStrs[i];
-    		var dataPoints = [{label: opStr, y: allWhiskers[i]}];
-    		console.log("DONE ADDING = " + id + " opSTR = " + opStr + " data = " + allWhiskers[i]);
-
-    		var chart = new CanvasJS.Chart(id, {
-    			animationEnabled: true,
-    			//zoomEnabled: true,
-    			//theme: "light1",
-    			title: {
-    				text: (opString)
-    			},
-
-    			axisY: {
-    				title: "# of solutions",
-    				titleFontSize: 20,
-    			},
-    			data: [{
-    				type: "boxAndWhisker",
-    				upperBoxColor: "#FFC28D",
-    				lowerBoxColor: "#9ECCB8",
-    				color: "black",
-    				dataPoints: dataPoints
-    			}]
-    		});
-
-
-    		chart.render();
+    	for (var i = 0; i < opArray.length; i++) {
+    		//console.log("rendering...")
+    		//console.log(opArray[i]);
+    		opArray[i].render();
     	}
     }
-
-    function Median(data) {
-      return Quartile_50(data);
-    }
-
-    function Quartile_25(data) {
-      return Quartile(data, 0.25);
-    }
-
-    function Quartile_50(data) {
-      return Quartile(data, 0.5);
-    }
-
-    function Quartile_75(data) {
-      return Quartile(data, 0.75);
-    }
-
-    function Quartile(data, q) {
-      //data=Array_Sort_Numbers(data);
-      var pos = ((data.length) - 1) * q;
-      var base = Math.floor(pos);
-      var rest = pos - base;
-      if( (data[base+1]!==undefined) ) {
-        return data[base] + rest * (data[base+1] - data[base]);
-      } else {
-        return data[base];
-      }
-    }
-
-    function Array_Sort_Numbers(inputarray){
-      return inputarray.sort(function(a, b) {
-        return a - b;
-      });
-    }
-
-    function createWhiskerData(path) {
-    	var whiskers = [];
-    	var yVals = [];
-
-    	$.getJSON(path, function(data) {
-    		index = 0;
-    		console.log("adding data = " + index);
-    		Object.keys(data[0]).forEach(function(key) {
-    		  for (var i = 0; i < data[0][key]; i++) {
-    			  yVals.push(parseInt(key));
-    				index += 1;
-    			}
-    		})
-    		yVals = Array_Sort_Numbers(yVals);
-    		whiskers.push(yVals[0]);
-    		whiskers.push(Quartile_25(yVals));
-    		whiskers.push(Quartile_75(yVals));
-    		whiskers.push(yVals[index-1]);
-    		whiskers.push(Quartile_50(yVals));
-    		allWhiskers.push(whiskers);
-
-    	});
-    }
-
 
     function createOpString(operators) {
     	var opString = "operators: ";
@@ -161,33 +71,75 @@
     var i = 0;
     var j = 0;
     var k = 0;
-    var index1 = 0;
-    var max = 5;
+    var index = 0;
+    var max = 1;
     function nextChart() {
     	var operators = [i, j, k]
-    	var opString = createOpString(operators)[0];
+      var opString = createOpString(operators)[0];
     	var opStr = createOpString(operators)[1];
 
-    	var path = "/distributions/d-[" + (i.toString()) + ", " + (j.toString()) + ", " + (k.toString()) + "].json";
+    	//console.log("creating chart" + opString)
 
-    	var id = ("chartContainer").concat(index1.toString());
+    	var path = "/distributions/d-[" + (i.toString()) + ", " + (j.toString()) + ", " + (k.toString()) + "].json";
+    	//console.log(path);
+    	// create and append div
+    	var id = ("chartContainer").concat(index.toString());
 
     	var div = document.createElement("div");
     	div.id = id;
-    	div.style.width = "31%";
-    	div.style.height = "600px";
+    	div.style.width = "98%";
+    	div.style.height = "400px";
     	div.style.margin = "1% 1%";
-    	div.style.float = "left";
-
+    	//div.style.background = "red";
+    	//div.style.color = "white";
+    	//div.innerHTML = "Hello";
     	document.getElementById("main").appendChild(div);
-    	allIDs.push(id);
-    	allOpStrings.push(opString);
-    	allOpStrs.push(opStr);
+
+    	// createChart(path, id, opString);
 
 
+    	var dataPoints = [];
 
-    	createWhiskerData(path);
-    	index1 += 1;
+    	// push dataPoints
+    	$.getJSON(path, function(data) {
+    		//console.log("adding data");
+    		//console.log(data[0][0])
+    		Object.keys(data[0][0]).forEach(function(key) {
+          //console.log(key)
+    			dataPoints.push({
+    				label: opStr,
+    				//x: key,
+    				y: data[0][1][key]
+    			})
+    		})
+    	});
+
+    	// initialize chart
+    	var chart = new CanvasJS.Chart(id, {
+    		animationEnabled: true,
+    		zoomEnabled: true,
+    		theme: "light1",
+    		title: {
+    			text: (opString)
+    		},
+    		axisX: {
+    			title: "results",
+    			//interval: 10,
+    			titleFontSize: 20,
+    		},
+    		axisY: {
+    			title: "# of solutions",
+    			titleFontSize: 20
+    		},
+    		data: [{
+    			type: "column",
+    			dataPoints: dataPoints
+    		}]
+    	});
+    	opArray.push(chart);
+
+    	// modify indices
+    	index += 1;
 
     	// k < 5
     	if(k < max) { k += 1; }
@@ -198,9 +150,7 @@
     				else {// i < 5
     							if(i < max) {	i += 1;	j = i; k = j }
     							// i == 5
-    							else {
-    								console.log("JEENAAA")
-    								renderCharts();	return; }}}
+    							else { renderCharts();	return; }}}
 
     	setTimeout(nextChart, 100);
     }
@@ -235,7 +185,5 @@
     <div id="main"></div>
 
   </body>
-
-
 
 </html>
