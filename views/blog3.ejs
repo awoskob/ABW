@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Alexander Woskob</title>
+    <link rel='stylesheet' href='/stylesheets/blog.css' />
+
+    <script src="/jquery/jquery.js"></script>
+    <script src="/javascripts/scrolling.js"></script>
+    <script src="/javascripts/navigation.js"></script>
+
+    <script src="/three/build/three.min.js"></script>
+    <script src="/three/js/loaders/OBJLoader.js"></script>
+    <script src="/three/js/loaders/MTLLoader.js"></script>
+    <script src="/three/js/renderers/CSS3DRenderer.js"></script>
+
+
+    <!--<script type="module" src="/three/textures/VideoTexture.js"></script>-->
+
+    <script src="/javascripts/OrbitControls.js"></script>
+    <script src="/javascripts/Tween.js"></script>
+
+
+  </head>
+
+  <header>
+    <div class="logo">
+      <div class="threedlogo" id="3dlogo">
+        <script src="/javascripts/3dlogo.js"></script>
+      </div>
+      <h1 class="textlogo"> Alexander Woskob </h1>
+    </div>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle">
+    <nav>
+      <ul>
+        <li><a class="nav-link" href="/">HOME</a></li>
+        <li><a class="nav-link" href="/work/groupwork">Group Work</a></li>
+        <li><a class="nav-link" href="/work/solowork">Solo Work</a></li>
+      </ul>
+    </nav>
+    <label for="nav-toggle" class="nav-toggle-label">
+      <span></span>
+    </label>
+  </header>
+
+  <body>
+    <section class="project">
+      <div class="descrip">
+        <h2> Can physics simulations be fun to play with like a toy? Can new physics be used to make creative content? </h2>
+        <p> A ball might be the most basic toy. It can be thrown, caught, bounced, squeezed, juggled, and many games evolve from these core interactions. Until people can easily travel to the Moon, Mars or another distant planet, a ball will always be governed by the physics of our planet. I wonder if it is a ball that is inherently fun to play with, or do we just have an innate curiosity to explore and test the properties of physics--Earth is just one big ball anyway. What would throwing a ball on the Moon be like? What would throwing the Moon into Earth orbit be like?
+        </p>
+        <p>
+          I have been pondering these questions for several years and have developed a project called Gravity Sound which hopes to be a platform through which players can explore and play with different physics. Gravity Sound currently sonifies the force of gravity through a mechanical-acoustic metaphor. Imagine connecting the planets in our solar system by strings where each string's tension was determined by the force of gravity between two connected planets. What would our solar system sound like if one were to bow these strings as the planets orbit? How much would each string vary in pitch along different parts of orbit? How would throwing a new planet into our solar system alter and disturb the relationships and sounds? Gravity Sound will attempt to quench those curiosities.
+        </p>
+        <p>
+          It is possible to find the fundamental vibrational mode of a stretched string given its mass, length and tension. The length of each string is determined by the distance between two connected planets. Given tension is just a force measured in Newtons we can assign it to the force of gravity between those planets. Finally, the string’s mass can be calculated knowing its volume and the density of the material it is made of.
+        </p>
+        <p>
+          Using data provided by NASA and JPL ephemerides, we can accurately simulate the positions of the planets in our solar system from roughly 20,000 BCE to 20,000 AD. Using a Pure Data embeddable audio synthesis library inside of Unity it is possible to procedurally generate the different string sounds and sonically spatialize them. Using either a desktop app or a VR app built in Unity, a user will be able to pick a date, create their own string alignments between planets, set the planets in motion at any variable speed, create new planets, throw them into orbit, and navigate outer space to experience a unique sonification of the solar system.
+        </p>
+        <p>
+          My vision for this project is to create an instrument out of the silent data from space--where instead of tuning a computer instrument to conform to a cultural artifact, it is tuned by the physical properties of real objects in time. Hopefully it will yield computer generative music which is neither pseudo-random nor predictable.
+        </p>
+
+      </div>
+    </section>
+
+
+
+
+
+
+
+    <footer>
+      <p>this is my blog</p>
+    </footer>
+  </body>
+
+
+</html>

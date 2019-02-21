@@ -9,4 +9,8 @@ router.get('/post2', function(req, res, next) {
   res.render('blog2');
 });
 
+router.get('/post3', function(req, res, next) {
+  res.render('blog3');
+});
+
 module.exports = router;
