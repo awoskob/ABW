@@ -21,5 +21,8 @@ router.get('/post5', function(req, res, next) {
   res.render('blog5');
 });
 
+router.get('/post6', function(req, res, next) {
+  res.render('blog6');
+});
 
 module.exports = router;
