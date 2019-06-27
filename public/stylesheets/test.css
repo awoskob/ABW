@@ -5,7 +5,7 @@ html{
 }
 
 :root {
-  --background: #074F57;
+  --background: #0A5F68;
 }
 
 *, *::before, *::after {
@@ -197,7 +197,7 @@ body {
 	font-family: 'Work Sans', sans-serif;
 	font-weight: 400;
   overflow: hidden;
-  background-color: white;
+  background-color: black;
 }
 
 #particleCanvas {
@@ -235,8 +235,8 @@ body {
 */
 
 .intro {
-  margin: 0 auto;
-  color: white;
+  margin: 30 auto;
+  background: black;
   text-align: center;
   padding: 50vh 0;
   width: 100vw;
@@ -246,27 +246,46 @@ body {
   //background: radial-gradient(rgba(120, 0, 0, 0.5), rgba(120, 0, 0, 0.4), rgba(120, 0, 0, 0.3), rgba(120, 0, 0, 0.1), rgba(120, 0, 0, 0.01), rgba(120, 0, 0, 0))
 }
 
+.fill {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    padding: 10vh;
+}
+.fill img {
+    width: 85%;
+    height: 85%;
+    top: 13%;
+    left: 25%;
+    position: absolute;
+    object-fit: fill;
+    //flex-shrink: 0;
+    //min-width: 100%;
+    //min-height: 100%
+}
+
 .typing-container{
     position: absolute;
   	top: 50%;
-  	right: 50%;
+  	right: 75%;
   	transform: translate(50%,-50%);
-  	color: black;
+  	color: white;
   	max-width: 90%;
-  	padding: 2em 3em;
-  	//background: rgb(250, 0, 0, .8);
-  	font-family: 'Open Sans', sans-serif;
+  	//padding: 2em 3em;
+  	//background: #00324933;
+  	font-family: 'Futura', sans-serif;
 }
 
 .text-primary{
-  color: #077187;
+  color: white;
 }
 
 .about {
   margin: 0;
   color: white;
   padding-top: 20vh;
-  padding-bottom: 5vh;
+  padding-bottom: 10vh;
   position:relative;
   background: #000000;
   overflow: auto;
@@ -306,12 +325,13 @@ body {
 .work {
   //width: 100vw;
   //height: 50vh;
-  padding-top: 20vh;
+  padding-top: 15vh;
   margin: 0 auto;
   //position: relative;
   //background: #00990066;
   //background: #33333366;
-  color: black;
+  color: white;
+  background: #000000;
 }
 
 .container {
@@ -321,7 +341,8 @@ body {
 }
 
 .contact {
-  padding: 10vh 0;
+  padding-top: 15vh;
+  padding-bottom: 15vh;
   margin: 0 auto;
   width: 100vw;
   //background: #rgb(0.5,0.5,0.5,0.7);
@@ -334,7 +355,7 @@ body {
   margin: 0 auto;
   width: 100vw;
   //background: #33333366;
-  color: black;
+  color: white;
 //position: relative;
 }
 
