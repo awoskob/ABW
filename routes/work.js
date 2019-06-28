@@ -42,7 +42,7 @@ router.get('/groupwork/hanselandgretel', function(req, res, next) {
   res.render('hanselandgretel');
 });
 router.get('/groupwork/punchbuggy', function(req, res, next) {
-  res.render('project');
+  res.render('punchbuggy');
 });
 
 router.get('/solowork', function(req, res, next) {
@@ -56,7 +56,7 @@ router.get('/solowork/proceduralanimation', function(req, res, next) {
   res.render('proceduralanimation');
 });
 router.get('/solowork/machinelearningunity', function(req, res, next) {
-  res.render('project');
+  res.render('spacebuccaneer');
 });
 router.get('/solowork/prokofiev7', function(req, res, next) {
   res.render('prokofiev');
@@ -65,7 +65,7 @@ router.get('/solowork/gravitysound', function(req, res, next) {
   res.render('gravitysound');
 });
 router.get('/solowork/birdcycle', function(req, res, next) {
-  res.render('project');
+  res.render('birdcycle');
 });
 router.get('/solowork/goldmarkviolin', function(req, res, next) {
   res.render('goldmark');

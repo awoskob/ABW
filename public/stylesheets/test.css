@@ -388,7 +388,7 @@ body {
 }
 
 .resume {
-  padding: 10vh 0;
+  padding-bottom: 10vh;
   margin: 0 auto;
   width: 100vw;
   //background: #33333366;
@@ -418,9 +418,9 @@ body {
 
 footer {
   margin: 0 auto;
-  padding: 10px 0;
+  padding: 5px 0;
   text-align: center;
-  background: var(--background);
+  background: var(--highlight);
   color: white;
   font-family: 'Saira', sans-serif;
 }
@@ -515,4 +515,21 @@ footer {
 .fa-instagram {
   background: #125688;
   color: white;
+}
+
+.btn {
+  background-color: #D661E2;
+  border: none;
+  color: white;
+  padding: 12px 30px;
+  cursor: pointer;
+  font-size: 20px;
+  text-align: center;
+  text-decoration: none;
+  //width: 100%;
+}
+
+/* Darker background on mouse-over */
+.btn:hover {
+  background-color: RoyalBlue;
 }

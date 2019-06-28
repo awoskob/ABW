@@ -5,7 +5,7 @@ html{
 }
 
 :root {
-  --background: #0A5F68;
+  --background: #000000CC;
   --highlight: #008E9B;
 }
 
@@ -22,7 +22,7 @@ header {
   z-index: 999;
   width: 100%;
   font-family: 'Press Start 2P', cursive;
-  font-size:16px;
+  font-size:0.7rem;
   text-transform: uppercase;
 }
 
@@ -112,7 +112,7 @@ nav a {
 }
 
 nav a:hover {
-  color: #000;
+  color: var(--highlight);
 }
 
 .nav-toggle:checked ~ nav {
@@ -132,7 +132,7 @@ nav a:hover {
 
   header {
       display: grid;
-      grid-template-columns: 1fr auto minmax(515px, 4fr) 0.5fr;
+      grid-template-columns: 0.1fr auto minmax(515px, 4fr) 0.2fr;
     }
   /*
   .logo {
@@ -140,7 +140,7 @@ nav a:hover {
     }
   */
   .logo {
-      grid-column: 1 / 2;
+      grid-column: 0 / 1;
       display: flex;
       align-items: center;
       margin-top: 3px;
@@ -177,7 +177,7 @@ nav a:hover {
     }
 
     nav li {
-      margin-left: 1em;
+      margin-left: 4em;
       margin-bottom: 0em;
     }
 
@@ -190,7 +190,7 @@ nav a:hover {
       content: '';
       display: block;
       height: 5px;
-      background: black;
+      background: var(--highlight);;
       position: absolute;
       top: -.75em;
       left: 0;
@@ -204,11 +204,33 @@ nav a:hover {
     }
 }
 
+.row {
+  margin: 0;
+}
+
+.col-md-4 {
+  margin: 0;
+  font-family: 'Saira', sans-serif;
+}
+
+
+.div_title{
+  font-family: 'Press Start 2P', cursive;
+  color: var(--highlight);
+  font-size: 40px;
+}
+
+.small_title{
+  font-family: 'Press Start 2P', cursive;
+  color: #D661E2;
+}
+
 body {
+  //padding-top: 20vh;
 	margin: 0 auto;
 	font-family: 'Work Sans', sans-serif;
 	font-weight: 400;
-  overflow: hidden;
+  //overflow: hidden;
   background-color: black;
 }
 
@@ -241,14 +263,17 @@ body {
 }
 
 .project {
-  height: 100vh;
+  height: 100%;
   display: block;
+  padding: 20vh 0;
+  //overflow: auto;
 }
 
 .descrip {
   //float: right;
   color: white;
   margin: 0 10% auto;
+  overflow: auto;
 }
 
 h2{
@@ -278,8 +303,9 @@ h2{
 
 footer {
   margin: 0 auto;
-  padding: 10px 0;
+  padding: 5px 0;
   text-align: center;
-  background: var(--background);
+  background: var(--highlight);
   color: white;
+  font-family: 'Saira', sans-serif;
 }
