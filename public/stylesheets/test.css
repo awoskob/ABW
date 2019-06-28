@@ -5,7 +5,7 @@ html{
 }
 
 :root {
-  --background: #0A5F68;
+  --background: #000000CC;
   --highlight: #008E9B;
 }
 
@@ -22,7 +22,7 @@ header {
   z-index: 999;
   width: 100%;
   font-family: 'Press Start 2P', cursive;
-  font-size:16px;
+  font-size:0.7rem;
   text-transform: uppercase;
 }
 
@@ -112,7 +112,7 @@ nav a {
 }
 
 nav a:hover {
-  color: #000;
+  color: var(--highlight);
 }
 
 .nav-toggle:checked ~ nav {
@@ -190,7 +190,7 @@ nav a:hover {
       content: '';
       display: block;
       height: 5px;
-      background: black;
+      background: var(--highlight);;
       position: absolute;
       top: -.75em;
       left: 0;
@@ -266,10 +266,10 @@ body {
     padding: 10vh;
 }
 .fill img {
-    width: 85%;
-    height: 85%;
+    width: 65%;
+    height: 75%;
     top: 13%;
-    left: 28%;
+    left: 35%;
     position: absolute;
     object-fit: fill;
     //flex-shrink: 0;
@@ -280,7 +280,7 @@ body {
 .typing-container{
     position: absolute;
     text-align: left;
-  	//top: 50%;
+  	top: 99%;
   	right: 50%;
     width: 100vw;
   	transform: translate(50%,-50%);
@@ -288,16 +288,17 @@ body {
   	max-width: 100%;
     height: 100%;
   	padding: 5em 5em;
-    font-size: 1rem;
+    font-size: 0.8rem;
     text-transform: uppercase;
   	//background: #00324933;
   	//font-family: 'Futura', sans-serif;
     font-family: 'Press Start 2P', cursive;
+    color: var(--highlight);
 }
 
 .text-primary{
   //color: #BC0000;
-  color: var(--highlight);
+  color: white;
 }
 
 .about {
