@@ -476,11 +476,11 @@ footer {
 .fa {
   padding: 20px;
   font-size: 30px;
-  width: 100px;
+  width: 80px;
   text-align: center;
   text-decoration: none;
   margin: 5px 2px;
-  //border-radius: 50%;
+  border-radius: 15%;
 }
 
 .fa:hover {
