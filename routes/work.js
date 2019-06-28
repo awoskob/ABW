@@ -18,7 +18,7 @@ router.get('/groupwork/extraterrestrialclunker', function(req, res, next) {
   res.render('ufo');
 });
 router.get('/groupwork/gamejampgh', function(req, res, next) {
-  res.render('project');
+  res.render('gamejampgh');
 });
 router.get('/groupwork/cookandruin', function(req, res, next) {
   res.render('cookandruin');
