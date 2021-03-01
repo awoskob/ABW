@@ -16,7 +16,7 @@
     "morgan": "^1.9.1",
     "particles.js": "^2.0.0",
     "postprocessing": "^5.4.0",
-    "three": "^0.100.0"
+    "three": "^0.125.0"
   },
   "engines": {
     "node": "10.x"
